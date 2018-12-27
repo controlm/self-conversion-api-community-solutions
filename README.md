@@ -1,7 +1,7 @@
 # Control-M Self Conversion API community solutions  
 
 This repository contains "Conversion Rules" code samples created for various Schedulers, Applications and Homegrown's tools.  
-+ [**Download Control-M self-conversion**](ftp://ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/).  
++ [**Download Control-M self-conversion**](ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/ ) . 
 
 ## Online Documentation
 You can find the latest Control-M self-conversion documentation, including a programming guide, on the [**project web page**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-817142681.html).

@@ -8,7 +8,7 @@
 * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the Informatica sample data using the Informatica converion rules.
 
 
-### Informatica mappinglogic  
+### Informatica mapping logic  
 Every __BOX__ Element   -> Control-M Smart Folder
 
 Attribute __Box_Name__  -> Smart Folder Name

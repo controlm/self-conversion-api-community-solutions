@@ -1,6 +1,6 @@
 # Informatica Converion example
 
-## The Informatica Converion example include:
+### The Informatica Converion example include:
 
 * __InformaticaSampleData.xml__ - Informatica sample data in XML format.
 * __InformaticaMappingLogic.docx__ - Holds the mapping logic used in this sample from Informatica data to Control-M data.
@@ -8,7 +8,7 @@
 * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the Informatica sample data using the Informatica converion rules.
 
 
-## Informatica mappinglogic  
+### Informatica mappinglogic  
 Every __BOX__ Element   -> Control-M Smart Folder
 
 Attribute __Box_Name__  -> Smart Folder Name

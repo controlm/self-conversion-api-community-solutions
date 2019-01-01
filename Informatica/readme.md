@@ -1,6 +1,6 @@
 # Informatica Converion example
 
-The Informatica Converion example include:
+## The Informatica Converion example include:
 
 * __InformaticaSampleData.xml__ - Informatica sample data in XML format.
 * __InformaticaMappingLogic.docx__ - Holds the mapping logic used in this sample from Informatica data to Control-M data.

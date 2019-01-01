@@ -9,9 +9,14 @@ The Informatica Converion example include:
 
 
 ## Informatica mappinglogic  
-Every __BOX__ Element   -> Control-M Smart Folder.
-Attribute __Box_Name__  -> Smart Folder Name.
-Every __JOB__ Element   -> Control-M Job.
-Attribute __UserName__  -> Job Run As.
-Attribute __Group__     -> Job Application.
+Every __BOX__ Element   -> Control-M Smart Folder
+
+Attribute __Box_Name__  -> Smart Folder Name
+
+Every __JOB__ Element   -> Control-M Job
+
+Attribute __UserName__  -> Job Run As
+
+Attribute __Group__     -> Job Application
+
 

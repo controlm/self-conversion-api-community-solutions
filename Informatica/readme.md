@@ -9,14 +9,14 @@
 
 
 ### Informatica mapping logic  
-Every __BOX__ Element   -> Control-M Smart Folder
+Every __BOX__ Element        -> Control-M Smart Folder
 
-Attribute __Box_Name__  -> Smart Folder Name
+Attribute __Box_Name__ value -> Smart Folder Name
 
-Every __JOB__ Element   -> Control-M Job
+Every __JOB__ Element        -> Control-M Job
 
-Attribute __UserName__  -> Job Run As
+Attribute __UserName__ value -> Job Run As
 
-Attribute __Group__     -> Job Application
+Attribute __Group__ value    -> Job Application
 
 

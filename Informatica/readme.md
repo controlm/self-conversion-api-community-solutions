@@ -4,8 +4,8 @@ You can use these Informatica Conversion Rules code samples to convert your Info
 
 # Online Documentation
 For more information, see [**Control-M Self Conversion**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-817142681.html) and the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) online documentation.
-To download the latest Control-M  Self Conversion, go to: <br> **ftp://ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/**
-For Control-M Self Conversion Training Video clik [**Here**](https://www.youtube.com/watch?v=2MrFcahMhH0)
+To download the latest Control-M  Self Conversion, go to: <br> **ftp://ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/**<br>
+For Control-M Self Conversion Training Video click [**Here**.](https://www.youtube.com/watch?v=2MrFcahMhH0)
 ### The Informatica Conversion example include:
 * __SampleData.xml__ - Informatica sample data in XML format. [(extract data instructions)](https://github.com/controlm/self-conversion-api-community-solutions/blob/master/Informatica/readme.md#extract-informatica-data-in-xml-format)
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample from Informatica data to Control-M data.

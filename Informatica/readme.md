@@ -76,6 +76,6 @@ To contribute, please follow these guidelines.
 
 ## Extract Informatica data in XML foramt
 From repository manager -> click on the workflow -> Repository -> Export Objects…
-
+![Informatica data extraction](images/Informatica_data_extraction.png)
 
 

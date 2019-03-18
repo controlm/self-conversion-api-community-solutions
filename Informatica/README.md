@@ -7,7 +7,7 @@ For more information, see [**Control-M Self Conversion**](https://docs.bmc.com/d
 To download the latest Control-M  Self Conversion, go to: <br> **ftp://ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/**<br>
 For Control-M Self Conversion Training Video click [**Here**.](https://www.youtube.com/watch?v=2MrFcahMhH0)
 ### The Informatica Conversion example include:
-* __SampleData.xml__ - Informatica sample data in XML format. [(extract data instructions)](https://github.com/controlm/self-conversion-api-community-solutions/blob/master/Informatica/readme.md#extract-informatica-data-in-xml-format)
+* __SampleData.xml__ - Informatica sample data in XML format. [(extract data instructions)](https://github.com/controlm/self-conversion-api-community-solutions/tree/master/Informatica#extract-informatica-data-in-xml-format)
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample from Informatica data to Control-M data.
 * __ConversionRules.json__ - The Informatica Conversion Rules json file that holds the Self Converion rules code samples.
 * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the Informatica sample data using the Informatica converion rules sample.

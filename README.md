@@ -10,7 +10,7 @@ To download the latest Control-M  Self Conversion:
   1) Go to: **ftp://ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/**
   2) Download ConversionTool.zip file
   3) Extract it
-  4) Click Self-Conversion.bat
+  4) Click SelfConversion.bat
 
 ## Contribution guide
 To contribute, please follow these guidelines.

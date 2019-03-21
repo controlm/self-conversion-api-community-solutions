@@ -16,6 +16,11 @@ To download the latest Control-M  Self Conversion:
 To contribute, please follow these guidelines.
 
 ### Files, folders and naming conventions
-1. Every sample and its associated files must be contained in its own **folder**. Name this folder something that describes what your sample does. Usually this naming pattern looks like **level-sample-purpose** (e.g. 201-automate-corrective-flow). Numbering should start at 101. 100 is reserved for things that need to be at the top.
-2. For consistent ordering **create all folders in lowercase**.
-3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text. If you want to add images to your README.md file, store the images in the **images** folder. Reference the images in the README.md with a relative path (e.g. `![alt text](images/sampleImage.png "Sample Image Text")`). This ensures the link will reference the target repository if the source repository is forked.
+1. Every conversion and its associated files must be contained in its own **folder**. Name this folder as the name of the tool that you convert from.
+2. The __folder__ should contain:
+   * __SampleData__ - A folder that holds tool sample Input Data in XML format that we want to convert to Control-M data.
+   * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
+   * __ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Converion rules code.
+   * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the tool sample data using the Demo Tool conversion rules.
+
+3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.

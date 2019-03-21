@@ -1,10 +1,16 @@
 # Control-M Self Conversion API community solutions  
-
 This repository contains "Conversion Rules" code samples created for various Schedulers, Applications and Homegrown's tools.  
-+ [**Download Control-M self-conversion**](ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/ ) . 
-
-## Online Documentation
-You can find the latest Control-M self-conversion documentation, including a programming guide, on the [**project web page**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-817142681.html).
+You can use those code examples to convert from those tools to Control-M using the Control-M Self-Conversion or as an example
+for creating conversion rules using Groovy and [Conversion API](). 
+# Online Documentation
+For more information, see [**Control-M Self Conversion**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-817142681.html) and the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) online documentation.
+For Control-M Self Conversion Training Video click [**Here**.](https://www.youtube.com/watch?v=2MrFcahMhH0)
+# Download Control-M Self-Conversion
+To download the latest Control-M  Self Conversion:
+  1) Go to: **ftp://ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/**
+  2) Download ConversionTool.zip file
+  3) Extract it
+  4) Click Self-Conversion.bat
 
 ## Contribution guide
 To contribute, please follow these guidelines.

@@ -1,12 +1,12 @@
 # Informatica Conversion example
 This repository contains Informatica "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to convert sample Informatica input data into Control-M Data.<br> 
-You can use these Informatica Conversion Rules code samples to convert your Informatica data to Control-M data, or as an example for using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M Informatica jobs.
+You can use these Informatica Conversion Rules code samples to convert your Informatica data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M Informatica jobs.
 
-### The Informatica Conversion example include:
+### The Informatica Conversion example includes:
 * __SampleData.xml__ - Informatica sample data in XML format. [(Informatica data extraction)](https://github.com/controlm/self-conversion-api-community-solutions/tree/master/Informatica#extract-informatica-data-in-xml-format)
-* __MappingLogic.xlsx__ - Holds the mapping logic used in this sample from Informatica data to Control-M data.
+* __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Informatica data to Control-M data.
 * __ConversionRules.json__ - The Informatica Conversion Rules json file that holds the Self Converion rules code samples.
-* __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the Informatica sample data using the Informatica converion rules sample.
+* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Informatica sample data using the Informatica converion rules sample.
 
 ### XML structure sample:
 ```xml 
@@ -15,8 +15,8 @@ You can use these Informatica Conversion Rules code samples to convert your Info
 </BOX> 
 ```
  __Above sample contains:__
-* BOX Element that has child JOB Element. 
-* JOB Element contains an "Name" attribute with value "JOB1"
+* BOX Element that has a child JOB Element. 
+* JOB Element contains a "Name" attribute with value "JOB1"
 * JOB Element text value is "Job Text"
 
 ### Informatica mapping logic  

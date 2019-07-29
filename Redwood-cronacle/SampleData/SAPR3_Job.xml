@@ -1,0 +1,1925 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Product build: 9.0.17.9-89793 -->
+<JobDefinition>
+  <Comment>Comment</Comment>
+  <Description>SAPR3_Job Description Example</Description>
+  <Name>SAPR3_Job</Name>
+  <Partition type="Partition" path="GLOBAL" />
+  <ParentApplication type="Application" path="GLOBAL.Application.Sub-Application" />
+  <EquivalentObject>false</EquivalentObject>
+  <CriticalProcess>false</CriticalProcess>
+  <KeepForce>false</KeepForce>
+  <KeepAmount />
+  <KeepUnits />
+  <KeepType />
+  <KeepJobsInStatus />
+  <Overdue>false</Overdue>
+  <OverdueStatus />
+  <OverviewFormat />
+  <Priority />
+  <MaxPriority>100</MaxPriority>
+  <RestartCount />
+  <ReturncodeMapToCompleted />
+  <HoldOnSubmit>false</HoldOnSubmit>
+  <TopLevel>true</TopLevel>
+  <Template>false</Template>
+  <Maintenance>false</Maintenance>
+  <ReactionJobType />
+  <EvaluationOwnerType>SystemDefault</EvaluationOwnerType>
+  <OverdueEventDefinition />
+  <DefaultOutputFormat />
+  <JobDefinitionType type="JobDefinitionType" path="GLOBAL.SAPR3" />
+  <DefaultLogFormat />
+  <DefaultQueue type="Queue" path="GLOBAL.HostName" />
+  <Resource />
+  <TimeWindow />
+  <TimeWindowTimeZone />
+  <ActionSubject />
+  <CategoryProcessTag />
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_SAP_SYSTEMS" />
+    <Comment />
+    <Description />
+    <Name>SAP_SYSTEMS</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SAP_SYSTEMS]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_CLIENT" />
+    <Comment />
+    <Description />
+    <Name>CLIENT</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[CLIENT]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_ABAP_VARIANT_NAME" />
+    <Comment />
+    <Description />
+    <Name>ABAP_VARIANT_NAME</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[ABAP_VARIANT_NAME]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_JOBCLASS" />
+    <Comment />
+    <Description />
+    <Name>JOBCLASS</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[JOBCLASS]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_TARGET_SERVER" />
+    <Comment />
+    <Description />
+    <Name>TARGET_SERVER</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[TARGET_SERVER]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_TARGET_GROUP" />
+    <Comment />
+    <Description />
+    <Name>TARGET_GROUP</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[TARGET_GROUP]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_ARMOD" />
+    <Comment />
+    <Description />
+    <Name>PRINT_ARMOD</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_ARMOD]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_PRNEW" />
+    <Comment />
+    <Description />
+    <Name>PRINT_PRNEW</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_PRNEW]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_PRIMM" />
+    <Comment />
+    <Description />
+    <Name>PRINT_PRIMM</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_PRIMM]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_PRREL" />
+    <Comment />
+    <Description />
+    <Name>PRINT_PRREL</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_PRREL]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_PEXPI" />
+    <Comment />
+    <Description />
+    <Name>PRINT_PEXPI</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_PEXPI]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_PRBIG" />
+    <Comment />
+    <Description />
+    <Name>PRINT_PRBIG</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_PRBIG]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_PRSAP" />
+    <Comment />
+    <Description />
+    <Name>PRINT_PRSAP</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_PRSAP]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_FOOTL" />
+    <Comment />
+    <Description />
+    <Name>PRINT_FOOTL</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_FOOTL]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_PRINT_PRUNX" />
+    <Comment />
+    <Description />
+    <Name>PRINT_PRUNX</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[PRINT_PRUNX]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_TYPE" />
+    <Comment />
+    <Description />
+    <Name>REC_TYPE</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_TYPE]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_COPY" />
+    <Comment />
+    <Description />
+    <Name>REC_COPY</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_COPY]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_BLIND_COPY" />
+    <Comment />
+    <Description />
+    <Name>REC_BLIND_COPY</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_BLIND_COPY]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_EXPRESS" />
+    <Comment />
+    <Description />
+    <Name>REC_EXPRESS</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_EXPRESS]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_NO_FORWARDING" />
+    <Comment />
+    <Description />
+    <Name>REC_NO_FORWARDING</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_NO_FORWARDING]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_NO_PRINT" />
+    <Comment />
+    <Description />
+    <Name>REC_NO_PRINT</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_NO_PRINT]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_DELIVER" />
+    <Comment />
+    <Description />
+    <Name>REC_DELIVER</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_DELIVER]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_REC_MAILSTATUS" />
+    <Comment />
+    <Description />
+    <Name>REC_MAILSTATUS</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[REC_MAILSTATUS]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_SHOWLOG" />
+    <Comment />
+    <Description />
+    <Name>SHOWLOG</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SHOWLOG]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_SHOWSPOOL" />
+    <Comment />
+    <Description />
+    <Name>SHOWSPOOL</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SHOWSPOOL]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_SHOWAPPLLOG" />
+    <Comment />
+    <Description />
+    <Name>SHOWAPPLLOG</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SHOWAPPLLOG]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_IGNORE_APPL_RC" />
+    <Comment />
+    <Description />
+    <Name>IGNORE_APPL_RC</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[IGNORE_APPL_RC]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_AbapRunPrint_DELETE_JOB" />
+    <Comment />
+    <Description />
+    <Name>DELETE_JOB</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[DELETE_JOB]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP System</Description>
+    <Name>SAP_SYSTEMS</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>1</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>true</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Client</Description>
+    <Name>CLIENT</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>2</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>true</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Job Name</Description>
+    <Name>JOBNAME</Name>
+    <DataLength>32</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[ZUSM_CORP_INBOUND]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>3</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>ABAP Program</Description>
+    <Name>ABAP_PROGRAM_NAME</Name>
+    <DataLength>40</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[ZRCRM_CHECK_BANK_WIZARD]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>4</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>true</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>ABAP Variant</Description>
+    <Name>ABAP_VARIANT_NAME</Name>
+    <DataLength>14</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>5</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>true</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Job Class</Description>
+    <Name>JOBCLASS</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[C]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>6</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP User Name</Description>
+    <Name>SAP_USER_NAME</Name>
+    <DataLength>12</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[BEACON_RUN]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>7</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Language for the Step</Description>
+    <Name>LANGUAGE</Name>
+    <DataLength>2</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[E]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>8</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Target Server Name</Description>
+    <Name>TARGET_SERVER</Name>
+    <DataLength>20</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>9</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Target Server Group Name</Description>
+    <Name>TARGET_GROUP</Name>
+    <DataLength>20</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>10</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Print/Archive Mode</Description>
+    <Name>PRINT_ARMOD</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[1]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>11</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Printer</Description>
+    <Name>PRINT_PDEST</Name>
+    <DataLength>4</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>12</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Cover Page Title</Description>
+    <Name>PRINT_PRTXT</Name>
+    <DataLength>68</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>13</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Number of Copies</Description>
+    <Name>PRINT_PRCOP</Name>
+    <DataLength>3</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[001]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>14</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>New Spool?</Description>
+    <Name>PRINT_PRNEW</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[Y]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>15</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Spool List Name</Description>
+    <Name>PRINT_PLIST</Name>
+    <DataLength>12</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[ZRCRM_CHECK_]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>16</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Print Immediately?</Description>
+    <Name>PRINT_PRIMM</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>17</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Delete Spool After Print?</Description>
+    <Name>PRINT_PRREL</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>18</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Expiration in Days</Description>
+    <Name>PRINT_PEXPI</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[8]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>19</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Print Lines per Page</Description>
+    <Name>PRINT_LICT</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[65]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>20</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Print Columns per Page</Description>
+    <Name>PRINT_LISZ</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[80]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>21</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Print Format</Description>
+    <Name>PRINT_PAART</Name>
+    <DataLength>16</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[X_PAPER]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>22</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Selection Cover Page?</Description>
+    <Name>PRINT_PRBIG</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>23</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Cover Page?</Description>
+    <Name>PRINT_PRSAP</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>24</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Spool List Recipient</Description>
+    <Name>PRINT_PRREC</Name>
+    <DataLength>12</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[BEACON_RUN]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>25</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Department on Cover Page</Description>
+    <Name>PRINT_PRABT</Name>
+    <DataLength>12</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>26</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Authority for Printing</Description>
+    <Name>PRINT_PRBER</Name>
+    <DataLength>12</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>27</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Spool Dataset Name</Description>
+    <Name>PRINT_PRDSN</Name>
+    <DataLength>6</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[LIST1S]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>28</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Spool Type</Description>
+    <Name>PRINT_PTYPE</Name>
+    <DataLength>12</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[TEXT]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>29</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Print Footer?</Description>
+    <Name>PRINT_FOOTL</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>30</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>OS Cover Page?</Description>
+    <Name>PRINT_PRUNX</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>31</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Print Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Archive SAP Object</Description>
+    <Name>ARCHIVE_SAP_OBJECT</Name>
+    <DataLength>10</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>32</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Archive Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Document Type</Description>
+    <Name>ARCHIVE_AR_OBJECT</Name>
+    <DataLength>10</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>33</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Archive Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Archive Information</Description>
+    <Name>ARCHIVE_INFO</Name>
+    <DataLength>3</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>34</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Archive Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Archive Text Information Field</Description>
+    <Name>ARCHIVE_ARCTEXT</Name>
+    <DataLength>40</DataLength>
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>35</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Archive Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Recipient Type</Description>
+    <Name>REC_TYPE</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[U]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>36</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Spool List Recipient</Description>
+    <Name>REC_RECIPIENT</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>37</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Recipient Copy Flag</Description>
+    <Name>REC_COPY</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>38</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Recipient Blind Copy Flag</Description>
+    <Name>REC_BLIND_COPY</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>39</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Recipient Express Flag</Description>
+    <Name>REC_EXPRESS</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>40</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Recipient No Forwarding Flag</Description>
+    <Name>REC_NO_FORWARDING</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>41</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Recipient No Print Flag</Description>
+    <Name>REC_NO_PRINT</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>42</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Report Send Status</Description>
+    <Name>REC_DELIVER</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>43</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Report Status By E-Mail</Description>
+    <Name>REC_MAILSTATUS</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>44</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Recipient Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Retrieve Job Log?</Description>
+    <Name>SHOWLOG</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[Y]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>45</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Retrieve Spool Lists?</Description>
+    <Name>SHOWSPOOL</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>46</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Retrieve Application Logs?</Description>
+    <Name>SHOWAPPLLOG</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>47</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Ignore Application Return Code?</Description>
+    <Name>IGNORE_APPL_RC</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>48</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Delete Job When Finished?</Description>
+    <Name>DELETE_JOB</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>49</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Job Count</Description>
+    <Name>JOBCOUNT</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>Out</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>50</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <SAPScript>
+    <SAPScriptAttribute>
+      <Name>ACTION</Name>
+      <Value>ABAP_RUN_PRINT</Value>
+    </SAPScriptAttribute>
+  </SAPScript>
+</JobDefinition>

@@ -1,0 +1,287 @@
+{
+  "hierarchyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\nInteger number = new Integer(0);\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n\tdef queue =  folderElement.getFirstChildElementByName(\"DefaultQueue\").getAttribute(\"type\");\n\tif ((queue != null) && queue.equals(\"Queue\"))\n\t{\n\t    if (ctmFolder.getChildren().size() == 0){\n            def listElements = folderElement.getAllDecnedElementByName(\"JobChainStep\");\n    \t    listElements.each { listElement ->\n    \t\tnumber = workOnStepElement(ctmFolder, number, listElement);\n    \t }\t        \n\t    }\n    }\n\t    \n}\ndef workOnStepElement(CtmFolder folderx, Integer number, CtmXmlElement stepElement) \n\t{\n\t\tdef callElements = stepElement.getAllDecnedElementByName(\"JobChainCall\");\n\t\tcallElements.each { callElement ->\n\t\t\tnumber = workOnCallElement(folderx, number, callElement);\t\t\t\n\t\t}\n\t\treturn number;\n\t}\ndef workOnCallElement(def folderx, Integer number, CtmXmlElement jobChainCall)\n\t\t\t\t{\n\t\t\t\t\tCtmXmlElement jobDefintionElement = jobChainCall.getFirstChildElementByName(\"JobDefinition\");\n\t\t\t\t\tString jobPath = jobDefintionElement.getAttribute(\"path\");\n\t\t\t\t\tString regexPattern = \"(.*)\\\\.(.*)\";\n\t\t\t\t\tPattern pattern = Pattern.compile(regexPattern);\n\t\t\t\t\tMatcher matcher = pattern.matcher(jobPath);\n\t\t\t\t\tif(matcher.find())\n\t\t\t\t\t{\n\t\t\t\t\t\tString jobName = matcher.group(2);\n\t\t\t\t\t\tprintln \"searched for: \" + jobName\n\t\t\t\t\t\t\n\t\t\t\t\t\tdef entity = ctmWorkspace.getJobsByName(jobName)[0];\n\t\t\t\t\t\tprintln entity;\n\t\t\t\t\t\tif (entity == null){\n\t\t\t\t\t\t        entity = ctmWorkspace.getFoldersByName(jobName)[0];\n\t\t\t\t\t\t        if (entity !=null){\n\t\t\t\t\t\t                entity = getEntityWithoutParent(entity);\n    \t\t\t\t\t\t            number = workOnFolderElement(folderx, number, jobChainCall, entity);\n\t\t\t\t\t\t             }\n\t\t\t\t\t\t        else{\n\t\t\t\t\t\t        }\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t    entity = getEntityWithoutParent(entity);\n\t\t\t\t\t\t\tnumber = workOnJobElement(folderx, number, jobChainCall, entity);\n\t\t\t\t\t\t}\n\t\t\t\t\t} \n\t\t\t\t\n\t\t\t\t\treturn number;\n\t\t\t\t}\t\t\n\t\t\t\tdef workOnJobElement(def folderx, Integer number, CtmXmlElement callForJobElement, CtmJob ctmJob)\n\t\t\t\t{\n\t\t\t\t\tnumber = addEntityToFolder(ctmJob, folderx, number);\t\t\n\t\t\t\t\treturn number;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\tdef workOnFolderElement(def folderx, Integer number, CtmXmlElement callForJobChain, CtmFolder ctmFolder)\n\t\t\t\t{\n\t\t\t\t\taddEntityToFolder(ctmFolder, folderx,number)\n\t\t\t\t\tif (ctmFolder.getChildren().size() == 0){\n        \t\t\t\t\tdef listElements = ctmFolder.getFolderInputXmlData().getAllDecnedElementByName(\"JobChainStep\");\n        \t\t\t\t\tlistElements.each { listElement ->\n        \t\t\t\t\t\tnumber = workOnStepElement(ctmFolder, number, listElement);\n        \t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\treturn number;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\tdef addEntityToFolder(def entity, def folderx, Integer number)\n\t\t\t\t{\n\t\t\t\t\tif(entity != null && folderx != null)\n\t\t\t\t\t{\n\t\t\t\t\t    \n\t\t\t\t\t\tentity.setDescription(number.toString());\n\t\t\t\t\t\tnumber = number + 1;\n\t\t\t\t\t\tif (entity instanceof CtmFolder){\n\t\t\t\t\t\t      ctmWorkspace.insertFolderToFolder(entity, folderx);\n\t\t\t\t\t\t}\n\t\t\t\t\t\telse{\n\t\t\t\t\t\t      ctmWorkspace.insertJobToFolder(entity, folderx);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\treturn number;\n\t\t\t\t}\n\t\t\tdef getEntityWithoutParent(def entity){\n\t\t     \tif (entity.getParentFolder() == null){\n\t\t\t            return entity;\n\t\t\t    }\n                else{\n                    def newEntity;\n                    if (entity instanceof CtmFolder){\n                        newEntity = ctmWorkspace.createFolder(entity.getFolderInputXmlData())\n                        newEntity.general().setName(entity.getName());\n                    }\n                    else{\n                         newEntity = ctmWorkspace.createJob(entity.getJobInputXmlData())\n                         newEntity.general().setName(entity.getName());\n                    }\n                    return newEntity; \n                }\t\t\t            \n\t\t\t}\t\n"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link folder to folder Rule ----\n\nString argument = \"\";\ndef foldersList = ctmWorkspace.getAllFolders();\nfoldersList.each  { ctmSubFolder ->\n\tCtmXmlElement subFolderElement = ctmSubFolder.getFolderInputXmlData();\n\tCtmXmlElement parentElement = subFolderElement.getParent();\n\tif(parentElement != null && parentElement.getTagName().equals(argument))\n\t{\n\t\tCtmFolder ctmFolder = ctmWorkspace.getFolder(parentElement);\n\t\tctmWorkspace.insertFolderToFolder(ctmSubFolder, ctmFolder);\n\t}\n}"
+    },
+    "name" : "Link folders to folders",
+    "category" : 2,
+    "type" : "regular"
+  } ],
+  "rulesForServer" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "String jobChainTopLevelQuery = \"//JobDefinition/JobDefinitionType[contains(@path,'.JobChain')]/..\";\r\nList<CtmXmlElement> jobChainXmlElements = ctmXmlQuery.findXmlElementsByXPath(jobChainTopLevelQuery);\r\nfor(CtmXmlElement jobChainElement: jobChainXmlElements)\r\n{\r\n\tCtmFolder ctmFolder = ctmWorkspace.createFolder(jobChainElement);\r\n}\t\t\t\t\t\r\n"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the data from\n// the equivalent XML element data and set the value to be the Folder name\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n\tString folderName = folderElement.getValueOfFirstChildElementByName(\"Name\");\n\tctmFolder.setName(folderName);\n\t\n\t//Set Application + Sub Application\n    def applicationElement = folderElement.getFirstChildElementByName(\"ParentApplication\");\n    if(applicationElement != null && !applicationElement.equals(\"\")){\n    String applicationValue = applicationElement.getAttribute(\"path\");\n\tString regexPattern = \"(.*)\\\\.(.*)\\\\.(.*)\";\n\tPattern pattern = Pattern.compile(regexPattern);\n\tMatcher matcher = pattern.matcher(applicationValue);\n\tif(matcher.find() && matcher.group(2))\n\t{\n\t\tString application = matcher.group(2);\n\t\tctmFolder.setApplication(application);\n\t  if(matcher.group(3))\n\t  {\n\t\tString subApplication = matcher.group(3);\n\t\tctmFolder.setSubApplication(subApplication);\n\t  }\n\t}\n  }\n}\n\n\n\n\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "JobDefinition",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\nString xpathQuery = \"/JobDefinition\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"JobDefinition\" XML elements into jobsElementData list\nList<CtmXmlElement> jobsElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"JobDefinition\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElementData : jobsElementData) {\n        String pathValue = jobElementData.getDirectChildsElementAttrByName(\"JobDefinitionType\", \"path\")[0];\n        if (!pathValue.contains(\".JobChain\")){\n             CtmJob ctmJob = ctmWorkspace.createJob(jobElementData);\n        }\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "Name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the text of child element tag name \"Name\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"Name\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString jobName = jobElement.getValueOfFirstChildElementByName(argument);\n\tctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Host/Host Group Rule---\r\n\r\nString argument = \"\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n setHost(ctmJob);\r\n}\r\n\r\ndef setHost(CtmJob ctmJob){\r\n    CtmXmlElement jobDef = ctmJob.getJobInputXmlData();\r\n\tdef jobDefaultQueue = jobDef.getFirstChildElementByName(\"DefaultQueue\");\r\n\tif(jobDefaultQueue != null){\r\n\t  String jobDefaultQueuePathValue = jobDefaultQueue.getAttribute(\"path\");\r\n\t  regexPattern = \"(.*)\\\\.(.*)\";\r\n\t  pattern = Pattern.compile(regexPattern);\r\n\t  matcher = pattern.matcher(jobDefaultQueuePathValue);\r\n\t  if(matcher.find() && matcher.group(2))\r\n\t  {\r\n\t\tString host = matcher.group(2);\r\n\t\tctmJob.setHost(host);\r\n\t  }\r\n\t}\r\n}"
+    },
+    "name" : "Job Job Host/Host Group",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Application Rule---\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n setApplicationAndSubApplication(ctmJob);\r\n}\r\n\r\ndef setApplicationAndSubApplication(CtmJob ctmJob){\r\n    CtmXmlElement xmlElement = ctmJob.getJobInputXmlData();\r\n\tString jobDefPathValue = xmlElement.getFirstChildElementByName(\"ParentApplication\").getAttribute(\"path\");\r\n\tString regexPattern = \"(.*)\\\\.(.*)\\\\.(.*)\";\r\n\tPattern pattern = Pattern.compile(regexPattern);\r\n\tMatcher matcher = pattern.matcher(jobDefPathValue);\r\n\tif(matcher.find())\r\n\t{\r\n\t    if(matcher.group(2))\r\n\t    {\r\n           String application = matcher.group(2);\r\n\t       ctmJob.setApplication(application);\r\n\t    }\r\n\t    if(matcher.group(3))\r\n\t    {\r\n\t        String subApplication = matcher.group(3);\r\n\t        ctmJob.setSubApplication(subApplication);\r\n\t    }\r\n\t}\r\n}"
+    },
+    "name" : "Job Job Application",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\nInteger number = new Integer(0);\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n\tdef queue =  folderElement.getFirstChildElementByName(\"DefaultQueue\").getAttribute(\"type\");\n\tif ((queue != null) && queue.equals(\"Queue\"))\n\t{\n\t    if (ctmFolder.getChildren().size() == 0){\n            def listElements = folderElement.getAllDecnedElementByName(\"JobChainStep\");\n    \t    listElements.each { listElement ->\n    \t\tnumber = workOnStepElement(ctmFolder, number, listElement);\n    \t }\t        \n\t    }\n    }\n\t    \n}\ndef workOnStepElement(CtmFolder folderx, Integer number, CtmXmlElement stepElement) \n\t{\n\t\tdef callElements = stepElement.getAllDecnedElementByName(\"JobChainCall\");\n\t\tcallElements.each { callElement ->\n\t\t\tnumber = workOnCallElement(folderx, number, callElement);\t\t\t\n\t\t}\n\t\treturn number;\n\t}\ndef workOnCallElement(def folderx, Integer number, CtmXmlElement jobChainCall)\n\t\t\t\t{\n\t\t\t\t\tCtmXmlElement jobDefintionElement = jobChainCall.getFirstChildElementByName(\"JobDefinition\");\n\t\t\t\t\tString jobPath = jobDefintionElement.getAttribute(\"path\");\n\t\t\t\t\tString regexPattern = \"(.*)\\\\.(.*)\";\n\t\t\t\t\tPattern pattern = Pattern.compile(regexPattern);\n\t\t\t\t\tMatcher matcher = pattern.matcher(jobPath);\n\t\t\t\t\tif(matcher.find())\n\t\t\t\t\t{\n\t\t\t\t\t\tString jobName = matcher.group(2);\n\t\t\t\t\t\tprintln \"searched for: \" + jobName\n\t\t\t\t\t\t\n\t\t\t\t\t\tdef entity = ctmWorkspace.getJobsByName(jobName)[0];\n\t\t\t\t\t\tprintln entity;\n\t\t\t\t\t\tif (entity == null){\n\t\t\t\t\t\t        entity = ctmWorkspace.getFoldersByName(jobName)[0];\n\t\t\t\t\t\t        if (entity !=null){\n\t\t\t\t\t\t                entity = getEntityWithoutParent(entity);\n    \t\t\t\t\t\t            number = workOnFolderElement(folderx, number, jobChainCall, entity);\n\t\t\t\t\t\t             }\n\t\t\t\t\t\t        else{\n\t\t\t\t\t\t        }\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t    entity = getEntityWithoutParent(entity);\n\t\t\t\t\t\t\tnumber = workOnJobElement(folderx, number, jobChainCall, entity);\n\t\t\t\t\t\t}\n\t\t\t\t\t} \n\t\t\t\t\n\t\t\t\t\treturn number;\n\t\t\t\t}\t\t\n\t\t\t\tdef workOnJobElement(def folderx, Integer number, CtmXmlElement callForJobElement, CtmJob ctmJob)\n\t\t\t\t{\n\t\t\t\t\tnumber = addEntityToFolder(ctmJob, folderx, number);\t\t\n\t\t\t\t\treturn number;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\tdef workOnFolderElement(def folderx, Integer number, CtmXmlElement callForJobChain, CtmFolder ctmFolder)\n\t\t\t\t{\n\t\t\t\t\taddEntityToFolder(ctmFolder, folderx,number)\n\t\t\t\t\tif (ctmFolder.getChildren().size() == 0){\n        \t\t\t\t\tdef listElements = ctmFolder.getFolderInputXmlData().getAllDecnedElementByName(\"JobChainStep\");\n        \t\t\t\t\tlistElements.each { listElement ->\n        \t\t\t\t\t\tnumber = workOnStepElement(ctmFolder, number, listElement);\n        \t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\treturn number;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\tdef addEntityToFolder(def entity, def folderx, Integer number)\n\t\t\t\t{\n\t\t\t\t\tif(entity != null && folderx != null)\n\t\t\t\t\t{\n\t\t\t\t\t    \n\t\t\t\t\t\tentity.setDescription(number.toString());\n\t\t\t\t\t\tnumber = number + 1;\n\t\t\t\t\t\tif (entity instanceof CtmFolder){\n\t\t\t\t\t\t      ctmWorkspace.insertFolderToFolder(entity, folderx);\n\t\t\t\t\t\t}\n\t\t\t\t\t\telse{\n\t\t\t\t\t\t      ctmWorkspace.insertJobToFolder(entity, folderx);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\treturn number;\n\t\t\t\t}\n\t\t\tdef getEntityWithoutParent(def entity){\n\t\t     \tif (entity.getParentFolder() == null){\n\t\t\t            return entity;\n\t\t\t    }\n                else{\n                    def newEntity;\n                    if (entity instanceof CtmFolder){\n                        newEntity = ctmWorkspace.createFolder(entity.getFolderInputXmlData())\n                        newEntity.general().setName(entity.getName());\n                    }\n                    else{\n                         newEntity = ctmWorkspace.createJob(entity.getJobInputXmlData())\n                         newEntity.general().setName(entity.getName());\n                    }\n                    return newEntity; \n                }\t\t\t            \n\t\t\t}\t\n"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- InCondition Rule ----\r\ndef folderList = ctmWorkspace.getAllFolders();\r\nfolderList.each { ctmFolder -> \r\n    def childrenList = ctmFolder.getChildren();\r\n    if(childrenList.size() > 1){\r\n        childrenList.sort{c1, c2 -> c1.getDescription().compareTo(c2.getDescription())};\r\n        for(int i = 0 ; i < childrenList.size()-1 ; i++)\r\n        {\r\n            def sourceEntity = childrenList.get(i);\r\n            def targetEntity = childrenList.get(i+1);\r\n            def conditionName = sourceEntity.getFullPathName()+ \"-TO-\" + targetEntity.getFullPathName();\r\n            sourceEntity.actions().addOutCondition(conditionName);\r\n            targetEntity.prerequisites().addInCondition(conditionName);\r\n        }\r\n    }\r\n    \r\n    //Set folder's Description\r\n    CtmXmlElement folderDef = ctmFolder.getFolderInputXmlData();\r\n\tString description = folderDef.getValueOfFirstChildElementByName(\"Description\");\r\n\tctmFolder.setDescription(description);\r\n\r\n}\r\n\r\n"
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create SapR3 Job Rule ----\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n        CtmXmlElement element = ctmJob.getJobInputXmlData();\r\n        String type = element.getDirectChildsElementAttrByName(\"JobDefinitionType\", \"path\")[0];\r\n        if (type.equals(\"GLOBAL.SAPR3\")){\r\n               String sapType = getSapJobType(element);\r\n               if(sapType.equals(\"ABAP_RUN_PRINT\")){\r\n                  setSapR3Attributes(ctmJob);    \r\n               }\r\n        }\r\n}\r\n\r\ndef getSapJobType(CtmXmlElement jobElement){\r\n    CtmXmlElement sapScriptElement = jobElement.getFirstChildElementByName(\"SAPScript\");\r\n    CtmXmlElement sapScriptAttr = sapScriptElement.getFirstChildElementByName(\"SAPScriptAttribute\");\r\n    String jobType = sapScriptAttr.getValueOfFirstChildElementByName(\"Value\");\r\n    return jobType;\r\n}\r\n\r\ndef setSapR3Attributes(CtmJob ctmJob){\r\n    ctmJob.setSapR3Type();\r\n    ctmJob.general().sapR3Parameters().setAction(SapR3Action.CreateANewJob);\r\n\tCtmXmlElement jobElementData = ctmJob.getJobInputXmlData();\r\n        //set job's description\r\n        setJobDescription(ctmJob);\r\n        //set job's connectionProfile\r\n    \tString jobDefaultQueuePathValue = jobElementData.getFirstChildElementByName(\"DefaultQueue\").getAttribute(\"path\");\r\n\t\tString regexPattern = \".*\\\\.(.*)\";\r\n\t\tPattern pattern = Pattern.compile(regexPattern);\r\n\t\tMatcher matcher = pattern.matcher(jobDefaultQueuePathValue);\r\n\t\tif(matcher.find() && matcher.group(1))\r\n\t\t{\r\n\t\t\tString connectionProfile = matcher.group(1);\r\n\t\t\t\tctmJob.general().sapR3Parameters().setConnectionProfile(connectionProfile);\r\n\t\t\t\t\t\r\n\t\t}\r\n\t\telse{\r\n\t\t    ctmJob.general().sapR3Parameters().setConnectionProfile(\"DEFAULT_SAP_CONNECTION_PROFILE\");\r\n\t\t}\r\n        \r\n        //set job's step + variables\r\n        List<CtmXmlElement> parametersList = jobElementData.getDirectChildsElementbyName(\"JobDefinitionParameter\");\r\n        SapR3AbapStepAPI step = ctmJob.general().sapR3Parameters().addAbapStep();\r\n        parametersList.each{ parameterElement -> \r\n        def parameterNameElement = parameterElement.getFirstChildElementByName(\"Name\");\r\n        String parameterName = parameterNameElement.getText();\r\n        def value = parameterElement.getValueOfFirstChildElementByName(\"DefaultExpression\");\r\n        if(value.equals(\"\"))return;\r\n        switch (parameterName) {\r\n            case \"JOBNAME\" :\r\n                ctmJob.general().sapR3Parameters().setSAPJobName(value);\r\n                break;\r\n            case \"JOBCLASS\" :\r\n                setSapJobClass(ctmJob,value);\r\n                break; \r\n                case \"ABAP_PROGRAM_NAME\" :\r\n                step.setAbapProgramName(value);\r\n                break;\r\n            case \"ABAP_VARIANT_NAME\" :\r\n                step.setVariantName(value);\r\n                break;\r\n            case \"TEMPORARY_VARIANT\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                step.setTemporaryVariant();\r\n                }\r\n                break;\r\n            case \"SAP_USER_NAME\" :\r\n                step.setUser(value);\r\n                break;\r\n            case \"LANGUAGE\" :\r\n                step.setLanguage(value);\r\n                break;\r\n            case \"PRINT_ARMOD\":\r\n                value = getPrintArchiveMode(value);\r\n                step.setPrintArchiveMode(value);\r\n                break;\r\n            case \"PRINT_PDEST\" :\r\n                step.setOutputDevice(value);\r\n                break;\r\n            case \"PRINT_PRTXT\" :\r\n                step.setDepartment(value);\r\n                step.setRecipient(value);\r\n                break;\r\n            case \"PRINT_PRCOP\" :\r\n                step.setNumberOfCopies(value);\r\n                break;\r\n            case \"PRINT_PRNEW\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.enableNewSpoolRequest();\r\n                }\r\n                else{\r\n                    step.disableNewSpoolRequest();\r\n                }\r\n                break;\r\n            case \"PRINT_PLIST\" :\r\n                step.setSpoolRequestName(value);\r\n                break;\r\n            case \"PRINT_PRIMM\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.setTimeOfPrint(TimeOfPrint.PrintOutImmediately);\r\n                }\r\n                else{\r\n                    step.setTimeOfPrint(TimeOfPrint.PrintLater);\r\n                }\r\n                break;\r\n            case \"PRINT_PRREL\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.enableDeleteAfterPrint();\r\n                }\r\n                else{\r\n                    step.disableDeleteAfterPrint();\r\n                }\r\n                break;\r\n            case \"PRINT_PEXPI\" :\r\n                step.setPrintExpiration(value);\r\n                break;\r\n            case \"PRINT_LICT\" :\r\n                step.setOutputFormatRows(value);\r\n                break;\r\n            case \"PRINT_LISZ\" :\r\n                step.setOutputFormatColumns(value);\r\n                break;\r\n            case \"PRINT_PAART\" :\r\n                step.setOutputFormatLayout(value);\r\n                break;\r\n            case \"PRINT_PRBIG\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.enableSelectionCoverPage();\r\n                }\r\n                else{\r\n                    step.disableSelectionCoverPage();\r\n                }\r\n                break;\r\n            case \"PRINT_PRSAP\" :\r\n                value = getSapCoverPage(value);\r\n                step.setSapCoverPage(value);\r\n                break;\r\n            case \"PRINT_PRBER\" :\r\n                step.setSpoolRequestAuthorization(value);\r\n                break;\r\n            case \"PRINT_PRUNX\" :\r\n                value = getOsCoverSheet(value);\r\n                step.setOsCoverSheet(value);\r\n                break;\r\n            case \"ARCHIVE_SAP_OBJECT\" :\r\n                step.setArchiveId(value);\r\n                break;\r\n            case \"ARCHIVE_AR_OBJECT\" :\r\n                step.setArchiveDocumentType(value);\r\n                break;\r\n            case \"ARCHIVE_INFO\" :\r\n                step.setArchiveInformationField(value);\r\n                break;\r\n            case \"ARCHIVE_ARCTEXT\" :\r\n                step.setArchiveText(value);\r\n                break;\r\n            default:\r\n            setJobVariable(ctmJob,parameterElement,parameterName);\r\n            break;\r\n                 \r\n        }\r\n            \r\n    }\r\n\r\n}\r\n\r\ndef convertYesNoToBoolean(String value){\r\n    if(value.equalsIgnoreCase(\"Y\")){\r\n     return true;\r\n    }\r\n    else{\r\n     return false;\r\n    }\r\n}\r\n\r\ndef getSapCoverPage(String value){\r\n    if(value.equalsIgnoreCase(\"D\")){\r\n        return SapCoverPage.DefaultSetting;\r\n    }\r\n    else{\r\n        value = convertYesNoToBoolean(value);\r\n        if(value){\r\n            return SapCoverPage.Print;\r\n        }\r\n        else{\r\n            return SapCoverPage.DoNotPrint;\r\n        }\r\n    }\r\n}\r\n\r\ndef getOsCoverSheet(String value){\r\n    if(value.equalsIgnoreCase(\"D\")){\r\n        return OsCoverSheet.DefaultSetting;\r\n    }\r\n    else{\r\n        value = convertYesNoToBoolean(value);\r\n        if(value){\r\n            return OsCoverSheet.Print;\r\n        }\r\n        else{\r\n            return OsCoverSheet.DoNotPrint;\r\n        }\r\n    }\r\n}\r\n\r\ndef getPrintArchiveMode(String value){\r\n    switch(value){\r\n        case \"1\" :\r\n            return PrintArchiveMode.Print;\r\n            break;\r\n        case \"2\" :\r\n            return PrintArchiveMode.Archive;\r\n            break;\r\n        case \"3\" :\r\n            return PrintArchiveMode.PrintAndArchive\r\n            break;\r\n        default :\r\n            return \"\";\r\n    }\r\n}\r\n\r\ndef setSapJobClass (CtmJob ctmJob,String value){\r\n     switch (value){\r\n        case \"A\" :     \r\n                ctmJob.general().sapR3Parameters().setJobClass(SapR3JobClass.HighPriority);\r\n                break; \r\n        case \"B\" :     \r\n                ctmJob.general().sapR3Parameters().setJobClass(SapR3JobClass.MediumPriority);\r\n                break; \r\n        case \"C\" :     \r\n                ctmJob.general().sapR3Parameters().setJobClass(SapR3JobClass.LowPriority);\r\n                break; \r\n     }\r\n}\r\n\r\ndef setJobDescription(CtmJob ctmJob){\r\n    def jobDef = ctmJob.getJobInputXmlData();\r\n\tString description = jobDef.getValueOfFirstChildElementByName(\"Description\");\r\n\tctmJob.setDescription(description);\r\n}\r\n\r\ndef setJobVariable(CtmJob ctmJob, CtmXmlElement parameterElement, String parameterName){\r\n\t\tif(shouldIgonreParameterWithName(parameterName))\r\n\t\t\treturn;\r\n\t\tvariableName = parameterName.startsWith(\"%%\") ? parameterName.replace(\"%%\",\"\") : parameterName;\r\n\t\tString variableValue = parameterElement.getValueOfFirstChildElementByName(\"DefaultExpression\");\r\n\t\tctmJob.general().addLocalVariable(variableName, variableValue);\r\n}\r\n\r\n\r\ndef shouldIgonreParameterWithName(String parameterName) {\r\n\treturn [\"JOBNAME\",\"ABAP_PROGRAM_NAME\",\"ABAP_VARIANT_NAME\",\"TEMPORARY_VARIANT\",\"JOBCLASS\",\"SAP_USER_NAME\",\"LANGUAGE\",\"TARGET_SERVER\",\r\n\t\t\t\"TARGET_GROUP\",\"PRINT_ARMOD\",\"PRINT_PDEST\",\"PRINT_PRTXT\",\"PRINT_PRCOP\",\"PRINT_PRNEW\",\"PRINT_PLIST\",\"PRINT_PRIMM\",\"PRINT_PRREL\",\r\n\t\t\t\"PRINT_PEXPI\",\"PRINT_LICT\",\"PRINT_LISZ\",\"PRINT_PAART\",\"PRINT_PRBIG\",\"PRINT_PRSAP\",\"PRINT_PRREC\",\"PRINT_PRABT\",\"PRINT_PRBER\",\r\n\t\t\t\"PRINT_PRDSN\",\"PRINT_PTYPE\",\"PRINT_FOOTL\",\"PRINT_PRUNX\",\"DRAFT_MODE\",\"PAGE_ORIENTATION\",\"ARCHIVE_SAP_OBJECT\",\"ARCHIVE_AR_OBJECT\",\r\n\t\t\t\"ARCHIVE_INFO\",\"ARCHIVE_ARCTEXT\",\"SHOWLOG\",\"SHOWSPOOL\",\"DELETE_JOB\",\"JOBCOUNT\",\"SAP_SYSTEMS\",\"CLIENT\"].contains(parameterName);\t\t\t\r\n}\r\n"
+    },
+    "jobTypeName" : "SAP R3",
+    "name" : "SAP R3 Job",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create SapBW Job Rule ----\r\n\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n    CtmXmlElement element = ctmJob.getJobInputXmlData();\r\n    String type = element.getDirectChildsElementAttrByName(\"JobDefinitionType\", \"path\")[0];\r\n    if (type.equals(\"GLOBAL.SAPR3\")){\r\n           String sapType = getSapJobType(element);\r\n           if(sapType.equals(\"BW_CHAIN_RUN\")){\r\n              setSapBwAttributes(ctmJob);    \r\n           }\r\n    }\r\n}\r\n\r\ndef getSapJobType(CtmXmlElement jobElement){\r\n    CtmXmlElement sapScriptElement = jobElement.getFirstChildElementByName(\"SAPScript\");\r\n    CtmXmlElement sapScriptAttr = sapScriptElement.getFirstChildElementByName(\"SAPScriptAttribute\");\r\n    String jobType = sapScriptAttr.getValueOfFirstChildElementByName(\"Value\");\r\n    return jobType;\r\n}\r\n\r\ndef setSapBwAttributes(CtmJob ctmJob){\r\n    ctmJob.setSapBWType();\r\n    setJobDescription(ctmJob);\r\n    setSapJobId(ctmJob);\r\n}\r\n\r\ndef setJobDescription(CtmJob ctmJob){\r\n    def jobElement = ctmJob.getJobInputXmlData();\r\n\tString description = jobElement.getValueOfFirstChildElementByName(\"Description\");\r\n\tctmJob.setDescription(description);\r\n}\r\n\r\ndef setSapJobId(CtmJob ctmJob){\r\n    CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n    def parameterList = jobElement.getDirectChildsElementbyName(\"JobDefinitionParameter\");\r\n    parameterList.each{ parameter ->\r\n        String parameterName = parameter.getValueOfFirstChildElementByName(\"Name\");\r\n        if(parameterName != null && parameterName.equals(\"NAME\")){\r\n            String sapJobId = parameter.getValueOfFirstChildElementByName(\"DefaultExpression\");\r\n            ctmJob.general().sapBWParameters().setID(sapJobId);\r\n        }\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+    },
+    "jobTypeName" : "SAP BW",
+    "name" : "SAP BW Job",
+    "category" : 3,
+    "type" : "script"
+  } ],
+  "projectRuleSetDescription" : "",
+  "folderRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "String jobChainTopLevelQuery = \"//JobDefinition/JobDefinitionType[contains(@path,'.JobChain')]/..\";\r\nList<CtmXmlElement> jobChainXmlElements = ctmXmlQuery.findXmlElementsByXPath(jobChainTopLevelQuery);\r\nfor(CtmXmlElement jobChainElement: jobChainXmlElements)\r\n{\r\n\tCtmFolder ctmFolder = ctmWorkspace.createFolder(jobChainElement);\r\n}\t\t\t\t\t\r\n"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the data from\n// the equivalent XML element data and set the value to be the Folder name\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n\tString folderName = folderElement.getValueOfFirstChildElementByName(\"Name\");\n\tctmFolder.setName(folderName);\n\t\n\t//Set Application + Sub Application\n    def applicationElement = folderElement.getFirstChildElementByName(\"ParentApplication\");\n    if(applicationElement != null && !applicationElement.equals(\"\")){\n    String applicationValue = applicationElement.getAttribute(\"path\");\n\tString regexPattern = \"(.*)\\\\.(.*)\\\\.(.*)\";\n\tPattern pattern = Pattern.compile(regexPattern);\n\tMatcher matcher = pattern.matcher(applicationValue);\n\tif(matcher.find() && matcher.group(2))\n\t{\n\t\tString application = matcher.group(2);\n\t\tctmFolder.setApplication(application);\n\t  if(matcher.group(3))\n\t  {\n\t\tString subApplication = matcher.group(3);\n\t\tctmFolder.setSubApplication(subApplication);\n\t  }\n\t}\n  }\n}\n\n\n\n\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "script"
+  } ],
+  "jobTypesRules" : {
+    "SAP R3" : [ {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create SapR3 Job Rule ----\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n        CtmXmlElement element = ctmJob.getJobInputXmlData();\r\n        String type = element.getDirectChildsElementAttrByName(\"JobDefinitionType\", \"path\")[0];\r\n        if (type.equals(\"GLOBAL.SAPR3\")){\r\n               String sapType = getSapJobType(element);\r\n               if(sapType.equals(\"ABAP_RUN_PRINT\")){\r\n                  setSapR3Attributes(ctmJob);    \r\n               }\r\n        }\r\n}\r\n\r\ndef getSapJobType(CtmXmlElement jobElement){\r\n    CtmXmlElement sapScriptElement = jobElement.getFirstChildElementByName(\"SAPScript\");\r\n    CtmXmlElement sapScriptAttr = sapScriptElement.getFirstChildElementByName(\"SAPScriptAttribute\");\r\n    String jobType = sapScriptAttr.getValueOfFirstChildElementByName(\"Value\");\r\n    return jobType;\r\n}\r\n\r\ndef setSapR3Attributes(CtmJob ctmJob){\r\n    ctmJob.setSapR3Type();\r\n    ctmJob.general().sapR3Parameters().setAction(SapR3Action.CreateANewJob);\r\n\tCtmXmlElement jobElementData = ctmJob.getJobInputXmlData();\r\n        //set job's description\r\n        setJobDescription(ctmJob);\r\n        //set job's connectionProfile\r\n    \tString jobDefaultQueuePathValue = jobElementData.getFirstChildElementByName(\"DefaultQueue\").getAttribute(\"path\");\r\n\t\tString regexPattern = \".*\\\\.(.*)\";\r\n\t\tPattern pattern = Pattern.compile(regexPattern);\r\n\t\tMatcher matcher = pattern.matcher(jobDefaultQueuePathValue);\r\n\t\tif(matcher.find() && matcher.group(1))\r\n\t\t{\r\n\t\t\tString connectionProfile = matcher.group(1);\r\n\t\t\t\tctmJob.general().sapR3Parameters().setConnectionProfile(connectionProfile);\r\n\t\t\t\t\t\r\n\t\t}\r\n\t\telse{\r\n\t\t    ctmJob.general().sapR3Parameters().setConnectionProfile(\"DEFAULT_SAP_CONNECTION_PROFILE\");\r\n\t\t}\r\n        \r\n        //set job's step + variables\r\n        List<CtmXmlElement> parametersList = jobElementData.getDirectChildsElementbyName(\"JobDefinitionParameter\");\r\n        SapR3AbapStepAPI step = ctmJob.general().sapR3Parameters().addAbapStep();\r\n        parametersList.each{ parameterElement -> \r\n        def parameterNameElement = parameterElement.getFirstChildElementByName(\"Name\");\r\n        String parameterName = parameterNameElement.getText();\r\n        def value = parameterElement.getValueOfFirstChildElementByName(\"DefaultExpression\");\r\n        if(value.equals(\"\"))return;\r\n        switch (parameterName) {\r\n            case \"JOBNAME\" :\r\n                ctmJob.general().sapR3Parameters().setSAPJobName(value);\r\n                break;\r\n            case \"JOBCLASS\" :\r\n                setSapJobClass(ctmJob,value);\r\n                break; \r\n                case \"ABAP_PROGRAM_NAME\" :\r\n                step.setAbapProgramName(value);\r\n                break;\r\n            case \"ABAP_VARIANT_NAME\" :\r\n                step.setVariantName(value);\r\n                break;\r\n            case \"TEMPORARY_VARIANT\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                step.setTemporaryVariant();\r\n                }\r\n                break;\r\n            case \"SAP_USER_NAME\" :\r\n                step.setUser(value);\r\n                break;\r\n            case \"LANGUAGE\" :\r\n                step.setLanguage(value);\r\n                break;\r\n            case \"PRINT_ARMOD\":\r\n                value = getPrintArchiveMode(value);\r\n                step.setPrintArchiveMode(value);\r\n                break;\r\n            case \"PRINT_PDEST\" :\r\n                step.setOutputDevice(value);\r\n                break;\r\n            case \"PRINT_PRTXT\" :\r\n                step.setDepartment(value);\r\n                step.setRecipient(value);\r\n                break;\r\n            case \"PRINT_PRCOP\" :\r\n                step.setNumberOfCopies(value);\r\n                break;\r\n            case \"PRINT_PRNEW\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.enableNewSpoolRequest();\r\n                }\r\n                else{\r\n                    step.disableNewSpoolRequest();\r\n                }\r\n                break;\r\n            case \"PRINT_PLIST\" :\r\n                step.setSpoolRequestName(value);\r\n                break;\r\n            case \"PRINT_PRIMM\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.setTimeOfPrint(TimeOfPrint.PrintOutImmediately);\r\n                }\r\n                else{\r\n                    step.setTimeOfPrint(TimeOfPrint.PrintLater);\r\n                }\r\n                break;\r\n            case \"PRINT_PRREL\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.enableDeleteAfterPrint();\r\n                }\r\n                else{\r\n                    step.disableDeleteAfterPrint();\r\n                }\r\n                break;\r\n            case \"PRINT_PEXPI\" :\r\n                step.setPrintExpiration(value);\r\n                break;\r\n            case \"PRINT_LICT\" :\r\n                step.setOutputFormatRows(value);\r\n                break;\r\n            case \"PRINT_LISZ\" :\r\n                step.setOutputFormatColumns(value);\r\n                break;\r\n            case \"PRINT_PAART\" :\r\n                step.setOutputFormatLayout(value);\r\n                break;\r\n            case \"PRINT_PRBIG\" :\r\n                value = convertYesNoToBoolean(value);\r\n                if(value){\r\n                    step.enableSelectionCoverPage();\r\n                }\r\n                else{\r\n                    step.disableSelectionCoverPage();\r\n                }\r\n                break;\r\n            case \"PRINT_PRSAP\" :\r\n                value = getSapCoverPage(value);\r\n                step.setSapCoverPage(value);\r\n                break;\r\n            case \"PRINT_PRBER\" :\r\n                step.setSpoolRequestAuthorization(value);\r\n                break;\r\n            case \"PRINT_PRUNX\" :\r\n                value = getOsCoverSheet(value);\r\n                step.setOsCoverSheet(value);\r\n                break;\r\n            case \"ARCHIVE_SAP_OBJECT\" :\r\n                step.setArchiveId(value);\r\n                break;\r\n            case \"ARCHIVE_AR_OBJECT\" :\r\n                step.setArchiveDocumentType(value);\r\n                break;\r\n            case \"ARCHIVE_INFO\" :\r\n                step.setArchiveInformationField(value);\r\n                break;\r\n            case \"ARCHIVE_ARCTEXT\" :\r\n                step.setArchiveText(value);\r\n                break;\r\n            default:\r\n            setJobVariable(ctmJob,parameterElement,parameterName);\r\n            break;\r\n                 \r\n        }\r\n            \r\n    }\r\n\r\n}\r\n\r\ndef convertYesNoToBoolean(String value){\r\n    if(value.equalsIgnoreCase(\"Y\")){\r\n     return true;\r\n    }\r\n    else{\r\n     return false;\r\n    }\r\n}\r\n\r\ndef getSapCoverPage(String value){\r\n    if(value.equalsIgnoreCase(\"D\")){\r\n        return SapCoverPage.DefaultSetting;\r\n    }\r\n    else{\r\n        value = convertYesNoToBoolean(value);\r\n        if(value){\r\n            return SapCoverPage.Print;\r\n        }\r\n        else{\r\n            return SapCoverPage.DoNotPrint;\r\n        }\r\n    }\r\n}\r\n\r\ndef getOsCoverSheet(String value){\r\n    if(value.equalsIgnoreCase(\"D\")){\r\n        return OsCoverSheet.DefaultSetting;\r\n    }\r\n    else{\r\n        value = convertYesNoToBoolean(value);\r\n        if(value){\r\n            return OsCoverSheet.Print;\r\n        }\r\n        else{\r\n            return OsCoverSheet.DoNotPrint;\r\n        }\r\n    }\r\n}\r\n\r\ndef getPrintArchiveMode(String value){\r\n    switch(value){\r\n        case \"1\" :\r\n            return PrintArchiveMode.Print;\r\n            break;\r\n        case \"2\" :\r\n            return PrintArchiveMode.Archive;\r\n            break;\r\n        case \"3\" :\r\n            return PrintArchiveMode.PrintAndArchive\r\n            break;\r\n        default :\r\n            return \"\";\r\n    }\r\n}\r\n\r\ndef setSapJobClass (CtmJob ctmJob,String value){\r\n     switch (value){\r\n        case \"A\" :     \r\n                ctmJob.general().sapR3Parameters().setJobClass(SapR3JobClass.HighPriority);\r\n                break; \r\n        case \"B\" :     \r\n                ctmJob.general().sapR3Parameters().setJobClass(SapR3JobClass.MediumPriority);\r\n                break; \r\n        case \"C\" :     \r\n                ctmJob.general().sapR3Parameters().setJobClass(SapR3JobClass.LowPriority);\r\n                break; \r\n     }\r\n}\r\n\r\ndef setJobDescription(CtmJob ctmJob){\r\n    def jobDef = ctmJob.getJobInputXmlData();\r\n\tString description = jobDef.getValueOfFirstChildElementByName(\"Description\");\r\n\tctmJob.setDescription(description);\r\n}\r\n\r\ndef setJobVariable(CtmJob ctmJob, CtmXmlElement parameterElement, String parameterName){\r\n\t\tif(shouldIgonreParameterWithName(parameterName))\r\n\t\t\treturn;\r\n\t\tvariableName = parameterName.startsWith(\"%%\") ? parameterName.replace(\"%%\",\"\") : parameterName;\r\n\t\tString variableValue = parameterElement.getValueOfFirstChildElementByName(\"DefaultExpression\");\r\n\t\tctmJob.general().addLocalVariable(variableName, variableValue);\r\n}\r\n\r\n\r\ndef shouldIgonreParameterWithName(String parameterName) {\r\n\treturn [\"JOBNAME\",\"ABAP_PROGRAM_NAME\",\"ABAP_VARIANT_NAME\",\"TEMPORARY_VARIANT\",\"JOBCLASS\",\"SAP_USER_NAME\",\"LANGUAGE\",\"TARGET_SERVER\",\r\n\t\t\t\"TARGET_GROUP\",\"PRINT_ARMOD\",\"PRINT_PDEST\",\"PRINT_PRTXT\",\"PRINT_PRCOP\",\"PRINT_PRNEW\",\"PRINT_PLIST\",\"PRINT_PRIMM\",\"PRINT_PRREL\",\r\n\t\t\t\"PRINT_PEXPI\",\"PRINT_LICT\",\"PRINT_LISZ\",\"PRINT_PAART\",\"PRINT_PRBIG\",\"PRINT_PRSAP\",\"PRINT_PRREC\",\"PRINT_PRABT\",\"PRINT_PRBER\",\r\n\t\t\t\"PRINT_PRDSN\",\"PRINT_PTYPE\",\"PRINT_FOOTL\",\"PRINT_PRUNX\",\"DRAFT_MODE\",\"PAGE_ORIENTATION\",\"ARCHIVE_SAP_OBJECT\",\"ARCHIVE_AR_OBJECT\",\r\n\t\t\t\"ARCHIVE_INFO\",\"ARCHIVE_ARCTEXT\",\"SHOWLOG\",\"SHOWSPOOL\",\"DELETE_JOB\",\"JOBCOUNT\",\"SAP_SYSTEMS\",\"CLIENT\"].contains(parameterName);\t\t\t\r\n}\r\n"
+      },
+      "jobTypeName" : "SAP R3",
+      "name" : "Job",
+      "category" : 3,
+      "type" : "script"
+    } ],
+    "SAP BW" : [ {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create SapBW Job Rule ----\r\n\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n    CtmXmlElement element = ctmJob.getJobInputXmlData();\r\n    String type = element.getDirectChildsElementAttrByName(\"JobDefinitionType\", \"path\")[0];\r\n    if (type.equals(\"GLOBAL.SAPR3\")){\r\n           String sapType = getSapJobType(element);\r\n           if(sapType.equals(\"BW_CHAIN_RUN\")){\r\n              setSapBwAttributes(ctmJob);    \r\n           }\r\n    }\r\n}\r\n\r\ndef getSapJobType(CtmXmlElement jobElement){\r\n    CtmXmlElement sapScriptElement = jobElement.getFirstChildElementByName(\"SAPScript\");\r\n    CtmXmlElement sapScriptAttr = sapScriptElement.getFirstChildElementByName(\"SAPScriptAttribute\");\r\n    String jobType = sapScriptAttr.getValueOfFirstChildElementByName(\"Value\");\r\n    return jobType;\r\n}\r\n\r\ndef setSapBwAttributes(CtmJob ctmJob){\r\n    ctmJob.setSapBWType();\r\n    setJobDescription(ctmJob);\r\n    setSapJobId(ctmJob);\r\n}\r\n\r\ndef setJobDescription(CtmJob ctmJob){\r\n    def jobElement = ctmJob.getJobInputXmlData();\r\n\tString description = jobElement.getValueOfFirstChildElementByName(\"Description\");\r\n\tctmJob.setDescription(description);\r\n}\r\n\r\ndef setSapJobId(CtmJob ctmJob){\r\n    CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n    def parameterList = jobElement.getDirectChildsElementbyName(\"JobDefinitionParameter\");\r\n    parameterList.each{ parameter ->\r\n        String parameterName = parameter.getValueOfFirstChildElementByName(\"Name\");\r\n        if(parameterName != null && parameterName.equals(\"NAME\")){\r\n            String sapJobId = parameter.getValueOfFirstChildElementByName(\"DefaultExpression\");\r\n            ctmJob.general().sapBWParameters().setID(sapJobId);\r\n        }\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+      },
+      "jobTypeName" : "SAP BW",
+      "name" : "Job",
+      "category" : 3,
+      "type" : "script"
+    } ]
+  },
+  "projectRuleSetName" : "ConversionRules",
+  "projectRuleSetControlMVersion" : "9.0.19",
+  "projectRuleSetDateCreated" : "Mon Jul 29 2019",
+  "folderAttributesRules" : [ ],
+  "scriptModeString" : "",
+  "projectRuleSetConversionType" : "UI\\Script Mode",
+  "dependencyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- InCondition Rule ----\r\ndef folderList = ctmWorkspace.getAllFolders();\r\nfolderList.each { ctmFolder -> \r\n    def childrenList = ctmFolder.getChildren();\r\n    if(childrenList.size() > 1){\r\n        childrenList.sort{c1, c2 -> c1.getDescription().compareTo(c2.getDescription())};\r\n        for(int i = 0 ; i < childrenList.size()-1 ; i++)\r\n        {\r\n            def sourceEntity = childrenList.get(i);\r\n            def targetEntity = childrenList.get(i+1);\r\n            def conditionName = sourceEntity.getFullPathName()+ \"-TO-\" + targetEntity.getFullPathName();\r\n            sourceEntity.actions().addOutCondition(conditionName);\r\n            targetEntity.prerequisites().addInCondition(conditionName);\r\n        }\r\n    }\r\n    \r\n    //Set folder's Description\r\n    CtmXmlElement folderDef = ctmFolder.getFolderInputXmlData();\r\n\tString description = folderDef.getValueOfFirstChildElementByName(\"Description\");\r\n\tctmFolder.setDescription(description);\r\n\r\n}\r\n\r\n"
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- OutCondition Rule ----\n\n//\tfilter how to find dependencies\nString argument = \"\";\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n\tString jobName=ctmJob.general().getName();\n//\tfind  the job that depends on this job according to argument specified\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString dependencyJobName = jobElement.undefined;\n//\tFind all jobs that depende on job being processed \n\tdef targetJobsList = ctmWorkspace.getAllJobs();\n\ttargetJobsList.each {dependencyJob -> \n\t\tString depJobName=dependencyJob.general().getName();\n\t\tif(depJobName != null && !depJobName.equals(\"\") && depJobName.equals(dependencyJobName)){\n//\t\t\tuse the addOutCondition API for jobs and folders to add the OutCondition \n\t\t\tString condName = jobName+\"-TO-\"+depJobName;\n\t\t\tctmJob.actions().addOutCondition(condName);\n\t\t}\n\t}\n}"
+    },
+    "name" : "Out Condition",
+    "category" : 4,
+    "type" : "regular"
+  } ],
+  "jobRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "JobDefinition",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\nString xpathQuery = \"/JobDefinition\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"JobDefinition\" XML elements into jobsElementData list\nList<CtmXmlElement> jobsElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"JobDefinition\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElementData : jobsElementData) {\n        String pathValue = jobElementData.getDirectChildsElementAttrByName(\"JobDefinitionType\", \"path\")[0];\n        if (!pathValue.contains(\".JobChain\")){\n             CtmJob ctmJob = ctmWorkspace.createJob(jobElementData);\n        }\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "Name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the text of child element tag name \"Name\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"Name\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString jobName = jobElement.getValueOfFirstChildElementByName(argument);\n\tctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "script"
+  } ],
+  "jobAttributesRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Host/Host Group Rule---\r\n\r\nString argument = \"\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n setHost(ctmJob);\r\n}\r\n\r\ndef setHost(CtmJob ctmJob){\r\n    CtmXmlElement jobDef = ctmJob.getJobInputXmlData();\r\n\tdef jobDefaultQueue = jobDef.getFirstChildElementByName(\"DefaultQueue\");\r\n\tif(jobDefaultQueue != null){\r\n\t  String jobDefaultQueuePathValue = jobDefaultQueue.getAttribute(\"path\");\r\n\t  regexPattern = \"(.*)\\\\.(.*)\";\r\n\t  pattern = Pattern.compile(regexPattern);\r\n\t  matcher = pattern.matcher(jobDefaultQueuePathValue);\r\n\t  if(matcher.find() && matcher.group(2))\r\n\t  {\r\n\t\tString host = matcher.group(2);\r\n\t\tctmJob.setHost(host);\r\n\t  }\r\n\t}\r\n}"
+    },
+    "name" : "Job Host/Host Group",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Application Rule---\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n setApplicationAndSubApplication(ctmJob);\r\n}\r\n\r\ndef setApplicationAndSubApplication(CtmJob ctmJob){\r\n    CtmXmlElement xmlElement = ctmJob.getJobInputXmlData();\r\n\tString jobDefPathValue = xmlElement.getFirstChildElementByName(\"ParentApplication\").getAttribute(\"path\");\r\n\tString regexPattern = \"(.*)\\\\.(.*)\\\\.(.*)\";\r\n\tPattern pattern = Pattern.compile(regexPattern);\r\n\tMatcher matcher = pattern.matcher(jobDefPathValue);\r\n\tif(matcher.find())\r\n\t{\r\n\t    if(matcher.group(2))\r\n\t    {\r\n           String application = matcher.group(2);\r\n\t       ctmJob.setApplication(application);\r\n\t    }\r\n\t    if(matcher.group(3))\r\n\t    {\r\n\t        String subApplication = matcher.group(3);\r\n\t        ctmJob.setSubApplication(subApplication);\r\n\t    }\r\n\t}\r\n}"
+    },
+    "name" : "Job Application",
+    "category" : 1,
+    "type" : "script"
+  } ]
+}

@@ -1,0 +1,511 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Product build: 9.0.17.9-89793 -->
+<JobDefinition>
+  <Comment>Comment</Comment>
+  <Description>SAPBW_Job2 Description Example</Description>
+  <Name>SAPBW_Job2</Name>
+  <Partition type="Partition" path="GLOBAL" />
+  <ParentApplication type="Application" path="GLOBAL.Application.Sub-Application" />
+  <EquivalentObject>false</EquivalentObject>
+  <CriticalProcess>false</CriticalProcess>
+  <KeepForce>false</KeepForce>
+  <KeepAmount />
+  <KeepUnits />
+  <KeepType />
+  <KeepJobsInStatus />
+  <Overdue>false</Overdue>
+  <OverdueStatus />
+  <OverviewFormat />
+  <Priority />
+  <MaxPriority>100</MaxPriority>
+  <RestartCount />
+  <ReturncodeMapToCompleted />
+  <HoldOnSubmit>false</HoldOnSubmit>
+  <TopLevel>true</TopLevel>
+  <Template>false</Template>
+  <Maintenance>false</Maintenance>
+  <ReactionJobType />
+  <EvaluationOwnerType>SystemDefault</EvaluationOwnerType>
+  <OverdueEventDefinition />
+  <DefaultOutputFormat />
+  <JobDefinitionType type="JobDefinitionType" path="GLOBAL.SAPR3" />
+  <DefaultLogFormat />
+  <DefaultQueue />
+  <Resource />
+  <TimeWindow />
+  <TimeWindowTimeZone />
+  <ActionSubject />
+  <CategoryProcessTag />
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_BW_ProcessChainRun_SAP_SYSTEMS" />
+    <Comment />
+    <Description />
+    <Name>SAP_SYSTEMS</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SAP_SYSTEMS]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_BW_ProcessChainRun_CLIENT" />
+    <Comment />
+    <Description />
+    <Name>CLIENT</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[CLIENT]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_BW_ProcessChainRun_CHAIN_RESTARTABLE" />
+    <Comment />
+    <Description />
+    <Name>CHAIN_RESTARTABLE</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[CHAIN_RESTARTABLE]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="BW_CHAIN_RUN_YNConstraint" />
+    <Comment />
+    <Description />
+    <Name>SYNCHRONOUS</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SYNCHRONOUS]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="BW_CHAIN_RUN_YNConstraint" />
+    <Comment />
+    <Description />
+    <Name>SHOWLOG</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SHOWLOG]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_BW_ProcessChainRun_SHOWSPOOL" />
+    <Comment />
+    <Description />
+    <Name>SHOWSPOOL</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SHOWSPOOL]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_BW_ProcessChainRun_SHOWAPPLLOG" />
+    <Comment />
+    <Description />
+    <Name>SHOWAPPLLOG</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[SHOWAPPLLOG]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionConstraint>
+    <ConstraintDefinition type="ConstraintDefinition" path="SAP_BW_ProcessChainRun_IGNORE_APPL_RC" />
+    <Comment />
+    <Description />
+    <Name>IGNORE_APPL_RC</Name>
+    <JobDefinitionConstraintParameterMapping>
+      <ParameterName>checkParameterName</ParameterName>
+      <Value><![CDATA[IGNORE_APPL_RC]]></Value>
+    </JobDefinitionConstraintParameterMapping>
+  </JobDefinitionConstraint>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP System</Description>
+    <Name>SAP_SYSTEMS</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>1</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP Client</Description>
+    <Name>CLIENT</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>InOut</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>2</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Technical Name of SAP BW Process Chain</Description>
+    <Name>NAME</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[BGR_DE_BW_TR_PERF_APPL_D]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>3</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>SAP BW Process Chain Log ID</Description>
+    <Name>LOGID</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression />
+    <DefaultValueEditable />
+    <Direction>Out</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>4</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>true</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Make Processes Restartable If Errors Occur?</Description>
+    <Name>CHAIN_RESTARTABLE</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[F]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>5</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Synchronous Run?</Description>
+    <Name>SYNCHRONOUS</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>6</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Retrieve Job Log?</Description>
+    <Name>SHOWLOG</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[Y]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>7</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Retrieve Spool Lists?</Description>
+    <Name>SHOWSPOOL</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>8</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Retrieve Application Logs?</Description>
+    <Name>SHOWAPPLLOG</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[N]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>9</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description>Ignore Application Return Code?</Description>
+    <Name>IGNORE_APPL_RC</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[Y]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>10</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName>Job Output Parameters</GroupName>
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>false</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionParameter>
+    <Comment />
+    <Description />
+    <Name>VAR_RMJ_SCHEDULE</Name>
+    <DataLength />
+    <DataPrecision />
+    <DataScale />
+    <DataType>String</DataType>
+    <DefaultExpression><![CDATA[=GLOBAL.Custom_RELStartTime.getTopLevelChainName(jobId)]]></DefaultExpression>
+    <DefaultValueEditable />
+    <Direction>In</Direction>
+    <SimpleConstraintType>None</SimpleConstraintType>
+    <SimpleConstraintData />
+    <SimpleConstraintMessage />
+    <SimpleConstraintOptional>false</SimpleConstraintOptional>
+    <SimpleConstraintSort>Ascending</SimpleConstraintSort>
+    <Display>true</Display>
+    <Password>false</Password>
+    <DisplayOrder>20</DisplayOrder>
+    <Editable>Always</Editable>
+    <GroupName />
+    <PartOfKey>false</PartOfKey>
+    <Nullable>false</Nullable>
+    <Runtime>true</Runtime>
+    <JobFormat />
+    <Array>false</Array>
+    <ArrayMinLength>0</ArrayMinLength>
+    <ArrayMaxLength />
+    <ArrayDuplicateValuesAllowed>false</ArrayDuplicateValuesAllowed>
+    <ArraySorted>false</ArraySorted>
+    <ParameterMappingType>Normal</ParameterMappingType>
+  </JobDefinitionParameter>
+  <JobDefinitionRaiseEvent>
+    <ErrorCode />
+    <RaiseComment><![CDATA[Event raised by job:${jobid} (${jobdescription}) being set to status ${jobstatus}]]></RaiseComment>
+    <StatusToRaiseOn>Completed</StatusToRaiseOn>
+    <EventDefinition type="EventDefinition" path="GLOBAL.BW_FROM_J3B_BGR_DE_BW_TR_PERF_APPL_D_TO_J3B_BGR_DE_BW_MD_PERF_CA_D" />
+  </JobDefinitionRaiseEvent>
+  <JobDefinitionWaitEvent>
+    <ClearsEvent>true</ClearsEvent>
+    <ClearComment />
+    <AutoSubmit>Never</AutoSubmit>
+    <CreatedBySystem>false</CreatedBySystem>
+    <EventDefinition type="EventDefinition" path="GLOBAL.BW_FROM_J3B_BGR_DE_BW_TR_SIEBCONT2_TO_J3B_BGR_DE_BW_TR_PERF_APPL_D" />
+  </JobDefinitionWaitEvent>
+  <JobDefinitionWaitEvent>
+    <ClearsEvent>true</ClearsEvent>
+    <ClearComment />
+    <AutoSubmit>Never</AutoSubmit>
+    <CreatedBySystem>false</CreatedBySystem>
+    <EventDefinition type="EventDefinition" path="GLOBAL.BW_FROM_J3B_AT_TR_MA_0FCBP1_TO_J3B_BGR_DE_BW_TR_PERF_APPL_D" />
+  </JobDefinitionWaitEvent>
+  <JobDefinitionWaitEvent>
+    <ClearsEvent>true</ClearsEvent>
+    <ClearComment />
+    <AutoSubmit>Never</AutoSubmit>
+    <CreatedBySystem>false</CreatedBySystem>
+    <EventDefinition type="EventDefinition" path="GLOBAL.BW_FROM_J3B_BU_BW_AT_0CACONT_ACC_TO_J3B_BGR_DE_BW_TR_PERF_APPL_D" />
+  </JobDefinitionWaitEvent>
+  <JobDefinitionWaitEvent>
+    <ClearsEvent>true</ClearsEvent>
+    <ClearComment />
+    <AutoSubmit>Never</AutoSubmit>
+    <CreatedBySystem>false</CreatedBySystem>
+    <EventDefinition type="EventDefinition" path="GLOBAL.BW_FROM_J3B_BU_BW_AT_0UCCONTRACT_TO_J3B_BGR_DE_BW_TR_PERF_APPL_D" />
+  </JobDefinitionWaitEvent>
+  <SAPScript>
+    <SAPScriptAttribute>
+      <Name>ACTION</Name>
+      <Value>BW_CHAIN_RUN</Value>
+    </SAPScriptAttribute>
+  </SAPScript>
+</JobDefinition>

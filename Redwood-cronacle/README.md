@@ -42,6 +42,10 @@ JobDefinitionParameter > Value of DefaultExpression|SAPR3 Variable Value
 JobDefinitionParameter > Value of DefaultExpression ,When: JobDefinitionParameter > Value of Name Element=Step parameter name**(Step parameters description in the "Abap Step Parameters" table)**|SAPR3 Abap Step Parameters
 JobDefinitionType > path attribute = GLOBAL.SAPR3 && SAPScript > SAPScriptAttribute > value of Value Element="BW_CHAIN_RUN"|SAPBW Job Type
 JobDefinitionParameter > Value of DefaultExpression ,When: JobDefinitionParameter > Value of Name Element=NAME|SABBW Process Chain Id
+JobDefinitionType > path attribute doesn’t contains ".SAPR3" && Script element exists |OS Embedded Script Type
+Script > Value of Source Element|OS Embedded Script - Script
+"Value of Name Element".cmd|OS Embedded Script - file name
+Script > value of RunAsUser Element|OS Embedded Script - Run As
 
 #### Abap Step Parameters table
 Abap Step Parameter| Redwood Cronacle Value
@@ -73,7 +77,7 @@ Archive Document Type|ARCHIVE_AR_OBJECT
 Archive Information Field|ARCHIVE_INFO
 Archive Text|ARCHIVE_ARCTEXT
 
-#### Non variables names list
+#### Non variable name list
 * JOBNAME
 * ABAP_PROGRAM_NAME
 * ABAP_VARIANT_NAME

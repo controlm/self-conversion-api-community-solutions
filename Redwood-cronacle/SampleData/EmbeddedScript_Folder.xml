@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Product build: 9.0.17.9-89793 -->
+<JobDefinition>
+  <Comment />
+  <Description>SAPBW_Folder Description Example</Description>
+  <Name>EmbeddedScript_Folder</Name>
+  <Partition type="Partition" path="GLOBAL" />
+  <ParentApplication type="Application" path="GLOBAL.Application.Sub-Application" />
+  <EquivalentObject>false</EquivalentObject>
+  <CriticalProcess>false</CriticalProcess>
+  <KeepForce>false</KeepForce>
+  <KeepAmount />
+  <KeepUnits />
+  <KeepType />
+  <KeepJobsInStatus />
+  <Overdue>false</Overdue>
+  <OverdueStatus />
+  <OverviewFormat />
+  <Priority />
+  <MaxPriority>100</MaxPriority>
+  <RestartCount />
+  <ReturncodeMapToCompleted />
+  <HoldOnSubmit>false</HoldOnSubmit>
+  <TopLevel>true</TopLevel>
+  <Template>false</Template>
+  <Maintenance>false</Maintenance>
+  <ReactionJobType />
+  <EvaluationOwnerType>SystemDefault</EvaluationOwnerType>
+  <OverdueEventDefinition />
+  <DefaultOutputFormat />
+  <JobDefinitionType type="JobDefinitionType" path="GLOBAL.JobChain" />
+  <DefaultLogFormat />
+  <DefaultQueue type="Queue" path="GLOBAL.Q_BGB_CRM" />
+  <Resource />
+  <TimeWindow />
+  <TimeWindowTimeZone />
+  <ActionSubject />
+  <CategoryProcessTag />
+  <JobChain>
+    <RestartCount />
+    <RequestRestartByDefault>false</RequestRestartByDefault>
+    <RestartDelayAmount>0</RestartDelayAmount>
+    <RestartDelayUnits>Minutes</RestartDelayUnits>
+    <JobChainStep>
+      <Comment />
+      <Description>Step 1</Description>
+      <Name>STEP001</Name>
+      <RestartCount />
+      <RestartDelayAmount>0</RestartDelayAmount>
+      <RestartDelayUnits>Minutes</RestartDelayUnits>
+      <SequenceNumber>0</SequenceNumber>
+      <JobChainCall>
+        <Description />
+        <SequenceNumber>0</SequenceNumber>
+        <IgnoreStatus>false</IgnoreStatus>
+        <StepWaitingOnJob>true</StepWaitingOnJob>
+        <JobDefinition type="JobDefinition" path="GLOBAL.EmbeddedScript_Job" />
+        <JobChainCallSchedulingParameter>
+          <Name>StartTime</Name>
+          <Expression><![CDATA[+00:15]]></Expression>
+        </JobChainCallSchedulingParameter>
+      </JobChainCall>
+	        <JobChainCall>
+        <Description />
+        <SequenceNumber>0</SequenceNumber>
+        <IgnoreStatus>false</IgnoreStatus>
+        <StepWaitingOnJob>true</StepWaitingOnJob>
+        <JobDefinition type="JobDefinition" path="GLOBAL.EmbeddedScript_Job2" />
+        <JobChainCallSchedulingParameter>
+          <Name>StartTime</Name>
+          <Expression><![CDATA[+00:15]]></Expression>
+        </JobChainCallSchedulingParameter>
+      </JobChainCall>
+    </JobChainStep>
+  </JobChain>
+</JobDefinition>

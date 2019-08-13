@@ -1,6 +1,6 @@
 # Redwood RunMyJobs Conversion example
 This repository contains Redwood RunMyJobs "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to convert sample Redwood RunMyJobs input data into Control-M Data.<br> 
-You can use these Redwood RunMyJobs Conversion Rules code samples to convert your Redwood RunMyJobs data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M Informatica jobs.
+You can use these Redwood RunMyJobs Conversion Rules code samples to convert your Redwood RunMyJobs data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M Redwood RunMyJobs jobs.
 
 ### The Redwood RunMyJobs Conversion example includes:
 * __SampleData.xml__ - Redwood RunMyJobs sample data in XML format.
@@ -22,30 +22,27 @@ You can use these Redwood RunMyJobs Conversion Rules code samples to convert you
 ### Redwood RunMyJobs mapping logic  
 Redwood RunMyJobs Data | Control-M Data
 -|-
-JobDefinitionType > path attribute: containts "JobChain"|Folder
-Value of Name Element|Folder Name
-Value of Description Element|Folder Description
-ParentApplication > path attribute: the value between the first and the second dot|Folder Application
-ParentApplication > path attribute: the value after the second dot|Folder Sub Application
-JobDefinitionType > path attribute:  doesn’t containts "JobChain"|Job
-Value of Name Element|Job Name
-ParentApplication > path attribute: the value between the first and the second dot|Job Application
-ParentApplication > path attribute: the value after the second dot|Job Sub Application
-DefaultQueue > path attribute: the value after the dot|Job Host
-Folder contains JobChainStep > JobChainCall > JobDefinition > path attribute: value after the dot is the job / sub-folder name| Hierarchy
-By the Folder JobChainStep > JobChainCall order|Conditions
-JobDefinitionType > path attribute = GLOBAL.SAPR3|SAPR3 Job Type
-JobDefinitionParameter > Value of DefaultExpression, When: JobDefinitionParameter Value of Name Element=JOBNAME|SAPR3 Job Name
-"JobDefinitionParameter > Value of DefaultExpression, When: JobDefinitionParameter > Value of Name Element=JOBCLASS|SAPR3 JOBCLASS
-JobDefinitionParameter > Value of Name Element (**only if the name doesnt include in the "Non variables names" list**)|SAPR3 Variable Name
-JobDefinitionParameter > Value of DefaultExpression|SAPR3 Variable Value
-JobDefinitionParameter > Value of DefaultExpression ,When: JobDefinitionParameter > Value of Name Element=Step parameter name**(Step parameters description in the "Abap Step Parameters" table)**|SAPR3 Abap Step Parameters
-JobDefinitionType > path attribute = GLOBAL.SAPR3 && SAPScript > SAPScriptAttribute > value of Value Element="BW_CHAIN_RUN"|SAPBW Job Type
-JobDefinitionParameter > Value of DefaultExpression ,When: JobDefinitionParameter > Value of Name Element=NAME|SABBW Process Chain Id
-JobDefinitionType > path attribute doesn’t contains ".SAPR3" && Script element exists |OS Embedded Script Type
-Script > Value of Source Element|OS Embedded Script - Script
-"Value of Name Element".cmd|OS Embedded Script - file name
-Script > value of RunAsUser Element|OS Embedded Script - Run As
+**JobDefinitionType > path** attribute: containts "JobChain"|Folder
+**JobDefinitionType > path** attribute:  doesn’t containts "JobChain"|Job
+Value of **Name** Element|Folder/Job Name
+Value of **Description** Element|Folder/Job Description
+**ParentApplication > path** attribute: the value between the first and the second dot. For example: ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Application
+**ParentApplication > path** attribute: the value after the second dot. For example: ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Sub Application
+**DefaultQueue > path** attribute: the value after the dot|Job Host
+Folder contains **JobChainStep > JobChainCall > JobDefinition > path** attribute: value after the dot is the job / sub-folder name| Hierarchy
+Create condition between entities according to the order of **JobChainStep > JobChainCall**|Conditions
+**JobDefinitionType > path** attribute = GLOBAL.SAPR3|SAPR3 Job Type
+If Value of **JobDefinitionParameter > Name** Element equals JOBNAME then value of  **JobDefinitionParameter > DefaultExpression **|SAPR3 Job Name
+If Value of **JobDefinitionParameter > Name** Element equals JOBCLASS then value of  **JobDefinitionParameter > DefaultExpression **|SAPR3 JOBCLASS
+Create Variable with name from the Value of **JobDefinitionParameter > Name** Element (**only if the name doesnt include in the "Redwood patameters list that are being converted to control-m attribute"**)|Variable Name
+Value of **JobDefinitionParameter > DefaultExpression**|Variable Value
+If Value of **JobDefinitionParameter > Name** Element equals Step parameter name then value of DefaultExpression Converted to SAPR3 Step Parameter**(Step parameters description in the "Abap Step Parameters" table)**|SAPR3 Abap Step Parameters
+**JobDefinitionType > path** attribute = GLOBAL.SAPR3 && value of** SAPScript > SAPScriptAttribute >Value** Element="BW_CHAIN_RUN"|SAPBW Job Type
+If Value of **JobDefinitionParameter > Name** Element equals NAME then value of  **JobDefinitionParameter > DefaultExpression **|SABBW Process Chain Id
+**JobDefinitionType > path** attribute doesn’t contains ".SAPR3" && Script element exists |OS Embedded Script Type
+Value of **Script > Source** Element|OS Embedded Script - Script
+``<Control-M job name>``.cmd|OS Embedded Script - file name
+Value of **Script > RunAsUser** Element|OS Embedded Script - Run As
 
 #### Abap Step Parameters table
 Abap Step Parameter| Redwood RunMyJobs Value
@@ -77,7 +74,7 @@ Archive Document Type|ARCHIVE_AR_OBJECT
 Archive Information Field|ARCHIVE_INFO
 Archive Text|ARCHIVE_ARCTEXT
 
-#### Non variable name list
+#### Redwood patameters list that are being converted to control-m attribute
 * JOBNAME
 * ABAP_PROGRAM_NAME
 * ABAP_VARIANT_NAME

@@ -19,26 +19,26 @@ You can use these Redwood BPA Conversion Rules code samples to convert your Redw
 * JOB Element contains a "Name" attribute with value "JOB1"
 * JOB Element text value is "Job Text"
 
-### Redwood BPA mapping logic  
+### Redwood BPA mapping logic
 Redwood BPA Data | Control-M Data
 -|-
 **JobDefinitionType > path** attribute: containts "JobChain"|Folder
 **JobDefinitionType > path** attribute:  doesn’t containts "JobChain"|Job
 Value of **Name** Element|Folder/Job Name
 Value of **Description** Element|Folder/Job Description
-**ParentApplication > path** attribute: the value between the first and the second dot. For example: ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Application
-**ParentApplication > path** attribute: the value after the second dot. For example: ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Sub Application
+**ParentApplication > path** attribute: the value between the first and the second dot.<br>For example:<br> ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Application
+**ParentApplication > path** attribute: the value after the second dot.<br> For example:<br> ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Sub Application
 **DefaultQueue > path** attribute: the value after the dot|Job Host
 Folder contains **JobChainStep > JobChainCall > JobDefinition > path** attribute: value after the dot is the job / sub-folder name| Hierarchy
 Create condition between entities according to the order of **JobChainStep > JobChainCall**|Conditions
 **JobDefinitionType > path** attribute = GLOBAL.SAPR3|SAPR3 Job Type
 If Value of **JobDefinitionParameter > Name** Element equals JOBNAME then value of  **JobDefinitionParameter > DefaultExpression **|SAPR3 Job Name
-If Value of **JobDefinitionParameter > Name** Element equals JOBCLASS then value of  **JobDefinitionParameter > DefaultExpression **|SAPR3 JOBCLASS
+If Value of **JobDefinitionParameter > Name** Element equals JOBCLASS then value of  **JobDefinitionParameter > DefaultExpression**|SAPR3 JOBCLASS
 Create Variable with name from the Value of **JobDefinitionParameter > Name** Element (**only if the name doesnt include in the "Redwood patameters list that are being converted to control-m attribute"**)|Variable Name
 Value of **JobDefinitionParameter > DefaultExpression**|Variable Value
 If Value of **JobDefinitionParameter > Name** Element equals Step parameter name then value of DefaultExpression Converted to SAPR3 Step Parameter**(Step parameters description in the "Abap Step Parameters" table)**|SAPR3 Abap Step Parameters
-**JobDefinitionType > path** attribute = GLOBAL.SAPR3 && value of** SAPScript > SAPScriptAttribute >Value** Element="BW_CHAIN_RUN"|SAPBW Job Type
-If Value of **JobDefinitionParameter > Name** Element equals NAME then value of  **JobDefinitionParameter > DefaultExpression **|SABBW Process Chain Id
+**JobDefinitionType > path** attribute = GLOBAL.SAPR3 && value of **SAPScript > SAPScriptAttribute >Value** Element="BW_CHAIN_RUN"|SAPBW Job Type
+If Value of **JobDefinitionParameter > Name** Element equals NAME then value of  **JobDefinitionParameter > DefaultExpression**|SABBW Process Chain Id
 **JobDefinitionType > path** attribute doesn’t contains ".SAPR3" && Script element exists |OS Embedded Script Type
 Value of **Script > Source** Element|OS Embedded Script - Script
 ``<Control-M job name>``.cmd|OS Embedded Script - file name
@@ -74,7 +74,7 @@ Archive Document Type|ARCHIVE_AR_OBJECT
 Archive Information Field|ARCHIVE_INFO
 Archive Text|ARCHIVE_ARCTEXT
 
-#### Redwood patameters list that are being converted to control-m attribute
+#### Redwood patameters list that are being converted to Control-M attributes
 * JOBNAME
 * ABAP_PROGRAM_NAME
 * ABAP_VARIANT_NAME

@@ -5,7 +5,7 @@ You can use these Redwood Cronacle Conversion Rules code samples to convert your
 ### The Redwood Cronacle Conversion example includes:
 * __SampleData.xml__ - Redwood Cronacle sample data in XML format.
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Redwood Cronacle data to Control-M data.
-* __ConversionRules.json__ - The Redwood Cronacle Conversion Rules json file that holds the Self Converion rules code samples.
+* __Redwood_cronacle_ConversionRules.json__ - The Redwood Cronacle Conversion Rules json file that holds the Self Converion rules code samples.
 * __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Redwood Cronacle sample data using the Redwood Cronacle converion rules sample.
 
 ### XML structure sample:
@@ -139,7 +139,7 @@ To contribute, please follow these guidelines.
 2. The __folder__ should contain:
    * __SampleData__ - A folder that holds tool sample Input Data in XML format that we want to convert to Control-M data.
    * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
-   * __ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Converion rules code.
+   * __Redwood_cronacle_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Converion rules code.
    * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the tool sample data using the Demo Tool conversion rules.
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.

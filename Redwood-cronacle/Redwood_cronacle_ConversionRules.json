@@ -256,9 +256,9 @@
       "type" : "script"
     } ]
   },
-  "projectRuleSetName" : "ConversionRules",
+  "projectRuleSetName" : "Redwood_cronacle_ConversionRules",
   "projectRuleSetControlMVersion" : "9.0.19",
-  "projectRuleSetDateCreated" : "Wed Jul 31 2019",
+  "projectRuleSetDateCreated" : "Tue Nov 05 2019",
   "folderAttributesRules" : [ ],
   "scriptModeString" : "",
   "projectRuleSetConversionType" : "UI\\Script Mode",

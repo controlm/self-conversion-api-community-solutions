@@ -173,7 +173,7 @@
     "category" : 3,
     "type" : "script"
   } ],
-  "projectRuleSetDescription" : "",
+  "projectRuleSetDescription" : "Redwood BPA conversion rules sample code, you can update the code according to your specific project needs",
   "folderRules" : [ {
     "rulesData" : {
       "triplets" : [ {

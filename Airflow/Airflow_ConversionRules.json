@@ -1,0 +1,373 @@
+{
+  "hierarchyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "element",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\n\ndef folders = ctmWorkspace.getAllFolders();\n\nfolders.each { folder ->\n\tCtmXmlElement folderElement = folder.getFolderInputXmlData();\n\tdef tasks = folderElement.getFirstChildElementByName(\"tasks\");\n\tdef elements = tasks.getAllDirectChildsElements();\n\telements.each { element ->\n\t    def name = element.getValueOfFirstChildElementByName(\"task_id\");\n\t    def job = ctmWorkspace.getJobByName(name)\n\t    if(job){\n\t       ctmWorkspace.insertJobToFolder(job, folder);    \n\t    }    \n\t}\n}"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link folder to folder Rule ----\n\nString argument = \"\";\ndef foldersList = ctmWorkspace.getAllFolders();\nfoldersList.each  { ctmSubFolder ->\n\tCtmXmlElement subFolderElement = ctmSubFolder.getFolderInputXmlData();\n\tCtmXmlElement parentElement = subFolderElement.getParent();\n\tif(parentElement != null && parentElement.getTagName().equals(argument))\n\t{\n\t\tCtmFolder ctmFolder = ctmWorkspace.getFolder(parentElement);\n\t\tctmWorkspace.insertFolderToFolder(ctmSubFolder, ctmFolder);\n\t}\n}"
+    },
+    "name" : "Link folders to folders",
+    "category" : 2,
+    "type" : "regular"
+  } ],
+  "rulesForServer" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "dag",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Folder Rule ----\n\nString xpathQuery = \"//dag\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"dag\" XML elements into folderElements list\nList<CtmXmlElement> folderElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"dag\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement folderElement : folderElements) {\n CtmFolder ctmFolder = ctmWorkspace.createFolder(folderElement);\n}"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "_dag_id",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the text of child element tag name \"_dag_id\" from\n// the equivalent XML element data and set the value to be the Folder name\nString argument = \"_dag_id\";\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n\tString folderName = folderElement.getValueOfFirstChildElementByName(argument);\n\tctmFolder.setName(folderName);\n}\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "_description",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Folder Description Rule---\r\n\r\nString argument = \"_description\";\r\nctmWorkspace.getAllFolders().each{ ctmFolder ->\r\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\r\n\tString descriptionValue = folderElement.getValueOfFirstChildElementByName(argument);\r\n\tctmFolder.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Folder Folder Description",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "tasks/item",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\n\nString xpathQuery = \"//tasks/item\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"tasks/item\" XML elements into jobElements list\nList<CtmXmlElement> jobElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"tasks/item\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElement : jobElements) {\n CtmJob ctmJob = ctmWorkspace.createJob(jobElement);\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "task_id",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the text of child element tag name \"task_id\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"task_id\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString jobName = jobElement.getValueOfFirstChildElementByName(argument);\n\tctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "_task_type",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Description Rule---\r\n\r\nString argument = \"_task_type\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tString descriptionValue = jobElement.getValueOfFirstChildElementByName(argument);\r\n\tctmJob.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Job Job Description",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "element",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\n\ndef folders = ctmWorkspace.getAllFolders();\n\nfolders.each { folder ->\n\tCtmXmlElement folderElement = folder.getFolderInputXmlData();\n\tdef tasks = folderElement.getFirstChildElementByName(\"tasks\");\n\tdef elements = tasks.getAllDirectChildsElements();\n\telements.each { element ->\n\t    def name = element.getValueOfFirstChildElementByName(\"task_id\");\n\t    def job = ctmWorkspace.getJobByName(name)\n\t    if(job){\n\t       ctmWorkspace.insertJobToFolder(job, folder);    \n\t    }    \n\t}\n}"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "_downstream_task_ids/element",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- InCondition / OutCondition Rule ----\n\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each { ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\t// Get downstream tasks for the source job\n\tdef downstreamTasks = jobElement.getFirstChildElementByName(\"_downstream_task_ids\");\n\tdef items = downstreamTasks.getAllDecnedElementByName(\"item\");\n    \n    items.each{ item-> \n        def taskName = item.getText();\n        def destJob = ctmWorkspace.getJobByName(taskName);\n        if(destJob){\n            String condName = ctmJob.getName()+\"-TO-\"+destJob.getName();\n            ctmJob.actions().addOutCondition(condName);\n            destJob.prerequisites().addInCondition(condName);\n        }\n    };\n}"
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Databases Job Rule ----\r\n\r\nString xpathQuery = \"_task_type\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement ctmXml = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = ctmXml.getDirectChildsElementbyName(xpathQuery);\r\n\tfor(CtmXmlElement taskTypeElement : ctmXmlElementResult) {\r\n\t\tString attributeValue = taskTypeElement.getText()\r\n\t\tif(attributeValue != null && attributeValue.equals(\"MySqlOperator\")){\r\n\t\t\tctmJob.setDatabasesType();\r\n\t\t}\r\n\t}\r\n}"
+    },
+    "jobTypeName" : "Databases",
+    "name" : "Databases Job",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Databases Execution Type Rule ----\r\n\r\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tctmJob.general().databasesParameters().setExecutionType(DatabasesExecutionType.EmbeddedQuery);\r\n}"
+    },
+    "jobTypeName" : "Databases",
+    "name" : "Databases Execution Type",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Databases Connection Profile Rule ----\r\n\r\nString argument = \"MYSQL_Connection_Profile\";\r\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\r\n\tctmJob.general().databasesParameters().setConnectionProfile(argument);\r\n}"
+    },
+    "jobTypeName" : "Databases",
+    "name" : "Databases Connection Profile",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "bash_command",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Os bash_command Rule ----\r\n\r\nString xpathQuery = \"_task_type\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement ctmXml = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = ctmXml.getDirectChildsElementbyName(xpathQuery);\r\n\tfor(CtmXmlElement taskTypeElement : ctmXmlElementResult) {\r\n\t\tString attributeValue = taskTypeElement.getText()\r\n\t\tif(attributeValue != null && attributeValue.equals(\"BashOperator\")){\r\n\t\t\tctmJob.setOsType();\r\n\t\t}\r\n\t}\r\n}"
+    },
+    "jobTypeName" : "OS",
+    "name" : "OS Job",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "bash_command",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Os Command Rule ----\r\n\r\nString xpathQuery = \"bash_command\";\r\nctmWorkspace.getOsJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = jobElement.getAllDecnedElementByName(xpathQuery);\r\n\tfor(CtmXmlElement ctmXmlElement : ctmXmlElementResult) {\r\n\t\tString commandValue = ctmXmlElement.getText()\r\n\t\tctmJob.general().osParameters().setCommand(commandValue);\r\n\t}\r\n}\r\n"
+    },
+    "jobTypeName" : "OS",
+    "name" : "OS Command",
+    "category" : 3,
+    "type" : "script"
+  } ],
+  "projectRuleSetDescription" : "Airflow conversion rules sample code, you can update the code according to your specific project needs",
+  "folderRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "dag",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Folder Rule ----\n\nString xpathQuery = \"//dag\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"dag\" XML elements into folderElements list\nList<CtmXmlElement> folderElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"dag\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement folderElement : folderElements) {\n CtmFolder ctmFolder = ctmWorkspace.createFolder(folderElement);\n}"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "_dag_id",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the text of child element tag name \"_dag_id\" from\n// the equivalent XML element data and set the value to be the Folder name\nString argument = \"_dag_id\";\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n\tString folderName = folderElement.getValueOfFirstChildElementByName(argument);\n\tctmFolder.setName(folderName);\n}\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "regular"
+  } ],
+  "jobTypesRules" : {
+    "Databases" : [ {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Databases Job Rule ----\r\n\r\nString xpathQuery = \"_task_type\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement ctmXml = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = ctmXml.getDirectChildsElementbyName(xpathQuery);\r\n\tfor(CtmXmlElement taskTypeElement : ctmXmlElementResult) {\r\n\t\tString attributeValue = taskTypeElement.getText()\r\n\t\tif(attributeValue != null && attributeValue.equals(\"MySqlOperator\")){\r\n\t\t\tctmJob.setDatabasesType();\r\n\t\t}\r\n\t}\r\n}"
+      },
+      "jobTypeName" : "Databases",
+      "name" : "Job",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Databases Execution Type Rule ----\r\n\r\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tctmJob.general().databasesParameters().setExecutionType(DatabasesExecutionType.EmbeddedQuery);\r\n}"
+      },
+      "jobTypeName" : "Databases",
+      "name" : "Execution Type",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Databases Connection Profile Rule ----\r\n\r\nString argument = \"MYSQL_Connection_Profile\";\r\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\r\n\tctmJob.general().databasesParameters().setConnectionProfile(argument);\r\n}"
+      },
+      "jobTypeName" : "Databases",
+      "name" : "Connection Profile",
+      "category" : 3,
+      "type" : "script"
+    } ],
+    "OS" : [ {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "Element Name",
+          "value" : "bash_command",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Os bash_command Rule ----\r\n\r\nString xpathQuery = \"_task_type\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement ctmXml = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = ctmXml.getDirectChildsElementbyName(xpathQuery);\r\n\tfor(CtmXmlElement taskTypeElement : ctmXmlElementResult) {\r\n\t\tString attributeValue = taskTypeElement.getText()\r\n\t\tif(attributeValue != null && attributeValue.equals(\"BashOperator\")){\r\n\t\t\tctmJob.setOsType();\r\n\t\t}\r\n\t}\r\n}"
+      },
+      "jobTypeName" : "OS",
+      "name" : "Job",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "Element Name",
+          "value" : "bash_command",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Os Command Rule ----\r\n\r\nString xpathQuery = \"bash_command\";\r\nctmWorkspace.getOsJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = jobElement.getAllDecnedElementByName(xpathQuery);\r\n\tfor(CtmXmlElement ctmXmlElement : ctmXmlElementResult) {\r\n\t\tString commandValue = ctmXmlElement.getText()\r\n\t\tctmJob.general().osParameters().setCommand(commandValue);\r\n\t}\r\n}\r\n"
+      },
+      "jobTypeName" : "OS",
+      "name" : "Command",
+      "category" : 3,
+      "type" : "script"
+    } ]
+  },
+  "projectRuleSetName" : "AirFlow_ConversionRules",
+  "projectRuleSetControlMVersion" : "9.0.20",
+  "projectRuleSetDateCreated" : "Mon Mar 15 2021",
+  "freeScriptRule" : [ {
+    "rulesData" : {
+      "script" : ""
+    },
+    "name" : "Free Script",
+    "category" : 5,
+    "type" : "script"
+  } ],
+  "folderAttributesRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "_description",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Folder Description Rule---\r\n\r\nString argument = \"_description\";\r\nctmWorkspace.getAllFolders().each{ ctmFolder ->\r\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\r\n\tString descriptionValue = folderElement.getValueOfFirstChildElementByName(argument);\r\n\tctmFolder.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Folder Description",
+    "category" : 0,
+    "type" : "regular"
+  } ],
+  "scriptModeString" : "",
+  "projectRuleSetConversionType" : "Tabs View",
+  "dependencyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "_downstream_task_ids/element",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- InCondition / OutCondition Rule ----\n\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each { ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\t// Get downstream tasks for the source job\n\tdef downstreamTasks = jobElement.getFirstChildElementByName(\"_downstream_task_ids\");\n\tdef items = downstreamTasks.getAllDecnedElementByName(\"item\");\n    \n    items.each{ item-> \n        def taskName = item.getText();\n        def destJob = ctmWorkspace.getJobByName(taskName);\n        if(destJob){\n            String condName = ctmJob.getName()+\"-TO-\"+destJob.getName();\n            ctmJob.actions().addOutCondition(condName);\n            destJob.prerequisites().addInCondition(condName);\n        }\n    };\n}"
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- OutCondition Rule ----\n\n//\tfilter how to find dependencies\nString argument = \"\";\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n\tString jobName=ctmJob.general().getName();\n//\tfind  the job that depends on this job according to argument specified\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString dependencyJobName = jobElement.undefined;\n//\tFind all jobs that depende on job being processed \n\tdef targetJobsList = ctmWorkspace.getAllJobs();\n\ttargetJobsList.each {dependencyJob -> \n\t\tString depJobName=dependencyJob.general().getName();\n\t\tif(depJobName != null && !depJobName.equals(\"\") && depJobName.equals(dependencyJobName)){\n//\t\t\tuse the addOutCondition API for jobs and folders to add the OutCondition \n\t\t\tString condName = jobName+\"-TO-\"+depJobName;\n\t\t\tctmJob.actions().addOutCondition(condName);\n\t\t}\n\t}\n}"
+    },
+    "name" : "Out Condition",
+    "category" : 4,
+    "type" : "regular"
+  } ],
+  "jobRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "tasks/item",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\n\nString xpathQuery = \"//tasks/item\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"tasks/item\" XML elements into jobElements list\nList<CtmXmlElement> jobElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"tasks/item\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElement : jobElements) {\n CtmJob ctmJob = ctmWorkspace.createJob(jobElement);\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "task_id",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the text of child element tag name \"task_id\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"task_id\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString jobName = jobElement.getValueOfFirstChildElementByName(argument);\n\tctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "regular"
+  } ],
+  "jobAttributesRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "_task_type",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Description Rule---\r\n\r\nString argument = \"_task_type\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tString descriptionValue = jobElement.getValueOfFirstChildElementByName(argument);\r\n\tctmJob.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Job Description",
+    "category" : 1,
+    "type" : "regular"
+  } ]
+}

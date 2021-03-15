@@ -20,30 +20,30 @@ You can use these Informatica Conversion Rules code samples to convert your Info
 * JOB Element text value is "Job Text"
 
 ### Informatica mapping logic  
-Informatica Data | Control-M Data
--|-
-WORKFLOW Element|Smart Folder
-WORKFLOW "NAME" Attribute|Smart Folder Name
-WORKLET Element|Sub Folder Definition
-WORKLET "NAME" Attribute|Sub Folder Name
-TASK Element with Attribute TYPE="Command"|OS Job Definition
-TASK "NAME" Attribute|Job Name
-TASK "DESCRIPTION" Attribute|Job Description
-TASK > VALUEPAIR "VALUE" Attribute|OS Job Command value
-TASK Element with Attribute TYPE="start"|Dummy job Definition
-SESSION Element|Informatica Job Definition
-SESSION "NAME" Attribute|Informatica Job Name
-SESSION "DESCRIPTION" Attribute|Informatica Job Description
-WORKFLOWLINK Element|Declare dependency between two entities 
-WORKFLOWLINK "FROMTASK" Attribute|Name of the Entity that raise Out Condition
-WORKFLOWLINK "TOTASK" Attribute|Name of the Entity that accept In Condition
-REPOSITORY "NAME" Attribute|Informatica Job Host/Host Group
-FOLDER "NAME" Attribute|Informatica Job Repository Folder Name
-WORKFLOW "NAME" Attribute|Informatica Job Run Single Task
-TASKINSTANCE "TASKNAME" Attribute|Reference to the Job/Sub-Folder Definition
-TASKINSTANCE Element|Job/Sub-Folder Instance
-WORKFLOW > TASKINSTANCE|Job/Sub-Folder is under  a Smart Folder
-WORKLET > TASKINSTANCE|Job/Sub-Folder is under a Sub-Folder
+| Informatica Data | Control-M Data |
+| --- | --- |
+| WORKFLOW Element | Smart Folder |
+| WORKFLOW "NAME" Attribute | Smart Folder Name |
+| WORKLET Element | Sub Folder Definition |
+| WORKLET "NAME" Attribute | Sub Folder Name |
+| TASK Element with Attribute TYPE="Command" | OS Job Definition |
+| TASK "NAME" Attribute | Job Name |
+| TASK "DESCRIPTION" Attribute | Job Description |
+| TASK > VALUEPAIR "VALUE" Attribute | OS Job Command value |
+| TASK Element with Attribute TYPE="start" | Dummy job Definition |
+| SESSION Element | Informatica Job Definition |
+| SESSION "NAME" Attribute | Informatica Job Name |
+| SESSION "DESCRIPTION" Attribute | Informatica Job Description |
+| WORKFLOWLINK Element | Declare dependency between two entities  |
+| WORKFLOWLINK "FROMTASK" Attribute | Name of the Entity that raise Out Condition |
+| WORKFLOWLINK "TOTASK" Attribute | Name of the Entity that accept In Condition |
+| REPOSITORY "NAME" Attribute | Informatica Job Host/Host Group |
+| FOLDER "NAME" Attribute | Informatica Job Repository Folder Name |
+| WORKFLOW "NAME" Attribute | Informatica Job Run Single Task |
+| TASKINSTANCE "TASKNAME" Attribute | Reference to the Job/Sub-Folder Definition |
+| TASKINSTANCE Element | Job/Sub-Folder Instance |
+| WORKFLOW > TASKINSTANCE | Job/Sub-Folder is under  a Smart Folder |
+| WORKLET > TASKINSTANCE | Job/Sub-Folder is under a Sub-Folder |
 
 ### Usage Instructions
 1. Clone or download the repository.

@@ -21,7 +21,7 @@ You can use these Redwood RunMyJobs Conversion Rules code samples to convert you
 
 ### Redwood RunMyJobs mapping logic
 Redwood RunMyJobs Data | Control-M Data
--|-
+---|---
 **JobDefinitionType > path** attribute: containts "JobChain"|Folder
 **JobDefinitionType > path** attribute:  doesn’t containts "JobChain"|Job
 Value of **Name** Element|Folder/Job Name

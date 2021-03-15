@@ -21,7 +21,7 @@ You can use these Redwood Cronacle Conversion Rules code samples to convert your
 
 ### Redwood Cronacle mapping logic
 Redwood Cronacle Data | Control-M Data
--|-
+---|---
 **JobDefinitionType > path** attribute: containts "JobChain"|Folder
 **JobDefinitionType > path** attribute:  doesn’t containts "JobChain"|Job
 Value of **Name** Element|Folder/Job Name

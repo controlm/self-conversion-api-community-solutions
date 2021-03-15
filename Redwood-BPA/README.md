@@ -46,7 +46,7 @@ Value of **Script > RunAsUser** Element|OS Embedded Script - Run As
 
 #### Abap Step Parameters table
 Abap Step Parameter| Redwood BPA Value
--|-
+---|---
 Program Name|ABAP_PROGRAM_NAME
 Variant Name|ABAP_VARIANT_NAME
 Temporary Variant|TEMPORARY_VARIANT

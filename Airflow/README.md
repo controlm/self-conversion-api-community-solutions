@@ -37,11 +37,19 @@ __Above sample contains:__
 3. Import the __Airflow Conversion Rules__ json file.
 4. Create a new Self Conversion project:
    * Enter a project name.
-   * Load the **Airflow Sample Input Data**.
+   * Load the [Airflow Sample Input Data](#instructions-how-to-extract-airflow-workflows-to-xml).
    * In "Use existing conversion rules" dropdown list, select the conversion rules imported in step 3.
    * Click "Create Project".
 5. Click Run.
 6. Review the conversion results.
+
+## Instructions how to extract Airflow workflows to XML
+1. Connect to the Airflow database.
+2. Make sure the Airflow installation supports [dag serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html).
+3. For each dag you want to export run query: `SELECT data FROM serialized_dag;`
+4. For each dag copy the json content from the data column to a file and run the [extract_script](Data_export/jsonToXml.py) to convert it to xml.
+5. Copy all dag xml files to one folder and follow the instructions at [Usage Instructions](#usage-instructions)
+   Example: `jsonToXml.py -j <json_file> -x <xml_file>`
 
 ## Contribution guide
 To contribute, please follow these guidelines.
@@ -55,13 +63,3 @@ To contribute, please follow these guidelines.
    * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the tool sample data using the Demo Tool conversion rules.
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.
-
-## Instructions how to extract Airflow workflows to XML
-1. Connect to the Airflow database.
-2. Make sure the Airflow installation supports [dag serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html). 
-3. For each dag you want to export run query: SELECT data FROM serialized_dag;
-4. For each dag copy the json content from the data column to a file and run the [extract_script](Data_export/jsonToXml.py) to convert it to xml.
-<br>
-   Example: jsonToXml.py -j <json_file> -x <xml_file>
-   
-

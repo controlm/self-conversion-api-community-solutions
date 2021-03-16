@@ -49,7 +49,7 @@ __Above sample contains:__
 3. For each dag you want to export run query: `SELECT data FROM serialized_dag;`
 4. For each dag copy the json content from the data column to a file and run the [extract_script](Data_export/jsonToXml.py) to convert it to xml.
 5. Copy all dag xml files to one folder and follow the instructions at [Usage Instructions](#usage-instructions)
-   Example: `jsonToXml.py -j <json_file> -x <xml_file>`
+   &nbsp;Example: `jsonToXml.py -j <json_file> -x <xml_file>`
 
 ## Contribution guide
 To contribute, please follow these guidelines.

@@ -5,8 +5,9 @@ You can use these Airflow Conversion Rules code samples to convert your Airflow 
 ### The Airflow Conversion example includes:
 * __SampleData.xml__ - Airflow sample data in XML format. [(Airflow data extraction)](#instructions-how-to-extract-airflow-workflows-to-xml)
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Airflow data to Control-M data.
-* __Airflow_ConversionRules.json__ - The Airflow Conversion Rules json file that holds the Self Converion rules code samples.
-* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Airflow sample data using the Airflow converion rules sample.
+* __Airflow_ConversionRules.json__ - The Airflow Conversion Rules json file that holds the Self Conversion rules code samples.
+* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Airflow sample data using the Airflow conversion rules sample.
+* __HelixControlM_Result.json__ - The Helix Control-M data created by the Helix Control-M Self-Conversion when converting the Airflow sample data using the Airflow conversion rules sample. 
 
 ### XML structure sample:
 ```xml 
@@ -59,7 +60,7 @@ To contribute, please follow these guidelines.
 2. The __folder__ should contain:
    * __SampleData__ - A folder that holds tool sample Input Data in XML format that we want to convert to Control-M data.
    * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
-   * __Airflow_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Converion rules code.
-   * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the tool sample data using the Demo Tool conversion rules.
+   * __Airflow_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Conversion rules code.
+   * __ControlM_Result.xml__ - The Control-M data created by the Self Conversion when converting the tool sample data using the Demo Tool conversion rules.
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.

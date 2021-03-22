@@ -5,8 +5,8 @@ You can use these Redwood Cronacle Conversion Rules code samples to convert your
 ### The Redwood Cronacle Conversion example includes:
 * __SampleData.xml__ - Redwood Cronacle sample data in XML format.
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Redwood Cronacle data to Control-M data.
-* __Redwood_cronacle_ConversionRules.json__ - The Redwood Cronacle Conversion Rules json file that holds the Self Converion rules code samples.
-* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Redwood Cronacle sample data using the Redwood Cronacle converion rules sample.
+* __Redwood_cronacle_ConversionRules.json__ - The Redwood Cronacle Conversion Rules json file that holds the Self Conversion rules code samples.
+* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Redwood Cronacle sample data using the Redwood Cronacle conversion rules sample.
 
 ### XML structure sample:
 ```xml 
@@ -22,8 +22,8 @@ You can use these Redwood Cronacle Conversion Rules code samples to convert your
 ### Redwood Cronacle mapping logic
 Redwood Cronacle Data | Control-M Data
 ---|---
-**JobDefinitionType > path** attribute: containts "JobChain"|Folder
-**JobDefinitionType > path** attribute:  doesn’t containts "JobChain"|Job
+**JobDefinitionType > path** attribute: contains "JobChain"|Folder
+**JobDefinitionType > path** attribute:  doesn't contain "JobChain"|Job
 Value of **Name** Element|Folder/Job Name
 Value of **Description** Element|Folder/Job Description
 **ParentApplication > path** attribute: the value between the first and the second dot.<br>For example:<br> ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Application
@@ -34,12 +34,12 @@ Create condition between entities according to the order of **JobChainStep > Job
 **JobDefinitionType > path** attribute = GLOBAL.SAPR3|SAPR3 Job Type
 If Value of **JobDefinitionParameter > Name** Element equals JOBNAME then value of  **JobDefinitionParameter > DefaultExpression **|SAPR3 Job Name
 If Value of **JobDefinitionParameter > Name** Element equals JOBCLASS then value of  **JobDefinitionParameter > DefaultExpression**|SAPR3 JOBCLASS
-Create Variable with name from the Value of **JobDefinitionParameter > Name** Element (**only if the name doesnt include in the "Redwood patameters list that are being converted to control-m attribute"**)|Variable Name
+Create Variable with name from the Value of **JobDefinitionParameter > Name** Element (**only if the name doesnt include in the "Redwood parameters list that are being converted to control-m attribute"**)|Variable Name
 Value of **JobDefinitionParameter > DefaultExpression**|Variable Value
 If Value of **JobDefinitionParameter > Name** Element equals Step parameter name then value of DefaultExpression Converted to SAPR3 Step Parameter**(Step parameters description in the "Abap Step Parameters" table)**|SAPR3 Abap Step Parameters
 **JobDefinitionType > path** attribute = GLOBAL.SAPR3 && value of **SAPScript > SAPScriptAttribute >Value** Element="BW_CHAIN_RUN"|SAPBW Job Type
 If Value of **JobDefinitionParameter > Name** Element equals NAME then value of  **JobDefinitionParameter > DefaultExpression**|SABBW Process Chain Id
-**JobDefinitionType > path** attribute doesn’t contains ".SAPR3" && Script element exists |OS Embedded Script Type
+**JobDefinitionType > path** attribute doesn't contain ".SAPR3" && Script element exists |OS Embedded Script Type
 Value of **Script > Source** Element|OS Embedded Script - Script
 ``<Control-M job name>``.cmd|OS Embedded Script - file name
 Value of **Script > RunAsUser** Element|OS Embedded Script - Run As
@@ -55,7 +55,7 @@ Language|LANGUAGE
 Print Archive Mode|PRINT_ARMOD
 Output Device|PRINT_PDEST
 Department|PRINT_PRTXT
-Recipinet|PRINT_PRTXT
+Recipient|PRINT_PRTXT
 Number of Copies|PRINT_PRCOP
 Enable/Disable New Spool Request|PRINT_PRNEW
 Spool Request Name|PRINT_PLIST
@@ -74,7 +74,7 @@ Archive Document Type|ARCHIVE_AR_OBJECT
 Archive Information Field|ARCHIVE_INFO
 Archive Text|ARCHIVE_ARCTEXT
 
-#### Redwood patameters list that are being converted to Control-M attributes
+#### Redwood parameters list that are being converted to Control-M attributes
 * JOBNAME
 * ABAP_PROGRAM_NAME
 * ABAP_VARIANT_NAME
@@ -139,7 +139,7 @@ To contribute, please follow these guidelines.
 2. The __folder__ should contain:
    * __SampleData__ - A folder that holds tool sample Input Data in XML format that we want to convert to Control-M data.
    * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
-   * __Redwood_cronacle_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Converion rules code.
-   * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the tool sample data using the Demo Tool conversion rules.
+   * __Redwood_cronacle_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Conversion rules code.
+   * __ControlM_Result.xml__ - The Control-M data created by the Self Conversion when converting the tool sample data using the Demo Tool conversion rules.
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.

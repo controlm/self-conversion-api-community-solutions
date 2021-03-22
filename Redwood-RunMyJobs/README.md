@@ -5,8 +5,8 @@ You can use these Redwood RunMyJobs Conversion Rules code samples to convert you
 ### The Redwood RunMyJobs Conversion example includes:
 * __SampleData.xml__ - Redwood RunMyJobs sample data in XML format.
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Redwood RunMyJobs data to Control-M data.
-* __Redwood_RunMyJobs_ConversionRules.json__ - The Redwood RunMyJobs Conversion Rules json file that holds the Self Converion rules code samples.
-* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Redwood RunMyJobs sample data using the Redwood RunMyJobs converion rules sample.
+* __Redwood_RunMyJobs_ConversionRules.json__ - The Redwood RunMyJobs Conversion Rules json file that holds the Self Conversion rules code samples.
+* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Redwood RunMyJobs sample data using the Redwood RunMyJobs conversion rules sample.
 
 ### XML structure sample:
 ```xml 
@@ -22,8 +22,8 @@ You can use these Redwood RunMyJobs Conversion Rules code samples to convert you
 ### Redwood RunMyJobs mapping logic
 Redwood RunMyJobs Data | Control-M Data
 ---|---
-**JobDefinitionType > path** attribute: containts "JobChain"|Folder
-**JobDefinitionType > path** attribute:  doesn’t containts "JobChain"|Job
+**JobDefinitionType > path** attribute: contains "JobChain"|Folder
+**JobDefinitionType > path** attribute:  doesn't contain "JobChain"|Job
 Value of **Name** Element|Folder/Job Name
 Value of **Description** Element|Folder/Job Description
 **ParentApplication > path** attribute: the value between the first and the second dot.<br>For example:<br> ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Application
@@ -55,7 +55,7 @@ Language|LANGUAGE
 Print Archive Mode|PRINT_ARMOD
 Output Device|PRINT_PDEST
 Department|PRINT_PRTXT
-Recipinet|PRINT_PRTXT
+Recipient|PRINT_PRTXT
 Number of Copies|PRINT_PRCOP
 Enable/Disable New Spool Request|PRINT_PRNEW
 Spool Request Name|PRINT_PLIST
@@ -74,7 +74,7 @@ Archive Document Type|ARCHIVE_AR_OBJECT
 Archive Information Field|ARCHIVE_INFO
 Archive Text|ARCHIVE_ARCTEXT
 
-#### Redwood patameters list that are being converted to Control-M attributes
+#### Redwood parameters list that are being converted to Control-M attributes
 * JOBNAME
 * ABAP_PROGRAM_NAME
 * ABAP_VARIANT_NAME
@@ -139,7 +139,7 @@ To contribute, please follow these guidelines.
 2. The __folder__ should contain:
    * __SampleData__ - A folder that holds tool sample Input Data in XML format that we want to convert to Control-M data.
    * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
-   * __Redwood_RunMyJobs_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Converion rules code.
-   * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the tool sample data using the Demo Tool conversion rules.
+   * __Redwood_RunMyJobs_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Conversion rules code.
+   * __ControlM_Result.xml__ - The Control-M data created by the Self Conversion when converting the tool sample data using the Demo Tool conversion rules.
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.

@@ -1,0 +1,129 @@
+{
+  "Smart_Folder" : {
+    "Type" : "Folder",
+    "Application" : "DEFAULT_APPLICATION",
+    "SubApplication" : "DEFAULT_SUB_APPLICATION",
+    "Description" : "",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "Dummy_Job" : {
+      "Type" : "Job:Dummy",
+      "Description" : "BranchPythonOperator",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Job_A-TO-Dummy_Job",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Dummy_Job-TO-SQL_Job",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Job_A-TO-Dummy_Job",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      }
+    },
+    "SQL_Job" : {
+      "Type" : "Job:Database:EmbeddedQuery",
+      "Query" : "",
+      "Description" : "MySqlOperator",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Dummy_Job-TO-SQL_Job",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Dummy_Job-TO-SQL_Job",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "ConnectionProfile" : "MYSQL_Connection_Profile",
+      "Autocommit" : "N",
+      "OutputExecutionLog" : "Y",
+      "OutputSQLOutput" : "N",
+      "SQLOutputFormat" : "Text"
+    },
+    "Job_B" : {
+      "Type" : "Job:Command",
+      "Command" : " echo \"Job_B CMD Command \" ",
+      "Description" : "BashOperator",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Job_A-TO-Job_B",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Job_A-TO-Job_B",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      }
+    },
+    "Job_A" : {
+      "Type" : "Job:Command",
+      "Command" : "echo \"Job_A CMD Command\" ",
+      "Description" : "BashOperator",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Job_A-TO-Job_B",
+          "OrderDate" : "OrderDate"
+        }, {
+          "Event" : "Job_A-TO-Dummy_Job",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      }
+    }
+  }
+}

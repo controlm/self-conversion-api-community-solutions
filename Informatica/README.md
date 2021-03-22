@@ -5,8 +5,8 @@ You can use these Informatica Conversion Rules code samples to convert your Info
 ### The Informatica Conversion example includes:
 * __SampleData.xml__ - Informatica sample data in XML format. [(Informatica data extraction)](https://github.com/controlm/self-conversion-api-community-solutions/tree/master/Informatica#extract-informatica-data-in-xml-format)
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Informatica data to Control-M data.
-* __Informatica_ConversionRules.json__ - The Informatica Conversion Rules json file that holds the Self Converion rules code samples.
-* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Informatica sample data using the Informatica converion rules sample.
+* __Informatica_ConversionRules.json__ - The Informatica Conversion Rules json file that holds the Self Conversion rules code samples.
+* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Informatica sample data using the Informatica conversion rules sample.
 
 ### XML structure sample:
 ```xml 
@@ -20,30 +20,30 @@ You can use these Informatica Conversion Rules code samples to convert your Info
 * JOB Element text value is "Job Text"
 
 ### Informatica mapping logic  
-Informatica Data | Control-M Data
--|-
-WORKFLOW Element|Smart Folder
-WORKFLOW "NAME" Attribute|Smart Folder Name
-WORKLET Element|Sub Folder Definition
-WORKLET "NAME" Attribute|Sub Folder Name
-TASK Element with Attribute TYPE="Command"|OS Job Definition
-TASK "NAME" Attribute|Job Name
-TASK "DESCRIPTION" Attribute|Job Description
-TASK > VALUEPAIR "VALUE" Attribute|OS Job Command value
-TASK Element with Attribute TYPE="start"|Dummy job Definition
-SESSION Element|Informatica Job Definition
-SESSION "NAME" Attribute|Informatica Job Name
-SESSION "DESCRIPTION" Attribute|Informatica Job Description
-WORKFLOWLINK Element|Declare dependency between two entities 
-WORKFLOWLINK "FROMTASK" Attribute|Name of the Entity that raise Out Condition
-WORKFLOWLINK "TOTASK" Attribute|Name of the Entity that accept In Condition
-REPOSITORY "NAME" Attribute|Informatica Job Host/Host Group
-FOLDER "NAME" Attribute|Informatica Job Repository Folder Name
-WORKFLOW "NAME" Attribute|Informatica Job Run Single Task
-TASKINSTANCE "TASKNAME" Attribute|Reference to the Job/Sub-Folder Definition
-TASKINSTANCE Element|Job/Sub-Folder Instance
-WORKFLOW > TASKINSTANCE|Job/Sub-Folder is under  a Smart Folder
-WORKLET > TASKINSTANCE|Job/Sub-Folder is under a Sub-Folder
+| Informatica Data | Control-M Data |
+| --- | --- |
+| WORKFLOW Element | Smart Folder |
+| WORKFLOW "NAME" Attribute | Smart Folder Name |
+| WORKLET Element | Sub Folder Definition |
+| WORKLET "NAME" Attribute | Sub Folder Name |
+| TASK Element with Attribute TYPE="Command" | OS Job Definition |
+| TASK "NAME" Attribute | Job Name |
+| TASK "DESCRIPTION" Attribute | Job Description |
+| TASK > VALUEPAIR "VALUE" Attribute | OS Job Command value |
+| TASK Element with Attribute TYPE="start" | Dummy job Definition |
+| SESSION Element | Informatica Job Definition |
+| SESSION "NAME" Attribute | Informatica Job Name |
+| SESSION "DESCRIPTION" Attribute | Informatica Job Description |
+| WORKFLOWLINK Element | Declare dependency between two entities  |
+| WORKFLOWLINK "FROMTASK" Attribute | Name of the Entity that raise Out Condition |
+| WORKFLOWLINK "TOTASK" Attribute | Name of the Entity that accept In Condition |
+| REPOSITORY "NAME" Attribute | Informatica Job Host/Host Group |
+| FOLDER "NAME" Attribute | Informatica Job Repository Folder Name |
+| WORKFLOW "NAME" Attribute | Informatica Job Run Single Task |
+| TASKINSTANCE "TASKNAME" Attribute | Reference to the Job/Sub-Folder Definition |
+| TASKINSTANCE Element | Job/Sub-Folder Instance |
+| WORKFLOW > TASKINSTANCE | Job/Sub-Folder is under  a Smart Folder |
+| WORKLET > TASKINSTANCE | Job/Sub-Folder is under a Sub-Folder |
 
 ### Usage Instructions
 1. Clone or download the repository.
@@ -65,8 +65,8 @@ To contribute, please follow these guidelines.
 2. The __folder__ should contain:
    * __SampleData__ - A folder that holds tool sample Input Data in XML format that we want to convert to Control-M data.
    * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
-   * __Informatica_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Converion rules code.
-   * __ControlM_Result.xml__ - The Control-M data created by the Self Converion when converting the tool sample data using the Demo Tool conversion rules.
+   * __Informatica_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Conversion rules code.
+   * __ControlM_Result.xml__ - The Control-M data created by the Self Conversion when converting the tool sample data using the Demo Tool conversion rules.
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.
 

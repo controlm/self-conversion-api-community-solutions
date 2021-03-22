@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<all>
+	<__version type="int">1</__version>
+	<dag type="dict">
+		<fileloc type="str">/root/airflow/dags/T0_cmf_monitor.py</fileloc>
+		<_dag_id type="str">Smart_Folder</_dag_id>
+		<catchup type="bool">False</catchup>
+		<schedule_interval type="str">*/5 * * * *</schedule_interval>
+		<default_args type="dict">
+			<__var type="dict">
+				<owner type="str">airflow</owner>
+				<start_date type="dict">
+					<__var type="float">1589995800.0</__var>
+					<__type type="str">datetime</__type>
+				</start_date>
+				<end_date type="null"/>
+			</__var>
+			<__type type="str">dict</__type>
+		</default_args>
+		<timezone type="str">UTC</timezone>
+		<tasks type="list">
+			<item type="dict">
+				<_outlets type="dict">
+					<datasets type="list"/>
+				</_outlets>
+				<_downstream_task_ids type="list">
+					<item type="str">Job_B</item>
+					<item type="str">Dummy_Job</item>
+				</_downstream_task_ids>
+				<task_id type="str">Job_A</task_id>
+				<template_fields type="list">
+					<item type="str">bash_command</item>
+					<item type="str">env</item>
+				</template_fields>
+				<_inlets type="dict">
+					<auto type="bool">False</auto>
+					<task_ids type="list"/>
+					<datasets type="list"/>
+				</_inlets>
+				<owner type="str">airflow</owner>
+				<start_date type="float">1589995800.0</start_date>
+				<ui_fgcolor type="str">#000</ui_fgcolor>
+				<ui_color type="str">#f0ede4</ui_color>
+				<_task_type type="str">BashOperator</_task_type>
+				<_task_module type="str">bash_operator</_task_module>
+				<bash_command type="str">echo &quot;Job_A CMD Command&quot; </bash_command>
+			</item>
+			<item type="dict">
+				<_outlets type="dict">
+					<datasets type="list"/>
+				</_outlets>
+				<_downstream_task_ids type="list"/>
+				<task_id type="str">Job_B</task_id>
+				<template_fields type="list">
+					<item type="str">bash_command</item>
+					<item type="str">env</item>
+				</template_fields>
+				<_inlets type="dict">
+					<auto type="bool">False</auto>
+					<task_ids type="list"/>
+					<datasets type="list"/>
+				</_inlets>
+				<owner type="str">airflow</owner>
+				<start_date type="float">1589995800.0</start_date>
+				<ui_fgcolor type="str">#000</ui_fgcolor>
+				<ui_color type="str">#f0ede4</ui_color>
+				<_task_type type="str">BashOperator</_task_type>
+				<_task_module type="str">bash_operator</_task_module>
+				<bash_command type="str"> echo &quot;Job_B CMD Command &quot; </bash_command>
+			</item>
+            <item type="dict">
+				<_outlets type="dict">
+					<datasets type="list"/>
+				</_outlets>
+				<_downstream_task_ids type="list">
+					<item type="str">SQL_Job</item>
+				</_downstream_task_ids>
+				<task_id type="str">Dummy_Job</task_id>
+				<template_fields type="list">
+					<item type="str">templates_dict</item>
+					<item type="str">op_args</item>
+					<item type="str">op_kwargs</item>
+				</template_fields>
+				<_inlets type="dict">
+					<auto type="bool">False</auto>
+					<task_ids type="list"/>
+					<datasets type="list"/>
+				</_inlets>
+				<owner type="str">airflow</owner>
+				<start_date type="float">1560038400.0</start_date>
+				<ui_fgcolor type="str">#000</ui_fgcolor>
+				<ui_color type="str">#ffefeb</ui_color>
+				<_task_type type="str">BranchPythonOperator</_task_type>
+				<_task_module type="str">airflow.operators.python_operator</_task_module>
+				<op_args type="list"/>
+				<op_kwargs type="dict"/>
+			</item>
+			<item type="dict">
+				<email_on_retry type="bool">False</email_on_retry>
+				<start_date type="int">1500249600</start_date>
+				<_inlets type="dict">
+					<auto type="bool">False</auto>
+					<task_ids type="list"/>
+					<datasets type="list"/>
+				</_inlets>
+				<task_id type="str">SQL_Job</task_id>
+				<ui_fgcolor type="str">#000</ui_fgcolor>
+				<ui_color type="str">#ededed</ui_color>
+				<template_fields type="list">
+					<item type="str">sql</item>
+				</template_fields>
+				<email type="list">
+					<item type="str">airflow@example.com</item>
+				</email>
+				<_downstream_task_ids type="list">
+					<item type="str">check_dataflow_job_status</item>
+				</_downstream_task_ids>
+				<_outlets type="dict">
+					<datasets type="list"/>
+				</_outlets>
+				<email_on_failure type="bool">False</email_on_failure>
+				<owner type="str">airflow</owner>
+				<_task_type type="str">MySqlOperator</_task_type>
+				<_task_module type="str">airflow.operators.mysql_operator</_task_module>
+				<sql type="str">SELECT 1</sql>
+			</item>
+		</tasks>
+	</dag>
+</all>

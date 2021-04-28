@@ -7,6 +7,7 @@ You can use these Informatica Conversion Rules code samples to convert your Info
 * __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Informatica data to Control-M data.
 * __Informatica_ConversionRules.json__ - The Informatica Conversion Rules json file that holds the Self Conversion rules code samples.
 * __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Informatica sample data using the Informatica conversion rules sample.
+* __HelixControlM_Result.json__ - The Helix Control-M data created by the Helix Control-M Self-Conversion when converting the Informatica sample data using the Informatica conversion rules sample.
 
 ### XML structure sample:
 ```xml 
@@ -67,6 +68,7 @@ To contribute, please follow these guidelines.
    * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
    * __Informatica_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Conversion rules code.
    * __ControlM_Result.xml__ - The Control-M data created by the Self Conversion when converting the tool sample data using the Demo Tool conversion rules.
+   * __HelixControlM_Result.json__ - The Helix Control-M data created by the Helix Control-M Self-Conversion when converting the tool sample data using the Demo Tool conversion rules.
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.
 

@@ -1,0 +1,272 @@
+{
+  "Workflow1" : {
+    "Type" : "Folder",
+    "Application" : "DEFAULT_APPLICATION",
+    "SubApplication" : "DEFAULT_SUB_APPLICATION",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "Job4" : {
+      "Type" : "Job:Informatica",
+      "ConnectionProfile" : "Informatica_Connection_Profile",
+      "RepositoryFolder" : "Folder1",
+      "Workflow" : "Workflow1",
+      "WorkflowExecutionMode" : "RunSingleTask",
+      "WorkflowRestartMode" : "Recover",
+      "RunSingleTask" : "Job4",
+      "Depth" : "10",
+      "EnableOutput" : true,
+      "EnableErrorDetails" : true,
+      "RunAs" : "Informatica_Connection_Profile",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Job3-TO-Job4",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Job4-TO-Job5",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Job3-TO-Job4",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "REP_DEV"
+    },
+    "Job3" : {
+      "Type" : "Job:Informatica",
+      "ConnectionProfile" : "Informatica_Connection_Profile",
+      "RepositoryFolder" : "Folder1",
+      "Workflow" : "Workflow1",
+      "WorkflowExecutionMode" : "RunSingleTask",
+      "WorkflowRestartMode" : "Recover",
+      "RunSingleTask" : "Job3",
+      "Depth" : "10",
+      "EnableOutput" : true,
+      "EnableErrorDetails" : true,
+      "RunAs" : "Informatica_Connection_Profile",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Start-TO-Job3",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Job3-TO-Job4",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Start-TO-Job3",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "REP_DEV"
+    },
+    "Start" : {
+      "Type" : "Job:Dummy",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Start-TO-Job3",
+          "OrderDate" : "OrderDate"
+        }, {
+          "Event" : "Start-TO-Job1",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      }
+    },
+    "Job2" : {
+      "Type" : "Job:Informatica",
+      "ConnectionProfile" : "Informatica_Connection_Profile",
+      "RepositoryFolder" : "Folder1",
+      "Workflow" : "Workflow1",
+      "WorkflowExecutionMode" : "RunSingleTask",
+      "WorkflowRestartMode" : "Recover",
+      "RunSingleTask" : "Job2",
+      "Depth" : "10",
+      "EnableOutput" : true,
+      "EnableErrorDetails" : true,
+      "RunAs" : "Informatica_Connection_Profile",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Job1-TO-Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Job2-TO-Job5",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Job1-TO-Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "REP_DEV"
+    },
+    "Job1" : {
+      "Type" : "Job:Informatica",
+      "ConnectionProfile" : "Informatica_Connection_Profile",
+      "RepositoryFolder" : "Folder1",
+      "Workflow" : "Workflow1",
+      "WorkflowExecutionMode" : "RunSingleTask",
+      "WorkflowRestartMode" : "Recover",
+      "RunSingleTask" : "Job1",
+      "Depth" : "10",
+      "EnableOutput" : true,
+      "EnableErrorDetails" : true,
+      "RunAs" : "Informatica_Connection_Profile",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Start-TO-Job1",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Job1-TO-Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Start-TO-Job1",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "REP_DEV"
+    },
+    "Job6" : {
+      "Type" : "Job:Command",
+      "Command" : "$PMRootDir/we/Scripts/Master/wrapper.ksh startworkflow.ksh $$BUILD_NAME $$FOLDER_NAME {workflowname} $$DomainName $$IntegrationServiceName",
+      "Description" : "This command calls the workflow",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Job5-TO-Job6",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Job5-TO-Job6",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "REP_DEV"
+    },
+    "Job5" : {
+      "Type" : "Job:Informatica",
+      "ConnectionProfile" : "Informatica_Connection_Profile",
+      "RepositoryFolder" : "Folder1",
+      "Workflow" : "Workflow1",
+      "WorkflowExecutionMode" : "RunSingleTask",
+      "WorkflowRestartMode" : "Recover",
+      "RunSingleTask" : "Job5",
+      "Depth" : "10",
+      "EnableOutput" : true,
+      "EnableErrorDetails" : true,
+      "RunAs" : "Informatica_Connection_Profile",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Job2-TO-Job5",
+          "OrderDate" : "OrderDate"
+        }, {
+          "Event" : "Job4-TO-Job5",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Job5-TO-Job6",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Job2-TO-Job5",
+          "OrderDate" : "OrderDate"
+        }, {
+          "Event" : "Job4-TO-Job5",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "REP_DEV"
+    }
+  }
+}

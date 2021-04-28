@@ -1,0 +1,328 @@
+{
+  "EmbeddedScript_Folder" : {
+    "Type" : "Folder",
+    "Application" : "Application",
+    "SubApplication" : "Sub-Application",
+    "Description" : "SAPBW_Folder Description Example",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "EmbeddedScript_Job" : {
+      "Type" : "Job:EmbeddedScript",
+      "Script" : "${example}daily.ksh",
+      "FileName" : "EmbeddedScript_Job.cmd",
+      "Application" : "Application",
+      "SubApplication" : "Sub-Application",
+      "Description" : "EmbeddedScript_Job Description Example \\n*** Type: GLOBAL.KSH ***",
+      "RunAs" : "User1",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "EmbeddedScript_Job-TO-EmbeddedScript_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      }
+    },
+    "EmbeddedScript_Job2" : {
+      "Type" : "Job:EmbeddedScript",
+      "Script" : "\"D:\\Program Files (x86)\\SAP BusinessObjects\\Data Services\\example.bat\"",
+      "FileName" : "EmbeddedScript_Job2.cmd",
+      "Application" : "Application",
+      "SubApplication" : "Sub-Application",
+      "Description" : "EmbeddedScript_Job2 Description Example \\n*** Type: GLOBAL.CMD ***",
+      "RunAs" : "User2",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "EmbeddedScript_Job-TO-EmbeddedScript_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "EmbeddedScript_Job-TO-EmbeddedScript_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "Q_CODE_MI_41"
+    }
+  },
+  "SAPBW_Folder" : {
+    "Type" : "Folder",
+    "Application" : "Application",
+    "SubApplication" : "Sub-Application",
+    "Description" : "SAPBW_Folder Description Example",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "SAPBW_Job" : {
+      "Type" : "Job:SAP:BW:ProcessChain",
+      "ConnectionProfile" : "DEFAULT_SAPBW_CONNECT",
+      "Id" : "BGR_DE_BW_TR_PERF_APPL_D",
+      "RerunOption" : "RestartFromFailiurePoint ",
+      "EnablePeridoicJob" : true,
+      "ConsiderOnlyOverallChainStatus" : false,
+      "RetrieveLog" : "true",
+      "Application" : "Application",
+      "SubApplication" : "Sub-Application",
+      "Description" : "SAPBW_Job Description Example",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "SAPBW_Job-TO-SAPBW_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      }
+    },
+    "SAPBW_Job2" : {
+      "Type" : "Job:SAP:BW:ProcessChain",
+      "ConnectionProfile" : "DEFAULT_SAPBW_CONNECT",
+      "Id" : "BGR_DE_BW_TR_PERF_APPL_D",
+      "RerunOption" : "RestartFromFailiurePoint ",
+      "EnablePeridoicJob" : true,
+      "ConsiderOnlyOverallChainStatus" : false,
+      "RetrieveLog" : "true",
+      "Application" : "Application",
+      "SubApplication" : "Sub-Application",
+      "Description" : "SAPBW_Job2 Description Example",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "SAPBW_Job-TO-SAPBW_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "SAPBW_Job-TO-SAPBW_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      }
+    }
+  },
+  "SAPR3_Folder" : {
+    "Type" : "Folder",
+    "Application" : "Application",
+    "SubApplication" : "Sub-Application",
+    "Description" : "SAPR3_Folder Description Example",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "SAPR3_Job2" : {
+      "Type" : "Job:SAP:R3:CREATE",
+      "Steps" : [ {
+        "StepType" : "ABAP",
+        "Language" : "E",
+        "TimeToPrint" : "PrintLater",
+        "CoverPrintPage" : false,
+        "PrintExpiration" : 8,
+        "DeleteAfterPrint" : false,
+        "OutputNumberColumns" : 80,
+        "OutputNumberRows" : 65,
+        "SpoolListName" : "ZRCRM_CHECK_",
+        "OutputLayout" : "X_PAPER",
+        "PrintArchiveMode" : "Print",
+        "CoverSheet" : "Print",
+        "CoverPage" : "Print",
+        "NumberOfCopies" : 1,
+        "NewSpoolRequest" : true,
+        "UserName" : "BEACON_RUN",
+        "ProgramName" : "ZRCRM_CHECK_BANK_WIZARD"
+      } ],
+      "RerunFromStep" : "1",
+      "SpoolListRecipient" : {
+        "RecipientCopy" : false,
+        "RecipientExpress" : false,
+        "ReciptNoForwarding" : false
+      },
+      "Application" : "Application",
+      "SubApplication" : "Sub-Application",
+      "Description" : "SAPR3_Job2 Description Example",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "SAPR3_Job-TO-SAPR3_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "SAPR3_Job-TO-SAPR3_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Variables" : [ {
+        "REC_TYPE" : "U"
+      }, {
+        "REC_COPY" : "N"
+      }, {
+        "REC_BLIND_COPY" : "N"
+      }, {
+        "REC_EXPRESS" : "N"
+      }, {
+        "REC_NO_FORWARDING" : "N"
+      }, {
+        "REC_NO_PRINT" : "N"
+      }, {
+        "REC_DELIVER" : "N"
+      }, {
+        "REC_MAILSTATUS" : "N"
+      }, {
+        "SHOWAPPLLOG" : "N"
+      }, {
+        "IGNORE_APPL_RC" : "N"
+      } ],
+      "Host" : "HostName",
+      "ConnectionProfile" : "HostName",
+      "SapJobName" : "ZUSM_CORP_INBOUND",
+      "Exec" : "Server",
+      "StartCondition" : "ASAP",
+      "RerunFromPointOfFailure" : false,
+      "PostJobAction" : {
+        "Spool" : "DoNotCopy",
+        "JobLog" : "CopyToOutput",
+        "JobCompletionStatusWillDependOnApplicationStatus" : false
+      }
+    },
+    "SAPR3_Job" : {
+      "Type" : "Job:SAP:R3:CREATE",
+      "Steps" : [ {
+        "StepType" : "ABAP",
+        "Language" : "E",
+        "TimeToPrint" : "PrintLater",
+        "CoverPrintPage" : false,
+        "PrintExpiration" : 8,
+        "DeleteAfterPrint" : false,
+        "OutputNumberColumns" : 80,
+        "OutputNumberRows" : 65,
+        "SpoolListName" : "ZRCRM_CHECK_",
+        "OutputLayout" : "X_PAPER",
+        "PrintArchiveMode" : "Print",
+        "CoverSheet" : "Print",
+        "CoverPage" : "Print",
+        "NumberOfCopies" : 1,
+        "NewSpoolRequest" : true,
+        "UserName" : "BEACON_RUN",
+        "ProgramName" : "ZRCRM_CHECK_BANK_WIZARD"
+      } ],
+      "RerunFromStep" : "1",
+      "SpoolListRecipient" : {
+        "RecipientCopy" : false,
+        "RecipientExpress" : false,
+        "ReciptNoForwarding" : false
+      },
+      "Application" : "Application",
+      "SubApplication" : "Sub-Application",
+      "Description" : "SAPR3_Job Description Example",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "SAPR3_Job-TO-SAPR3_Job2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Variables" : [ {
+        "REC_TYPE" : "U"
+      }, {
+        "REC_COPY" : "N"
+      }, {
+        "REC_BLIND_COPY" : "N"
+      }, {
+        "REC_EXPRESS" : "N"
+      }, {
+        "REC_NO_FORWARDING" : "N"
+      }, {
+        "REC_NO_PRINT" : "N"
+      }, {
+        "REC_DELIVER" : "N"
+      }, {
+        "REC_MAILSTATUS" : "N"
+      }, {
+        "SHOWAPPLLOG" : "N"
+      }, {
+        "IGNORE_APPL_RC" : "N"
+      } ],
+      "Host" : "HostName",
+      "ConnectionProfile" : "HostName",
+      "SapJobName" : "ZUSM_CORP_INBOUND",
+      "Exec" : "Server",
+      "StartCondition" : "ASAP",
+      "RerunFromPointOfFailure" : false,
+      "PostJobAction" : {
+        "Spool" : "DoNotCopy",
+        "JobLog" : "CopyToOutput",
+        "JobCompletionStatusWillDependOnApplicationStatus" : false
+      }
+    }
+  }
+}

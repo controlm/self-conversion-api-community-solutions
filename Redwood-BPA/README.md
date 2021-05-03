@@ -142,7 +142,7 @@ To contribute, please follow these guidelines.
    * __MappingLogic.xlsx__ - The mapping logic used for conversion in this sample, from the  tool sample input data to Control-M data.
    * __Redwood_BPA_ConversionRules.json__ - The tool Conversion Rules json file that contains the Self Conversion rules code.
    * __ControlM_Result.xml__ - The Control-M data created by the Self Conversion when converting the tool sample data using the Demo Tool conversion rules.
-   * __HelixControlM_Result.json__ - The Helix Control-M data created by the Helix Control-M Self-Conversion when converting the tool sample data using the Demo Tool conversion rules.
+   * __HelixControlM_Result.json__ - The Helix Control-M data created by the Helix Control-M Self-Conversion when converting the tool sample data using the Demo Tool conversion rules. 
 
 
 3. Include a **README.md** file that explains the sample. A good description helps other community members to understand your sample. The README.md uses [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) for formatting text.

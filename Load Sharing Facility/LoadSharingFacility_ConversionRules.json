@@ -238,7 +238,7 @@
       "type" : "script"
     } ]
   },
-  "projectRuleSetName" : "New_LSF_ConversionRules",
+  "projectRuleSetName" : "LoadSharingFacility_ConversionRules",
   "projectRuleSetControlMVersion" : "9.0.20",
   "projectRuleSetDateCreated" : "Mon May 03 2021",
   "freeScriptRule" : [ {

@@ -1,89 +1,379 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmlFlowDef Name="sampleData.xml" Version="1.0">
-<FlowDef  Name="FlowDef1" Id="FlowDef1" Description="" Created="" Modified="" Location="Batch" >
-<JobDef Name="JOB1" Type="Job" Location="Sales" Description="Job 1" Created="" Modified="">
-<JobCmdLine  Value="c:\test1.bat"/>
-<Host  Value="Host1"/>
-</JobDef>
-<JobDef Name="JOB2" Type="Job" Location="Sales" Description="Job 2" Created="" Modified="">
-<JobCmdLine  Value="c:\test2.bat"/>
-<Host  Value="Host2"/>
-</JobDef>
-<JobDef Name="JOB3" Type="Job" Location="Sales" Description="Job 3" Created="" Modified="">
-<JobCmdLine  Value="c:\test3.bat"/>
-<Host  Value="Host3" />
-</JobDef>
-<JobDef Name="JOB4" Type="Job" Location="Sales" Description="Job 4" Created="" Modified="">
-<JobCmdLine  Value="c:\test4.bat"/>
-<Host  Value="Host4"/>
-</JobDef>
-<JobDef Name="JOB5" Type="Job" Location="Sales" Description="Job 5" Created="" Modified="">
-<JobCmdLine  Value="c:\test5.bat"/>
-<Host  Value="Host5"/>
-</JobDef>
-<Dependencies  Name="Completes successfully " Type = "Job" Reference="JOB4" Description="null">
-<Events CombinationType="AND">
-<Event Type="Job" Description="Done(JOB3) ">
-<done Depend="JOB3"/>
-</Event>
-</Events>
-</Dependencies>
-<Dependencies  Name="Completes successfully " Type = "Job" Reference="JOB5" Description="null">
-<Events CombinationType="AND">
-<Event Type="Job" Description="Done(JOB3) ">
-<done Depend="JOB3"/>
-</Event>
-</Events>
-</Dependencies>
-<Dependencies  Name="Completes successfully " Type = "Job" Reference="JOB3" Description="null">
-<Events CombinationType="AND">
-<Event Type="Job" Description="Done(JOB1) ">
-<done Depend="JOB1"/>
-</Event>
-<Event Type="Job" Description="Done(JOB2) ">
-<done Depend="JOB2"/>
-</Event>
-</Events>
-</Dependencies>
-</FlowDef>
-<FlowDef  Name="FlowDef2" Id="FlowDef2" Description="" Created="" Modified="" Location="Batch" >
-<JobDef Name="subFlow1" Type="subFlow" Location="Sales" Description="subFlow 1" Created="" Modified="">
-<JobCmdLine  Value="c:\testSubFlow1.bat"/>
-<Host  Value="HostSubFlow1" />
-</JobDef>
-<JobDef Name="subFlow2" Type="subFlow" Location="Sales" Description="subFlow 2" Created="" Modified="">
-<JobCmdLine  Value="c:\testSubFlow1.bat"/>
-<Host  Value="HostSubFlow2" />
-</JobDef>
-<Dependencies  Name="Completes successfully " Type = "subFlow" Reference="subFlow2" Description="null">
-<Events CombinationType="AND">
-<Event Type="subFlow" Description="Done(subFlow1) ">
-<done Depend="subFlow1"/>
-</Event>
-</Events>
-</Dependencies>
-</FlowDef>
-<FlowDef  Name="subFlow1" Id="subFlow1" Description="" Created="" Modified="" Location="Batch" >
-<JobDef Name="JOB6" Type="Job" Location="Sales" Description="Job 6" Created="" Modified="">
-<JobCmdLine  Value="c:\test6.bat"/>
-<Host  Value="Host6"/>
-</JobDef>
-<JobDef Name="JOB7" Type="Job" Location="Sales" Description="Job 7" Created="" Modified="">
-<JobCmdLine  Value="c:\test7.bat"/>
-<Host  Value="Host7"/>
-</JobDef>
-<Dependencies  Name="Completes successfully" Type = "Job" Reference="JOB7" Description="null">
-<Events CombinationType="AND">
-<Event Type="Job" Description="Done(JOB6) ">
-<done Depend="JOB6"/>
-</Event>
-</Events>
-</Dependencies>
-</FlowDef>
-<FlowDef  Name="subFlow2" Id="subFlow2" Description="" Created="" Modified="" Location="Batch" >
-<JobDef Name="JOB8" Type="Job" Location="Sales" Description="Job 8" Created="" Modified="">
-<JobCmdLine  Value="c:\test8.bat"/>
-<Host  Value="Host8"/>
-</JobDef>
-</FlowDef>
-</xmlFlowDef>
+<DEFTABLE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Folder.xsd">
+<SMART_FOLDER
+	DATACENTER="datacenter"
+	CREATION_DATE="20210504"
+	CREATION_TIME="113901"
+	FOLDER_NAME="FlowDef1"
+	USED_BY_CODE="0"
+	ADJUST_COND="N"
+	FOLDER_ORDER_METHOD="SYSTEM"
+	APPLICATION="DEFAULT_APPLICATION"
+	CREATED_BY="N/A"
+	CONFIRM="0"
+	CRITICAL="0"
+	JOBNAME="FlowDef1"
+	SUB_APPLICATION="DEFAULT_SUB_APPLICATION"
+	DESCRIPTION=""
+	TIMEFROM=""
+	TIMETO=""
+	PRIORITY=""
+	CREATION_USER="1"
+	PLATFORM="UNIX"
+	VERSION="920"
+	CYCLIC="0"
+	INTERVAL="00001M"
+	MAXRERUN="0"
+	REMOVEATONCE="Y"
+	DAYSKEEPINNOTOK="0"
+	CYCLIC_TOLERANCE="1"
+>
+	<RULE_BASED_CALENDAR NAME="EVERYDAY" MAXWAIT="00" DAYS_AND_OR="O" JAN="1" FEB="1" MAR="1" APR="1" MAY="1" JUN="1" JUL="1" AUG="1" SEP="1" OCT="1" NOV="1" DEC="1" SHIFT="Ignore Job" RETRO="0" DAYS="ALL" LEVEL="N" />
+	<JOB
+		PARENT_FOLDER="FlowDef1"
+		RUN_AS="N/A"
+		TASKTYPE="Command"
+		CMDLINE="c:\test1.bat"
+		NODEID="Host1"
+		AUTOARCH="0"
+		CYCLIC="0"
+		INTERVAL="00001M"
+		MAXRERUN="0"
+		MAXDAYS="0"
+		MAXRUNS="0"
+		MULTY_AGENT="N"
+		SYSDB="0"
+		RULE_BASED_CALENDAR_RELATIONSHIP="O"
+		USE_INSTREAM_JCL="N"
+		APPL_FORM=""
+		APPL_TYPE="OS"
+		APPL_VER=""
+		CM_VER=""
+		CREATION_USER="2"
+		APPLICATION="N/A"
+		CREATED_BY="N/A"
+		CONFIRM="0"
+		CRITICAL="0"
+		JOBNAME="JOB1"
+		SUB_APPLICATION="N/A"
+		DESCRIPTION="Job 1"
+		TIMEFROM=""
+		TIMETO=""
+		PRIORITY=""
+	>
+		<OUTCOND NAME="JOB1_TO_JOB3" ODATE="ODAT" SIGN="+" />
+	</JOB>
+	<JOB
+		PARENT_FOLDER="FlowDef1"
+		RUN_AS="N/A"
+		TASKTYPE="Command"
+		CMDLINE="c:\test2.bat"
+		NODEID="Host2"
+		AUTOARCH="0"
+		CYCLIC="0"
+		INTERVAL="00001M"
+		MAXRERUN="0"
+		MAXDAYS="0"
+		MAXRUNS="0"
+		MULTY_AGENT="N"
+		SYSDB="0"
+		RULE_BASED_CALENDAR_RELATIONSHIP="O"
+		USE_INSTREAM_JCL="N"
+		APPL_FORM=""
+		APPL_TYPE="OS"
+		APPL_VER=""
+		CM_VER=""
+		CREATION_USER="3"
+		APPLICATION="N/A"
+		CREATED_BY="N/A"
+		CONFIRM="0"
+		CRITICAL="0"
+		JOBNAME="JOB2"
+		SUB_APPLICATION="N/A"
+		DESCRIPTION="Job 2"
+		TIMEFROM=""
+		TIMETO=""
+		PRIORITY=""
+	>
+		<OUTCOND NAME="JOB2_TO_JOB3" ODATE="ODAT" SIGN="+" />
+	</JOB>
+	<JOB
+		PARENT_FOLDER="FlowDef1"
+		RUN_AS="N/A"
+		TASKTYPE="Command"
+		CMDLINE="c:\test3.bat"
+		NODEID="Host3"
+		AUTOARCH="0"
+		CYCLIC="0"
+		INTERVAL="00001M"
+		MAXRERUN="0"
+		MAXDAYS="0"
+		MAXRUNS="0"
+		MULTY_AGENT="N"
+		SYSDB="0"
+		RULE_BASED_CALENDAR_RELATIONSHIP="O"
+		USE_INSTREAM_JCL="N"
+		APPL_FORM=""
+		APPL_TYPE="OS"
+		APPL_VER=""
+		CM_VER=""
+		CREATION_USER="4"
+		APPLICATION="N/A"
+		CREATED_BY="N/A"
+		CONFIRM="0"
+		CRITICAL="0"
+		JOBNAME="JOB3"
+		SUB_APPLICATION="N/A"
+		DESCRIPTION="Job 3"
+		TIMEFROM=""
+		TIMETO=""
+		PRIORITY=""
+	>
+		<INCOND AND_OR="A" NAME="JOB1_TO_JOB3" ODATE="ODAT" />
+		<INCOND AND_OR="A" NAME="JOB2_TO_JOB3" ODATE="ODAT" />
+		<OUTCOND NAME="JOB1_TO_JOB3" ODATE="ODAT" SIGN="-" />
+		<OUTCOND NAME="JOB2_TO_JOB3" ODATE="ODAT" SIGN="-" />
+		<OUTCOND NAME="JOB3_TO_JOB4" ODATE="ODAT" SIGN="+" />
+		<OUTCOND NAME="JOB3_TO_JOB5" ODATE="ODAT" SIGN="+" />
+	</JOB>
+	<JOB
+		PARENT_FOLDER="FlowDef1"
+		RUN_AS="N/A"
+		TASKTYPE="Command"
+		CMDLINE="c:\test4.bat"
+		NODEID="Host4"
+		AUTOARCH="0"
+		CYCLIC="0"
+		INTERVAL="00001M"
+		MAXRERUN="0"
+		MAXDAYS="0"
+		MAXRUNS="0"
+		MULTY_AGENT="N"
+		SYSDB="0"
+		RULE_BASED_CALENDAR_RELATIONSHIP="O"
+		USE_INSTREAM_JCL="N"
+		APPL_FORM=""
+		APPL_TYPE="OS"
+		APPL_VER=""
+		CM_VER=""
+		CREATION_USER="5"
+		APPLICATION="N/A"
+		CREATED_BY="N/A"
+		CONFIRM="0"
+		CRITICAL="0"
+		JOBNAME="JOB4"
+		SUB_APPLICATION="N/A"
+		DESCRIPTION="Job 4"
+		TIMEFROM=""
+		TIMETO=""
+		PRIORITY=""
+	>
+		<INCOND AND_OR="A" NAME="JOB3_TO_JOB4" ODATE="ODAT" />
+		<OUTCOND NAME="JOB3_TO_JOB4" ODATE="ODAT" SIGN="-" />
+	</JOB>
+	<JOB
+		PARENT_FOLDER="FlowDef1"
+		RUN_AS="N/A"
+		TASKTYPE="Command"
+		CMDLINE="c:\test5.bat"
+		NODEID="Host5"
+		AUTOARCH="0"
+		CYCLIC="0"
+		INTERVAL="00001M"
+		MAXRERUN="0"
+		MAXDAYS="0"
+		MAXRUNS="0"
+		MULTY_AGENT="N"
+		SYSDB="0"
+		RULE_BASED_CALENDAR_RELATIONSHIP="O"
+		USE_INSTREAM_JCL="N"
+		APPL_FORM=""
+		APPL_TYPE="OS"
+		APPL_VER=""
+		CM_VER=""
+		CREATION_USER="6"
+		APPLICATION="N/A"
+		CREATED_BY="N/A"
+		CONFIRM="0"
+		CRITICAL="0"
+		JOBNAME="JOB5"
+		SUB_APPLICATION="N/A"
+		DESCRIPTION="Job 5"
+		TIMEFROM=""
+		TIMETO=""
+		PRIORITY=""
+	>
+		<INCOND AND_OR="A" NAME="JOB3_TO_JOB5" ODATE="ODAT" />
+		<OUTCOND NAME="JOB3_TO_JOB5" ODATE="ODAT" SIGN="-" />
+	</JOB>
+</SMART_FOLDER>
+<SMART_FOLDER
+	DATACENTER="datacenter"
+	CREATION_DATE="20210504"
+	CREATION_TIME="113901"
+	FOLDER_NAME="FlowDef2"
+	USED_BY_CODE="0"
+	ADJUST_COND="N"
+	FOLDER_ORDER_METHOD="SYSTEM"
+	APPLICATION="DEFAULT_APPLICATION"
+	CREATED_BY="N/A"
+	CONFIRM="0"
+	CRITICAL="0"
+	JOBNAME="FlowDef2"
+	SUB_APPLICATION="DEFAULT_SUB_APPLICATION"
+	DESCRIPTION=""
+	TIMEFROM=""
+	TIMETO=""
+	PRIORITY=""
+	CREATION_USER="7"
+	PLATFORM="UNIX"
+	VERSION="920"
+	CYCLIC="0"
+	INTERVAL="00001M"
+	MAXRERUN="0"
+	REMOVEATONCE="Y"
+	DAYSKEEPINNOTOK="0"
+	CYCLIC_TOLERANCE="1"
+>
+	<RULE_BASED_CALENDAR NAME="EVERYDAY" MAXWAIT="00" DAYS_AND_OR="O" JAN="1" FEB="1" MAR="1" APR="1" MAY="1" JUN="1" JUL="1" AUG="1" SEP="1" OCT="1" NOV="1" DEC="1" SHIFT="Ignore Job" RETRO="0" DAYS="ALL" LEVEL="N" />
+	<SUB_FOLDER
+		PARENT_FOLDER="FlowDef2"
+		ADJUST_COND="N"
+		APPLICATION="DEFAULT_APPLICATION"
+		CREATED_BY="N/A"
+		CONFIRM="0"
+		CRITICAL="0"
+		JOBNAME="subFlow1"
+		SUB_APPLICATION="DEFAULT_SUB_APPLICATION"
+		DESCRIPTION=""
+		TIMEFROM=""
+		TIMETO=""
+		PRIORITY=""
+		CREATION_USER="8"
+	>
+		<OUTCOND NAME="subFlow1_TO_subFlow2" ODATE="ODAT" SIGN="+" />
+		<RULE_BASED_CALENDARS NAME="EVERYDAY" />
+		<JOB
+			PARENT_FOLDER="FlowDef2/subFlow1"
+			RUN_AS="N/A"
+			TASKTYPE="Command"
+			CMDLINE="c:\test6.bat"
+			NODEID="Host6"
+			AUTOARCH="0"
+			CYCLIC="0"
+			INTERVAL="00001M"
+			MAXRERUN="0"
+			MAXDAYS="0"
+			MAXRUNS="0"
+			MULTY_AGENT="N"
+			SYSDB="0"
+			RULE_BASED_CALENDAR_RELATIONSHIP="O"
+			USE_INSTREAM_JCL="N"
+			APPL_FORM=""
+			APPL_TYPE="OS"
+			APPL_VER=""
+			CM_VER=""
+			CREATION_USER="9"
+			APPLICATION="N/A"
+			CREATED_BY="N/A"
+			CONFIRM="0"
+			CRITICAL="0"
+			JOBNAME="JOB6"
+			SUB_APPLICATION="N/A"
+			DESCRIPTION="Job 6"
+			TIMEFROM=""
+			TIMETO=""
+			PRIORITY=""
+		>
+			<OUTCOND NAME="JOB6_TO_JOB7" ODATE="ODAT" SIGN="+" />
+		</JOB>
+		<JOB
+			PARENT_FOLDER="FlowDef2/subFlow1"
+			RUN_AS="N/A"
+			TASKTYPE="Command"
+			CMDLINE="c:\test7.bat"
+			NODEID="Host7"
+			AUTOARCH="0"
+			CYCLIC="0"
+			INTERVAL="00001M"
+			MAXRERUN="0"
+			MAXDAYS="0"
+			MAXRUNS="0"
+			MULTY_AGENT="N"
+			SYSDB="0"
+			RULE_BASED_CALENDAR_RELATIONSHIP="O"
+			USE_INSTREAM_JCL="N"
+			APPL_FORM=""
+			APPL_TYPE="OS"
+			APPL_VER=""
+			CM_VER=""
+			CREATION_USER="10"
+			APPLICATION="N/A"
+			CREATED_BY="N/A"
+			CONFIRM="0"
+			CRITICAL="0"
+			JOBNAME="JOB7"
+			SUB_APPLICATION="N/A"
+			DESCRIPTION="Job 7"
+			TIMEFROM=""
+			TIMETO=""
+			PRIORITY=""
+		>
+			<INCOND AND_OR="A" NAME="JOB6_TO_JOB7" ODATE="ODAT" />
+			<OUTCOND NAME="JOB6_TO_JOB7" ODATE="ODAT" SIGN="-" />
+		</JOB>
+	</SUB_FOLDER>
+	<SUB_FOLDER
+		PARENT_FOLDER="FlowDef2"
+		ADJUST_COND="N"
+		APPLICATION="DEFAULT_APPLICATION"
+		CREATED_BY="N/A"
+		CONFIRM="0"
+		CRITICAL="0"
+		JOBNAME="subFlow2"
+		SUB_APPLICATION="DEFAULT_SUB_APPLICATION"
+		DESCRIPTION=""
+		TIMEFROM=""
+		TIMETO=""
+		PRIORITY=""
+		CREATION_USER="11"
+	>
+		<INCOND AND_OR="A" NAME="subFlow1_TO_subFlow2" ODATE="ODAT" />
+		<OUTCOND NAME="subFlow1_TO_subFlow2" ODATE="ODAT" SIGN="-" />
+		<RULE_BASED_CALENDARS NAME="EVERYDAY" />
+		<JOB
+			PARENT_FOLDER="FlowDef2/subFlow2"
+			RUN_AS="N/A"
+			TASKTYPE="Command"
+			CMDLINE="c:\test8.bat"
+			NODEID="Host8"
+			AUTOARCH="0"
+			CYCLIC="0"
+			INTERVAL="00001M"
+			MAXRERUN="0"
+			MAXDAYS="0"
+			MAXRUNS="0"
+			MULTY_AGENT="N"
+			SYSDB="0"
+			RULE_BASED_CALENDAR_RELATIONSHIP="O"
+			USE_INSTREAM_JCL="N"
+			APPL_FORM=""
+			APPL_TYPE="OS"
+			APPL_VER=""
+			CM_VER=""
+			CREATION_USER="12"
+			APPLICATION="N/A"
+			CREATED_BY="N/A"
+			CONFIRM="0"
+			CRITICAL="0"
+			JOBNAME="JOB8"
+			SUB_APPLICATION="N/A"
+			DESCRIPTION="Job 8"
+			TIMEFROM=""
+			TIMETO=""
+			PRIORITY=""
+		>
+		</JOB>
+	</SUB_FOLDER>
+</SMART_FOLDER>
+</DEFTABLE>

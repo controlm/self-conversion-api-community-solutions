@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlFlowDef Name="sampleData.xml" Version="1.0">
+<FlowDef  Name="FlowDef1" Id="FlowDef1" Description="" Created="" Modified="" Location="Batch" >
+<JobDef Name="JOB1" Type="Job" Location="Sales" Description="Job 1" Created="" Modified="">
+<JobCmdLine  Value="c:\test1.bat"/>
+<Host  Value="Host1"/>
+</JobDef>
+<JobDef Name="JOB2" Type="Job" Location="Sales" Description="Job 2" Created="" Modified="">
+<JobCmdLine  Value="c:\test2.bat"/>
+<Host  Value="Host2"/>
+</JobDef>
+<JobDef Name="JOB3" Type="Job" Location="Sales" Description="Job 3" Created="" Modified="">
+<JobCmdLine  Value="c:\test3.bat"/>
+<Host  Value="Host3" />
+</JobDef>
+<JobDef Name="JOB4" Type="Job" Location="Sales" Description="Job 4" Created="" Modified="">
+<JobCmdLine  Value="c:\test4.bat"/>
+<Host  Value="Host4"/>
+</JobDef>
+<JobDef Name="JOB5" Type="Job" Location="Sales" Description="Job 5" Created="" Modified="">
+<JobCmdLine  Value="c:\test5.bat"/>
+<Host  Value="Host5"/>
+</JobDef>
+<Dependencies  Name="Completes successfully " Type = "Job" Reference="JOB4" Description="null">
+<Events CombinationType="AND">
+<Event Type="Job" Description="Done(JOB3) ">
+<done Depend="JOB3"/>
+</Event>
+</Events>
+</Dependencies>
+<Dependencies  Name="Completes successfully " Type = "Job" Reference="JOB5" Description="null">
+<Events CombinationType="AND">
+<Event Type="Job" Description="Done(JOB3) ">
+<done Depend="JOB3"/>
+</Event>
+</Events>
+</Dependencies>
+<Dependencies  Name="Completes successfully " Type = "Job" Reference="JOB3" Description="null">
+<Events CombinationType="AND">
+<Event Type="Job" Description="Done(JOB1) ">
+<done Depend="JOB1"/>
+</Event>
+<Event Type="Job" Description="Done(JOB2) ">
+<done Depend="JOB2"/>
+</Event>
+</Events>
+</Dependencies>
+</FlowDef>
+<FlowDef  Name="FlowDef2" Id="FlowDef2" Description="" Created="" Modified="" Location="Batch" >
+<JobDef Name="subFlow1" Type="subFlow" Location="Sales" Description="subFlow 1" Created="" Modified="">
+<JobCmdLine  Value="c:\testSubFlow1.bat"/>
+<Host  Value="HostSubFlow1" />
+</JobDef>
+<JobDef Name="subFlow2" Type="subFlow" Location="Sales" Description="subFlow 2" Created="" Modified="">
+<JobCmdLine  Value="c:\testSubFlow1.bat"/>
+<Host  Value="HostSubFlow2" />
+</JobDef>
+<Dependencies  Name="Completes successfully " Type = "subFlow" Reference="subFlow2" Description="null">
+<Events CombinationType="AND">
+<Event Type="subFlow" Description="Done(subFlow1) ">
+<done Depend="subFlow1"/>
+</Event>
+</Events>
+</Dependencies>
+</FlowDef>
+<FlowDef  Name="subFlow1" Id="subFlow1" Description="" Created="" Modified="" Location="Batch" >
+<JobDef Name="JOB6" Type="Job" Location="Sales" Description="Job 6" Created="" Modified="">
+<JobCmdLine  Value="c:\test6.bat"/>
+<Host  Value="Host6"/>
+</JobDef>
+<JobDef Name="JOB7" Type="Job" Location="Sales" Description="Job 7" Created="" Modified="">
+<JobCmdLine  Value="c:\test7.bat"/>
+<Host  Value="Host7"/>
+</JobDef>
+<Dependencies  Name="Completes successfully" Type = "Job" Reference="JOB7" Description="null">
+<Events CombinationType="AND">
+<Event Type="Job" Description="Done(JOB6) ">
+<done Depend="JOB6"/>
+</Event>
+</Events>
+</Dependencies>
+</FlowDef>
+<FlowDef  Name="subFlow2" Id="subFlow2" Description="" Created="" Modified="" Location="Batch" >
+<JobDef Name="JOB8" Type="Job" Location="Sales" Description="Job 8" Created="" Modified="">
+<JobCmdLine  Value="c:\test8.bat"/>
+<Host  Value="Host8"/>
+</JobDef>
+</FlowDef>
+</xmlFlowDef>

@@ -1,0 +1,276 @@
+{
+  "FlowDef1" : {
+    "Type" : "Folder",
+    "Application" : "DEFAULT_APPLICATION",
+    "SubApplication" : "DEFAULT_SUB_APPLICATION",
+    "Description" : "",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "JOB3" : {
+      "Type" : "Job:Command",
+      "Command" : "c:\\test3.bat",
+      "Description" : "Job 3",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "JOB1_TO_JOB3",
+          "OrderDate" : "OrderDate"
+        }, {
+          "Event" : "JOB2_TO_JOB3",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "JOB3_TO_JOB4",
+          "OrderDate" : "OrderDate"
+        }, {
+          "Event" : "JOB3_TO_JOB5",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "JOB1_TO_JOB3",
+          "OrderDate" : "OrderDate"
+        }, {
+          "Event" : "JOB2_TO_JOB3",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "Host3"
+    },
+    "JOB4" : {
+      "Type" : "Job:Command",
+      "Command" : "c:\\test4.bat",
+      "Description" : "Job 4",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "JOB3_TO_JOB4",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "JOB3_TO_JOB4",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "Host4"
+    },
+    "JOB1" : {
+      "Type" : "Job:Command",
+      "Command" : "c:\\test1.bat",
+      "Description" : "Job 1",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "JOB1_TO_JOB3",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "Host1"
+    },
+    "JOB2" : {
+      "Type" : "Job:Command",
+      "Command" : "c:\\test2.bat",
+      "Description" : "Job 2",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "JOB2_TO_JOB3",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "Host2"
+    },
+    "JOB5" : {
+      "Type" : "Job:Command",
+      "Command" : "c:\\test5.bat",
+      "Description" : "Job 5",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "JOB3_TO_JOB5",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "JOB3_TO_JOB5",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "Host" : "Host5"
+    }
+  },
+  "FlowDef2" : {
+    "Type" : "Folder",
+    "Application" : "DEFAULT_APPLICATION",
+    "SubApplication" : "DEFAULT_SUB_APPLICATION",
+    "Description" : "",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "subFlow1" : {
+      "Type" : "SubFolder",
+      "Application" : "DEFAULT_APPLICATION",
+      "SubApplication" : "DEFAULT_SUB_APPLICATION",
+      "Description" : "",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "subFlow1_TO_subFlow2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "RuleBasedCalendars" : {
+          "Included" : [ "EVERYDAY" ]
+        }
+      },
+      "JOB7" : {
+        "Type" : "Job:Command",
+        "Command" : "c:\\test7.bat",
+        "Description" : "Job 7",
+        "RunAs" : "DEFAULT_RUN_AS",
+        "eventsToWaitFor" : {
+          "Type" : "WaitForEvents",
+          "Events" : [ {
+            "Event" : "JOB6_TO_JOB7",
+            "OrderDate" : "OrderDate"
+          } ]
+        },
+        "eventsToDelete" : {
+          "Type" : "DeleteEvents",
+          "Events" : [ {
+            "Event" : "JOB6_TO_JOB7",
+            "OrderDate" : "OrderDate"
+          } ]
+        },
+        "When" : {
+          "WeekDays" : [ "NONE" ],
+          "MonthDays" : [ "NONE" ],
+          "DaysRelation" : "AND"
+        },
+        "Host" : "Host7"
+      },
+      "JOB6" : {
+        "Type" : "Job:Command",
+        "Command" : "c:\\test6.bat",
+        "Description" : "Job 6",
+        "RunAs" : "DEFAULT_RUN_AS",
+        "eventsToAdd" : {
+          "Type" : "AddEvents",
+          "Events" : [ {
+            "Event" : "JOB6_TO_JOB7",
+            "OrderDate" : "OrderDate"
+          } ]
+        },
+        "When" : {
+          "WeekDays" : [ "NONE" ],
+          "MonthDays" : [ "NONE" ],
+          "DaysRelation" : "AND"
+        },
+        "Host" : "Host6"
+      }
+    },
+    "subFlow2" : {
+      "Type" : "SubFolder",
+      "Application" : "DEFAULT_APPLICATION",
+      "SubApplication" : "DEFAULT_SUB_APPLICATION",
+      "Description" : "",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "subFlow1_TO_subFlow2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "subFlow1_TO_subFlow2",
+          "OrderDate" : "OrderDate"
+        } ]
+      },
+      "When" : {
+        "RuleBasedCalendars" : {
+          "Included" : [ "EVERYDAY" ]
+        }
+      },
+      "JOB8" : {
+        "Type" : "Job:Command",
+        "Command" : "c:\\test8.bat",
+        "Description" : "Job 8",
+        "RunAs" : "DEFAULT_RUN_AS",
+        "When" : {
+          "WeekDays" : [ "NONE" ],
+          "MonthDays" : [ "NONE" ],
+          "DaysRelation" : "AND"
+        },
+        "Host" : "Host8"
+      }
+    }
+  }
+}

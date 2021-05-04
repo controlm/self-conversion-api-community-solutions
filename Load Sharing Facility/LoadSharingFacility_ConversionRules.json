@@ -1,0 +1,342 @@
+{
+  "hierarchyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "FlowDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\n\nString argument = \"FlowDef\";\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tCtmXmlElement parentElement = jobElement.getParent();\n\tif(parentElement != null && parentElement.getTagName().equals(argument))\n\t{\n\t\tCtmFolder ctmFolder = ctmWorkspace.getFolder(parentElement);\n\t\tctmWorkspace.insertJobToFolder(ctmJob, ctmFolder);\n\t}\n}"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "FlowDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "xpathQuery = \"//JobDef\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nfoldersElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement subFolderElementData : foldersElementData) {\n    if (subFolderElementData.getAttribute(\"Type\").equals(\"subFlow\")) {\n        CtmXmlElement parentElement = subFolderElementData.getParent();\n\t    if(parentElement){\n                CtmFolder ctmFolder = ctmWorkspace.getFolder(parentElement);\n                ctmSubFolder = ctmWorkspace.getFoldersByName(subFolderElementData.getAttribute(\"Name\"))[0];\n\t\t        ctmWorkspace.insertFolderToFolder(ctmSubFolder, ctmFolder);\n\t    }\n    }\n}"
+    },
+    "name" : "Link folders to folders",
+    "category" : 2,
+    "type" : "script"
+  } ],
+  "rulesForServer" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "FlowDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Folder Rule ----\n\nString xpathQuery = \"//FlowDef\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nList<CtmXmlElement> foldersElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement folderElementData : foldersElementData) {\n CtmFolder ctmFolder = ctmWorkspace.createFolder(folderElementData);\n ctmFolder.general().setDescription(folderElementData.getAttribute(\"Description\"));\n}\n"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the value of attribute name \"Name\" from\n// the equivalent XML element data and set the value to be the Folder name\nString argument = \"Name\";\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n  CtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n  String folderName = folderElement.getAttribute(argument);\n  ctmFolder.setName(folderName);\n}\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Description",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Folder Description Rule---\r\n\r\nString argument = \"Description\";\r\nctmWorkspace.getAllFolders().each{ ctmFolder ->\r\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\r\n\tString descriptionValue = folderElement.getAttribute(argument);\r\n\tctmFolder.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Folder Folder Description",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "JobDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\n\nString xpathQuery = \"//JobDef\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"JobDef\" XML elements into jobsElementData list\nList<CtmXmlElement> jobsElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"JobDef\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElementData : jobsElementData) {\n    if (jobElementData.getAttribute(\"Type\").equals(\"Job\"))\n         CtmJob ctmJob = ctmWorkspace.createJob(jobElementData)\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the value of attribute name \"Name\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"Name\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n  CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n  String jobName = jobElement.getAttribute(argument);\n  ctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Description",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Description Rule---\r\n\r\nString argument = \"Description\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tString descriptionValue = jobElement.getAttribute(argument);\r\n\tctmJob.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Job Job Description",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "Host",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Host Rule---\r\n\r\nString argument = \"Host\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement xmlElement = ctmJob.getJobInputXmlData();\r\n\tCtmXmlElement host = xmlElement.getFirstChildElementByName(argument)\r\n\tctmJob.general().setHost(host.getAttribute(\"Value\"));\r\n}"
+    },
+    "name" : "Job Job Host/Host Group",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "FlowDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\n\nString argument = \"FlowDef\";\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tCtmXmlElement parentElement = jobElement.getParent();\n\tif(parentElement != null && parentElement.getTagName().equals(argument))\n\t{\n\t\tCtmFolder ctmFolder = ctmWorkspace.getFolder(parentElement);\n\t\tctmWorkspace.insertJobToFolder(ctmJob, ctmFolder);\n\t}\n}"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Parent element name",
+        "value" : "FlowDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "xpathQuery = \"//JobDef\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nfoldersElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement subFolderElementData : foldersElementData) {\n    if (subFolderElementData.getAttribute(\"Type\").equals(\"subFlow\")) {\n        CtmXmlElement parentElement = subFolderElementData.getParent();\n\t    if(parentElement){\n                CtmFolder ctmFolder = ctmWorkspace.getFolder(parentElement);\n                ctmSubFolder = ctmWorkspace.getFoldersByName(subFolderElementData.getAttribute(\"Name\"))[0];\n\t\t        ctmWorkspace.insertFolderToFolder(ctmSubFolder, ctmFolder);\n\t    }\n    }\n}"
+    },
+    "name" : "Link folders to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "Dependencies",
+        "operator" : "Equal"
+      } ],
+      "script" : "String xpathQuery = \"//Dependencies\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nList<CtmXmlElement> dependencyElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\nList<String> sourceJobNamesList = new ArrayList<>();\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement dependency : dependencyElementData) {\n    targetJob = dependency.getAttribute(\"Reference\");\n    sourceJobNamesList = new ArrayList<>();\n    List<CtmXmlElement> eventsListElementData = dependency.getAllDecnedElementByName(\"Events\");\n    for (CtmXmlElement eventslist : eventsListElementData){\n        List<CtmXmlElement> doneElementData = eventslist.getAllDecnedElementByName(\"done\");\n         for (CtmXmlElement done : doneElementData){\n             sourceJobNamesList.add(done.getAttribute(\"Depend\"));\n         }\n    }\n    def jobsList = ctmWorkspace.getJobsByName(targetJob);\n    jobsList.each  { ctmJob ->\n        sourceJobNamesList.each{ name ->\n            ctmJob.prerequisites().addInCondition(name+\"_TO_\"+targetJob);\n        }\n    } \n        \n    def foldersList = ctmWorkspace.getFoldersByName(targetJob);\n    foldersList.each  { ctmFolder ->\n        sourceJobNamesList.each{ name ->\n            ctmFolder.prerequisites().addInCondition(name+\"_TO_\"+targetJob);\n        }\n    } \n        \n}\n\n    \n\n    \n"
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "String xpathQuery = \"//Dependencies\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nList<CtmXmlElement> dependencyElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\nList<String> sourceJobNamesList = new ArrayList<>();\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement dependency : dependencyElementData) {\n    targetJob = dependency.getAttribute(\"Reference\");\n    sourceJobNamesList = new ArrayList<>();\n    List<CtmXmlElement> eventsListElementData = dependency.getAllDecnedElementByName(\"Events\");\n    for (CtmXmlElement eventslist : eventsListElementData){\n        List<CtmXmlElement> doneElementData = eventslist.getAllDecnedElementByName(\"done\");\n         for (CtmXmlElement done : doneElementData){\n             sourceJobNamesList.add(done.getAttribute(\"Depend\"));\n         }\n    }\n        \n    sourceJobNamesList.each{ name ->    \n                    sourceJobs = ctmWorkspace.getJobsByName(name);\n                    sourceJobs.each{ job -> job.actions().addOutCondition(name+\"_TO_\"+targetJob);}\n    }\n        \n    sourceJobNamesList.each{ name ->    \n                    sourceJobs = ctmWorkspace.getFoldersByName(name);\n                    sourceJobs.each{ job -> job.actions().addOutCondition(name+\"_TO_\"+targetJob);}\n    }\n}\n\n    \n\n    \n"
+    },
+    "name" : "Out Condition",
+    "category" : 4,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Os Job Rule---\r\n\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tctmJob.setOsType();\r\n}"
+    },
+    "jobTypeName" : "OS",
+    "name" : "OS Job",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "JobCmdLine",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Os JobCmdLine Rule---\r\n\r\nString xpathQuery = \"JobCmdLine\";\r\nctmWorkspace.getOsJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = jobElement.getAllDecnedElementByName(xpathQuery);\r\n\tfor(CtmXmlElement ctmXmlElement : ctmXmlElementResult) {\r\n\t\tString commandValue = ctmXmlElement.getAttribute(\"Value\")\r\n\t\tctmJob.general().osParameters().setCommand(commandValue);\r\n\t}\r\n}"
+    },
+    "jobTypeName" : "OS",
+    "name" : "OS Command",
+    "category" : 3,
+    "type" : "script"
+  } ],
+  "projectRuleSetDescription" : "Load Sharing Facility conversion rules sample code, you can update the code according to your specific project needs",
+  "folderRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "FlowDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Folder Rule ----\n\nString xpathQuery = \"//FlowDef\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nList<CtmXmlElement> foldersElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement folderElementData : foldersElementData) {\n CtmFolder ctmFolder = ctmWorkspace.createFolder(folderElementData);\n ctmFolder.general().setDescription(folderElementData.getAttribute(\"Description\"));\n}\n"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the value of attribute name \"Name\" from\n// the equivalent XML element data and set the value to be the Folder name\nString argument = \"Name\";\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n\tCtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n\tString folderName = folderElement.getAttribute(argument);\n\tctmFolder.setName(folderName);\n}\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "regular"
+  } ],
+  "jobTypesRules" : {
+    "OS" : [ {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//---Create Os Job Rule---\r\n\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tctmJob.setOsType();\r\n}"
+      },
+      "jobTypeName" : "OS",
+      "name" : "Job",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "Element Name",
+          "value" : "JobCmdLine",
+          "operator" : "Equal"
+        } ],
+        "script" : "//---Create Os JobCmdLine Rule---\r\n\r\nString xpathQuery = \"JobCmdLine\";\r\nctmWorkspace.getOsJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tList<CtmXmlElement> ctmXmlElementResult = jobElement.getAllDecnedElementByName(xpathQuery);\r\n\tfor(CtmXmlElement ctmXmlElement : ctmXmlElementResult) {\r\n\t\tString commandValue = ctmXmlElement.getAttribute(\"Value\")\r\n\t\tctmJob.general().osParameters().setCommand(commandValue);\r\n\t}\r\n}"
+      },
+      "jobTypeName" : "OS",
+      "name" : "Command",
+      "category" : 3,
+      "type" : "script"
+    } ]
+  },
+  "projectRuleSetName" : "New_LSF_ConversionRules",
+  "projectRuleSetControlMVersion" : "9.0.20",
+  "projectRuleSetDateCreated" : "Mon May 03 2021",
+  "freeScriptRule" : [ {
+    "rulesData" : {
+      "script" : ""
+    },
+    "name" : "Free Script",
+    "category" : 5,
+    "type" : "script"
+  } ],
+  "folderAttributesRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Description",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Folder Description Rule---\r\n\r\nString argument = \"Description\";\r\nctmWorkspace.getAllFolders().each{ ctmFolder ->\r\n\tCtmXmlElement xmlElement = ctmFolder.getFolderInputXmlData();\r\n\tString descriptionValue = xmlElement.getAttribute(argument);\r\n\tctmFolder.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Folder Description",
+    "category" : 0,
+    "type" : "regular"
+  } ],
+  "scriptModeString" : "",
+  "projectRuleSetConversionType" : "Tabs View",
+  "dependencyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "Dependencies",
+        "operator" : "Equal"
+      } ],
+      "script" : "String xpathQuery = \"//Dependencies\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nList<CtmXmlElement> dependencyElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\nList<String> sourceJobNamesList = new ArrayList<>();\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement dependency : dependencyElementData) {\n    targetJob = dependency.getAttribute(\"Reference\");\n    sourceJobNamesList = new ArrayList<>();\n    List<CtmXmlElement> eventsListElementData = dependency.getAllDecnedElementByName(\"Events\");\n    for (CtmXmlElement eventslist : eventsListElementData){\n        List<CtmXmlElement> doneElementData = eventslist.getAllDecnedElementByName(\"done\");\n         for (CtmXmlElement done : doneElementData){\n             sourceJobNamesList.add(done.getAttribute(\"Depend\"));\n         }\n    }\n    def jobsList = ctmWorkspace.getJobsByName(targetJob);\n    jobsList.each  { ctmJob ->\n        sourceJobNamesList.each{ name ->\n            ctmJob.prerequisites().addInCondition(name+\"_TO_\"+targetJob);\n        }\n    } \n        \n    def foldersList = ctmWorkspace.getFoldersByName(targetJob);\n    foldersList.each  { ctmFolder ->\n        sourceJobNamesList.each{ name ->\n            ctmFolder.prerequisites().addInCondition(name+\"_TO_\"+targetJob);\n        }\n    } \n        \n}\n\n    \n\n    \n"
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "String xpathQuery = \"//Dependencies\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"FlowDef\" XML elements into foldersElementData list\nList<CtmXmlElement> dependencyElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\nList<String> sourceJobNamesList = new ArrayList<>();\n// Run in a loop on all elements with tag name equals to \"FlowDef\" XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement dependency : dependencyElementData) {\n    targetJob = dependency.getAttribute(\"Reference\");\n    sourceJobNamesList = new ArrayList<>();\n    List<CtmXmlElement> eventsListElementData = dependency.getAllDecnedElementByName(\"Events\");\n    for (CtmXmlElement eventslist : eventsListElementData){\n        List<CtmXmlElement> doneElementData = eventslist.getAllDecnedElementByName(\"done\");\n         for (CtmXmlElement done : doneElementData){\n             sourceJobNamesList.add(done.getAttribute(\"Depend\"));\n         }\n    }\n        \n    sourceJobNamesList.each{ name ->    \n                    sourceJobs = ctmWorkspace.getJobsByName(name);\n                    sourceJobs.each{ job -> job.actions().addOutCondition(name+\"_TO_\"+targetJob);}\n    }\n        \n    sourceJobNamesList.each{ name ->    \n                    sourceJobs = ctmWorkspace.getFoldersByName(name);\n                    sourceJobs.each{ job -> job.actions().addOutCondition(name+\"_TO_\"+targetJob);}\n    }\n}\n\n    \n\n    \n"
+    },
+    "name" : "Out Condition",
+    "category" : 4,
+    "type" : "script"
+  } ],
+  "jobRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "JobDef",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\n\nString xpathQuery = \"//JobDef\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"JobDef\" XML elements into jobsElementData list\nList<CtmXmlElement> jobsElementData = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"JobDef\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElementData : jobsElementData) {\n    if (jobElementData.getAttribute(\"Type\").equals(\"Job\"))\n         CtmJob ctmJob = ctmWorkspace.createJob(jobElementData)\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the value of attribute name \"Name\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"Name\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n  CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n  String jobName = jobElement.getAttribute(argument);\n  ctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "regular"
+  } ],
+  "jobAttributesRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "Description",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Description Rule---\r\n\r\nString argument = \"Description\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n\tString descriptionValue = jobElement.getAttribute(argument);\r\n\tctmJob.general().setDescription(descriptionValue);\r\n}"
+    },
+    "name" : "Job Description",
+    "category" : 1,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "Host",
+        "operator" : "Equal"
+      } ],
+      "script" : "//---Create Job Host Rule---\r\n\r\nString argument = \"Host\";\r\nctmWorkspace.getAllJobs().each{ ctmJob ->\r\n\tCtmXmlElement xmlElement = ctmJob.getJobInputXmlData();\r\n\tCtmXmlElement host = xmlElement.getFirstChildElementByName(argument)\r\n\tctmJob.general().setHost(host.getAttribute(\"Value\"));\r\n}"
+    },
+    "name" : "Job Host/Host Group",
+    "category" : 1,
+    "type" : "script"
+  } ]
+}

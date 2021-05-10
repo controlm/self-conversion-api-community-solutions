@@ -37,7 +37,10 @@
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "NONE" ],
         "DaysRelation" : "AND"
-      }
+      },
+      "Variables" : [ {
+        "CALMIS" : "=Table.getColumnString('GLOBAL.MST_PARAMETERS','CALMIS','VALUE')"
+      } ]
     },
     "EmbeddedScript_Job2" : {
       "Type" : "Job:EmbeddedScript",
@@ -325,4 +328,4 @@
       }
     }
   }
-} 
+}

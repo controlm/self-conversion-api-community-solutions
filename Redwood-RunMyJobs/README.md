@@ -31,6 +31,7 @@ Value of **Description** Element|Folder/Job Description
 **ParentApplication > path** attribute: the value after the second dot.<br> For example:<br> ```xml <ParentApplication type="Application" path="GLOBAL.Application.SubApplication" /> ```|Folder/Job Sub Application
 **DefaultQueue > path** attribute: the value after the dot|Job Host
 Folder contains **JobChainStep > JobChainCall > JobDefinition > path** attribute: value after the dot is the job / sub-folder name| Hierarchy
+Folder contains **JobChainStep > JobChainCall > JobChainCallPrecondition > TimeWindow > path** attribute: value after the dot | Rule-Based Calendar name
 Create condition between entities according to the order of **JobChainStep > JobChainCall**|Conditions
 **JobDefinitionType > path** attribute = GLOBAL.SAPR3|SAPR3 Job Type
 If Value of **JobDefinitionParameter > Name** Element equals JOBNAME then value of  **JobDefinitionParameter > DefaultExpression **|SAPR3 Job Name

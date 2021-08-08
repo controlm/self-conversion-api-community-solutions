@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DEFTABLE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Folder.xsd">
 <SMART_FOLDER
-	DATACENTER="controlm"
+	DATACENTER="SQLServerAgent"
 	CREATION_DATE="20210808"
 	CREATION_TIME="125000"
 	FOLDER_NAME="Uncategorized__Local_"
@@ -113,7 +113,7 @@
 	</JOB>
 </SMART_FOLDER>
 <SMART_FOLDER
-	DATACENTER="controlm"
+	DATACENTER="SQLServerAgent"
 	CREATION_DATE="20210808"
 	CREATION_TIME="125000"
 	FOLDER_NAME="Data_Collector"

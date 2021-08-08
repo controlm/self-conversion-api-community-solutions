@@ -1,0 +1,250 @@
+{
+  "hierarchyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\n\nString argument = \"\";\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tCtmXmlElement parentElement = jobElement.getParent();\n\tif(parentElement != null && parentElement.getTagName().equals(argument))\n\t{\n\t\tCtmFolder ctmFolder = ctmWorkspace.getFolder(parentElement);\n\t\tctmWorkspace.insertJobToFolder(ctmJob, ctmFolder);\n\t}\n}"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : ""
+    },
+    "name" : "Link folders to folders",
+    "category" : 2,
+    "type" : "regular"
+  } ],
+  "rulesForServer" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "JobData",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\nString xpathQuery = \"//JobData\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"JobData\" XML elements into jobElements list\nList<CtmXmlElement> jobElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"JobData\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElement : jobElements) {\n    def ctmFolder = getFolder(jobElement)\n    CtmJob ctmJob = ctmWorkspace.createJob(jobElement);\n    ctmWorkspace.insertJobToFolder(ctmJob, ctmFolder)\n}\n\ndef validateFolderName(folderName){\n    return folderName\n        .replace(\"(\", \"_\")\n        .replace(\")\", \"_\")\n        .replace(\"[\", \"\")\n        .replace(\"]\", \"\")\n        .replace(\" \", \"_\")\n}\n\ndef getFolder(jobXmlData){\n    def folderName = validateFolderName(jobXmlData.getAttribute('category'))\n    def ctmFolder = ctmWorkspace.getFolderByName(folderName)\n    if(!ctmFolder){\n        ctmFolder = ctmWorkspace.createFolder()\n        ctmFolder.setName(folderName)\n    }\n    return ctmFolder\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the value of attribute name \"name\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"name\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n  CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n  String jobName = jobElement.getAttribute(argument);\n  ctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Databases Job Rule ----\n\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tctmJob.setDatabasesType();\n}"
+    },
+    "jobTypeName" : "Databases",
+    "name" : "Databases Job",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Databases MSSQL Agent Job Name Rule ----\n\nString argument = \"name\";\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString mSSQLAgentJobNameValue = jobElement.getAttribute(argument);\n\tctmJob.general().databasesParameters().setMSSQLAgentJobName(mSSQLAgentJobNameValue);\n}"
+    },
+    "jobTypeName" : "Databases",
+    "name" : "Databases MSSQL Agent Job Name",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Databases Connection Profile Rule ----\n\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\n    def server = ctmJob.getJobInputXmlData().getAttribute('server')\n\tctmJob.general().databasesParameters().setConnectionProfile(server + '_CONNECTION');\n}"
+    },
+    "jobTypeName" : "Databases",
+    "name" : "Databases Connection Profile",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Databases Execution Type Rule ----\n\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\n\t\tctmJob.general().databasesParameters().setExecutionType(DatabasesExecutionType.MSSQLAgentJob);\n}"
+    },
+    "jobTypeName" : "Databases",
+    "name" : "Databases Execution Type",
+    "category" : 3,
+    "type" : "script"
+  } ],
+  "projectRuleSetDescription" : "MSSQL Agent conversion rules sample code, you can update the code according to your specific project needs",
+  "folderRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Folder Rule ----\n\nString xpathQuery = \"\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all undefined XML elements into folderElements list\nList<CtmXmlElement> folderElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all undefined XML elements found, and create a Control-M Folder for each one of them\n// For each Control-M Folder created we keep the equivalent XML element data\nfor(CtmXmlElement folderElement : folderElements) {\n CtmFolder ctmFolder = ctmWorkspace.createFolder(folderElement);\n}"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the data from\n// the equivalent XML element data and set the value to be the Folder name\nString argument = \"\";\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n  CtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n  String folderName = \"\";\n  ctmFolder.setName(folderName);\n}\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "regular"
+  } ],
+  "jobTypesRules" : {
+    "Databases" : [ {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Databases Job Rule ----\n\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tctmJob.setDatabasesType();\n}"
+      },
+      "jobTypeName" : "Databases",
+      "name" : "Job",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "Attribute Name",
+          "value" : "name",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Databases MSSQL Agent Job Name Rule ----\n\nString argument = \"name\";\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString mSSQLAgentJobNameValue = jobElement.getAttribute(argument);\n\tctmJob.general().databasesParameters().setMSSQLAgentJobName(mSSQLAgentJobNameValue);\n}"
+      },
+      "jobTypeName" : "Databases",
+      "name" : "MSSQL Agent Job Name",
+      "category" : 3,
+      "type" : "regular"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Databases Connection Profile Rule ----\n\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\n    def server = ctmJob.getJobInputXmlData().getAttribute('server')\n\tctmJob.general().databasesParameters().setConnectionProfile(server + '_CONNECTION');\n}"
+      },
+      "jobTypeName" : "Databases",
+      "name" : "Connection Profile",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Databases Execution Type Rule ----\n\nctmWorkspace.getDatabasesJobs().each{ ctmJob ->\n\t\tctmJob.general().databasesParameters().setExecutionType(DatabasesExecutionType.MSSQLAgentJob);\n}"
+      },
+      "jobTypeName" : "Databases",
+      "name" : "Execution Type",
+      "category" : 3,
+      "type" : "script"
+    } ]
+  },
+  "projectRuleSetName" : "MSSQLAgent_ConversionRules",
+  "projectRuleSetControlMVersion" : "9.0.20",
+  "projectRuleSetDateCreated" : "Sun Aug 08 2021",
+  "freeScriptRule" : [ {
+    "rulesData" : {
+      "script" : ""
+    },
+    "name" : "Free Script",
+    "category" : 5,
+    "type" : "script"
+  } ],
+  "folderAttributesRules" : [ ],
+  "scriptModeString" : "",
+  "projectRuleSetConversionType" : "Tabs View",
+  "dependencyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : ""
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : ""
+    },
+    "name" : "Out Condition",
+    "category" : 4,
+    "type" : "regular"
+  } ],
+  "jobRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "JobData",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\nString xpathQuery = \"//JobData\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"JobData\" XML elements into jobElements list\nList<CtmXmlElement> jobElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"JobData\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElement : jobElements) {\n    def ctmFolder = getFolder(jobElement)\n    CtmJob ctmJob = ctmWorkspace.createJob(jobElement);\n    ctmWorkspace.insertJobToFolder(ctmJob, ctmFolder)\n}\n\ndef validateFolderName(folderName){\n    return folderName\n        .replace(\"(\", \"_\")\n        .replace(\")\", \"_\")\n        .replace(\"[\", \"\")\n        .replace(\"]\", \"\")\n        .replace(\" \", \"_\")\n}\n\ndef getFolder(jobXmlData){\n    def folderName = validateFolderName(jobXmlData.getAttribute('category'))\n    def ctmFolder = ctmWorkspace.getFolderByName(folderName)\n    if(!ctmFolder){\n        ctmFolder = ctmWorkspace.createFolder()\n        ctmFolder.setName(folderName)\n    }\n    return ctmFolder\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Attribute Name",
+        "value" : "name",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the value of attribute name \"name\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"name\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n  CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n  String jobName = jobElement.getAttribute(argument);\n  ctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "regular"
+  } ],
+  "jobAttributesRules" : [ ]
+}

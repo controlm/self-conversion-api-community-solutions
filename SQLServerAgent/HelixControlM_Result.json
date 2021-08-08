@@ -1,0 +1,85 @@
+{
+  "Uncategorized__Local_" : {
+    "Type" : "Folder",
+    "Application" : "DEFAULT_APPLICATION",
+    "SubApplication" : "DEFAULT_SUB_APPLICATION",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "JOB2" : {
+      "Type" : "Job:Database:MSSQL:AgentJob",
+      "JobName" : "JOB2",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "ConnectionProfile" : "MSSQL_SERVER_CONNECTION",
+      "Autocommit" : "N",
+      "OutputExecutionLog" : "Y",
+      "OutputSQLOutput" : "N",
+      "SQLOutputFormat" : "Text"
+    },
+    "syspolicy_purge_history" : {
+      "Type" : "Job:Database:MSSQL:AgentJob",
+      "JobName" : "syspolicy_purge_history",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "ConnectionProfile" : "MSSQL_SERVER_CONNECTION",
+      "Autocommit" : "N",
+      "OutputExecutionLog" : "Y",
+      "OutputSQLOutput" : "N",
+      "SQLOutputFormat" : "Text"
+    }
+  },
+  "Data_Collector" : {
+    "Type" : "Folder",
+    "Application" : "DEFAULT_APPLICATION",
+    "SubApplication" : "DEFAULT_SUB_APPLICATION",
+    "RunAs" : "DEFAULT_RUN_AS",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "JOB1" : {
+      "Type" : "Job:Database:MSSQL:AgentJob",
+      "JobName" : "JOB1",
+      "RunAs" : "DEFAULT_RUN_AS",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "AND"
+      },
+      "ConnectionProfile" : "MSSQL_SERVER_CONNECTION",
+      "Autocommit" : "N",
+      "OutputExecutionLog" : "Y",
+      "OutputSQLOutput" : "N",
+      "SQLOutputFormat" : "Text"
+    }
+  }
+}

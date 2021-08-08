@@ -1,0 +1,5 @@
+<SQLAgentJobs>
+    <JobData name="syspolicy_purge_history" category="[Uncategorized (Local)]" server="MSSQL_SERVER" />
+    <JobData name="JOB2" category="[Uncategorized (Local)]" server="MSSQL_SERVER" />
+    <JobData name="JOB1" category="Data Collector" server="MSSQL_SERVER" />
+</SQLAgentJobs>

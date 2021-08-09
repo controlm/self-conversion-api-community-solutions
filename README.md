@@ -7,8 +7,8 @@ For more information, see [**Control-M Self Conversion**](https://docs.bmc.com/d
 For Control-M Self Conversion Training Video click [**Here**.](https://www.youtube.com/watch?v=2MrFcahMhH0)
 # Download Control-M Self-Conversion
 To download the latest Control-M  Self Conversion:
-  1) Go to: **ftp://ftp.bmc.com/pub/control-m/opensystem/Control-M_Conversions_for_DS/**
-  2) Download ConversionTool.zip file
+  1) Go to: **https://control-m-conversion.s3.eu-central-1.amazonaws.com/Control-M_Conversions_for_DS/Index.html**
+  2) Download the Convesrion Tool zip file
   3) Extract it
   4) Click SelfConversion.bat
 

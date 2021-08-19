@@ -1,6 +1,6 @@
 # Redwood RunMyJobs Conversion example
-This repository contains Redwood RunMyJobs "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to convert sample Redwood RunMyJobs input data into Control-M Data.<br> 
-You can use these Redwood RunMyJobs Conversion Rules code samples to convert your Redwood RunMyJobs data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M Redwood RunMyJobs jobs.
+This repository contains Redwood RunMyJobs "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) or [**Helix Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) to convert sample Redwood RunMyJobs input data into Control-M Data.<br> 
+You can use these Redwood RunMyJobs Conversion Rules code samples to convert your Redwood RunMyJobs data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) or [**Helix Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) to create Control-M Redwood RunMyJobs jobs.
 
 ### The Redwood RunMyJobs Conversion example includes:
 * __SampleData.xml__ - Redwood RunMyJobs sample data in XML format.

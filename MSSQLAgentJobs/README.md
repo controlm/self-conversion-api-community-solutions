@@ -1,6 +1,6 @@
 # MSSQL Agent Jobs Conversion example
-This repository contains MSSQL Agent Jobs "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to convert sample MSSQL Agent Jobs input data into Control-M Data.<br> 
-You can use these MSSQL Agent Jobs Conversion Rules code samples to convert your MSSQL Agent Jobs data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M MSSQL Agent database jobs.
+This repository contains MSSQL Agent Jobs "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) or [**Helix Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) to convert sample MSSQL Agent Jobs input data into Control-M Data.<br> 
+You can use these MSSQL Agent Jobs Conversion Rules code samples to convert your MSSQL Agent Jobs data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) or [**Helix Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) to create Control-M MSSQL Agent database jobs.
 
 ### The MSSQL Agent Jobs Conversion example includes:
 * __SampleData.xml__ -MSSQL Agent Jobs sample data in XML format.

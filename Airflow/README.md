@@ -1,6 +1,6 @@
 # Airflow Conversion example
-This repository contains Airflow "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to convert sample Airflow input data into Control-M Data.<br>
-You can use these Airflow Conversion Rules code samples to convert your Airflow data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M Airflow jobs.
+This repository contains Airflow "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) or [**Helix Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) to convert sample Airflow input data into Control-M Data.<br>
+You can use these Airflow Conversion Rules code samples to convert your Airflow data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) or [**Helix Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) to create Control-M Airflow jobs.
 
 ### The Airflow Conversion example includes:
 * __SampleData.xml__ - Airflow sample data in XML format. [(Airflow data extraction)](#instructions-how-to-extract-airflow-workflows-to-xml)

@@ -1,13 +1,13 @@
-# Load Sharing Facility Conversion example
-This repository contains Load Sharing Facility "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to convert sample Load Sharing Facility input data into Control-M Data.<br> 
-You can use these Load Sharing Facility Conversion Rules code samples to convert your Load Sharing Facility data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M Load Sharing Facility jobs.
+# IBM Load Sharing Facility Conversion example
+This repository contains IBM Load Sharing Facility "Conversion Rules" code samples that use groovy and [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to convert sample IBM Load Sharing Facility input data into Control-M Data.<br> 
+You can use these IBM Load Sharing Facility Conversion Rules code samples to convert your IBM Load Sharing Facility data to Control-M data, or use them as an example in using the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) to create Control-M IBM Load Sharing Facility jobs.
 
-### The Load Sharing Facility Conversion example includes:
-* __SampleData.xml__ - Load Sharing Facility sample data in XML format. [(Load Sharing Facility data extraction)](https://github.com/controlm/self-conversion-api-community-solutions/tree/master/Load-Sharing-Facility#extract-Load-Sharing-Facility-data-in-xml-format)
-* __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from Load Sharing Facility data to Control-M data.
-* __LoadSharingFacility_ConversionRules.json__ - The Load Sharing Facility Conversion Rules json file that holds the Self Converion rules code samples.
-* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the Load Sharing Facility sample data using the Load Sharing Facility converion rules sample.
-* __HelixControlM_Result.json__ - The Helix Control-M data created by the Helix Control-M Self-Conversion when converting the Load Sharing Facility sample data using the Load Sharing Facility conversion rules sample. 
+### The IBM Load Sharing Facility Conversion example includes:
+* __SampleData.xml__ - IBM Load Sharing Facility sample data in XML format. [(IBM Load Sharing Facility data extraction)](https://github.com/controlm/self-conversion-api-community-solutions/tree/master/Load-Sharing-Facility#extract-Load-Sharing-Facility-data-in-xml-format)
+* __MappingLogic.xlsx__ - Holds the mapping logic used in this sample to convert from IBM Load Sharing Facility data to Control-M data.
+* __IBM_LSF_ConversionRules.json__ - The IBM Load Sharing Facility Conversion Rules json file that holds the Self Conversion rules code samples.
+* __ControlM_Result.xml__ - The Control-M data created by the Self-Conversion when converting the IBM Load Sharing Facility sample data using the IBM Load Sharing Facility converion rules sample.
+* __HelixControlM_Result.json__ - The Helix Control-M data created by the Helix Control-M Self-Conversion when converting the IBM Load Sharing Facility sample data using the IBM Load Sharing Facility conversion rules sample. 
 
 ### XML structure sample:
 ```xml 
@@ -20,8 +20,8 @@ You can use these Load Sharing Facility Conversion Rules code samples to convert
 * JOB Element contains a "Name" attribute with value "JOB1"
 * JOB Element text value is "Job Text"
 
-### Load Sharing Facility mapping logic  
-Load Sharing Facility Data | Control-M Data
+### IBM Load Sharing Facility mapping logic  
+IBM Load Sharing Facility Data | Control-M Data
 -|-
 FlowDef Element|Smart Folder
 FlowDef "Name" Attribute|Smart Folder Name
@@ -37,10 +37,10 @@ FlowDef > Dependencies > Events > Event Element > done Element with Attribute "D
 ### Usage Instructions
 1. Clone or download the repository.
 2. Open Control-M Self Conversion.
-3. Import the __Load Sharing Facility Conversion Rules__ json file.
+3. Import the __IBM Load Sharing Facility Conversion Rules__ json file.
 4. Create a new Self Conversion project: 
    * Enter a project name.
-   * Load the **Load Sharing Facility Sample Input Data**.
+   * Load the **IBM Load Sharing Facility Sample Input Data**.
    * In "Use existing conversion rules" dropdown list, select the conversion rules imported in step 3.
    * Click "Create Project".
 5. Click Run.

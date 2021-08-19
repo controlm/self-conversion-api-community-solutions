@@ -6,7 +6,7 @@ for creating conversion rules using Groovy and  [**Control-M Self Conversion API
 For more information on Control-M Self Conversion, see [**Control-M Self Conversion**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-817142681.html) and the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-api-814570051.html) online documentation.<br>
 For Control-M Self Conversion Training Video click [**Here**.](https://www.youtube.com/watch?v=2MrFcahMhH0)
 
-For more information on Helix Control-M Self Conversion, see [**Helix Control-M Self Conversion**](https://docs.bmc.com/docs/ctmselfconv/control-m-self-conversion-817142681.html) and the [**Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) online documentation.<br>
+For more information on Helix Control-M Self Conversion, see [**Helix Control-M Self Conversion**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-saas-self-conversion-home-967323185.html) and the [**Helix Control-M Self Conversion API**](https://docs.bmc.com/docs/ctmsaasselfconv/control-m-self-conversion-api-967323199.html) online documentation.<br>
 
 
 # Download Control-M Self-Conversion

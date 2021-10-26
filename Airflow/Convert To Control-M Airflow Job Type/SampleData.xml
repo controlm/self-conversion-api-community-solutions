@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<all>
+	<item type="dict">
+		<dag_id type="str">example_bash_operator</dag_id>
+		<description type="null"/>
+		<file_token type="str">.eJw9xzEOgCAMAMC_sEsHE79DClYkVtu0GOX3bt52AW43YCnIwC2Djr7LNccFvHWaFMuBlRyw2cbyAL14KlNasfqfjL4nUTLsYlFH-ABcxSBc.lrTQ64-t5T5rw5l34CGQlJHfaow</file_token>
+		<fileloc type="str">/usr/local/lib/python3.6/site-packages/airflow/example_dags/example_bash_operator.py</fileloc>
+		<is_active type="bool">True</is_active>
+		<is_paused type="bool">True</is_paused>
+		<is_subdag type="bool">False</is_subdag>
+		<owners type="list">
+			<item type="str">airflow</item>
+		</owners>
+		<root_dag_id type="null"/>
+		<schedule_interval type="dict">
+			<__type type="str">CronExpression</__type>
+			<value type="str">0 0 * * *</value>
+		</schedule_interval>
+		<tags type="list">
+			<item type="dict">
+				<name type="str">example</name>
+			</item>
+			<item type="dict">
+				<name type="str">example2</name>
+			</item>
+		</tags>
+	</item>
+	<item type="dict">
+		<dag_id type="str">example_branch_datetime_operator_2</dag_id>
+		<description type="null"/>
+		<file_token type="str">.eJw9yDEOgCAMAMC_sEsHE79DKlYgVtuUGvX3OjneBTi7AUtGBm4z6ONVjjFO0JvToJg3LNQBm60sF9CNuzKlBUv_MRseuX7n5G2nJEqGLhb1CS_eniTY.7XZhmduCbDycaexHlmoHN3tpBeU</file_token>
+		<fileloc type="str">/usr/local/lib/python3.6/site-packages/airflow/example_dags/example_branch_datetime_operator.py</fileloc>
+		<is_active type="bool">True</is_active>
+		<is_paused type="bool">False</is_paused>
+		<is_subdag type="bool">False</is_subdag>
+		<owners type="list">
+			<item type="str">airflow</item>
+		</owners>
+		<root_dag_id type="null"/>
+		<schedule_interval type="dict">
+			<__type type="str">CronExpression</__type>
+			<value type="str">@daily</value>
+		</schedule_interval>
+		<tags type="list">
+			<item type="dict">
+				<name type="str">example</name>
+			</item>
+		</tags>
+	</item>
+	<item type="dict">
+		<dag_id type="str">example_branch_dop_operator_v3</dag_id>
+		<description type="null"/>
+		<file_token type="str">.eJw9yzEOgCAMAMC_sGsHE7_TFKxCrLYpGOX3DiaON1yAqzqIJhKQEsF6y3pO4wy1NB6M0k4bV6Diq-gN_NBhwrjQVn9EpzNl_C4uaqjGTk0dp9F6eAF5uCZh.dutl2g74jtQH4m35tSYcL4jz3qc</file_token>
+		<fileloc type="str">/usr/local/lib/python3.6/site-packages/airflow/example_dags/example_branch_python_dop_operator_3.py</fileloc>
+		<is_active type="bool">True</is_active>
+		<is_paused type="bool">True</is_paused>
+		<is_subdag type="bool">False</is_subdag>
+		<owners type="list">
+			<item type="str">airflow</item>
+		</owners>
+		<root_dag_id type="null"/>
+		<schedule_interval type="dict">
+			<__type type="str">CronExpression</__type>
+			<value type="str">*/1 * * * *</value>
+		</schedule_interval>
+		<tags type="list">
+			<item type="dict">
+				<name type="str">example</name>
+			</item>
+		</tags>
+	</item>
+</all>
+

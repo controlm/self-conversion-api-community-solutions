@@ -48,7 +48,7 @@ __Above sample contains:__
 1. Connect to the Airflow database.
 2. Make sure the Airflow installation supports [dag serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html).
 3. For each dag you want to export run query: `SELECT data FROM serialized_dag;`
-4. For each dag copy the json content from the data column to a file and run the [extract_script](Data_export/jsonToXml.py) to convert it to xml.
+4. For each dag copy the json content from the data column to a file and run the [extract_script](data_export/jsonToXml.py) to convert it to xml.
 5. Copy all dag xml files to one folder and follow the instructions at [Usage Instructions](#usage-instructions)
    <br>Example: `jsonToXml.py -j <json_file> -x <xml_file>`
 

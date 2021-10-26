@@ -1,0 +1,255 @@
+{
+  "hierarchyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\n\ndef ctmFolder = ctmWorkspace.getFolderByName('AirflowDags')\n\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n    ctmWorkspace.insertJobToFolder(ctmJob, ctmFolder);\n}"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : ""
+    },
+    "name" : "Link folders to folders",
+    "category" : 2,
+    "type" : "regular"
+  } ],
+  "rulesForServer" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Folder Rule ----\n\nCtmFolder ctmFolder = ctmWorkspace.createFolder();\nctmFolder.setName('AirflowDags');"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "item",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\n\nString xpathQuery = \"//all/item\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"item\" XML elements into jobElements list\nList<CtmXmlElement> jobElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"item\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElement : jobElements) {\n CtmJob ctmJob = ctmWorkspace.createJob(jobElement);\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "dag_id",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the text of child element tag name \"dag_id\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"dag_id\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n  CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n  String jobName = jobElement.getValueOfFirstChildElementByName(argument);\n  ctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Link job to folder Rule ----\n\ndef ctmFolder = ctmWorkspace.getFolderByName('AirflowDags')\n\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n    ctmWorkspace.insertJobToFolder(ctmJob, ctmFolder);\n}"
+    },
+    "name" : "Link jobs to folders",
+    "category" : 2,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Airflow Job Rule ----\n\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tctmJob.setAirflowType();\n}"
+    },
+    "jobTypeName" : "Airflow",
+    "name" : "Airflow Job",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Airflow Connection Profile Rule ----\r\n\r\nctmWorkspace.getAirflowJobs().each{ ctmJob ->\r\n    addConnectionProfile(ctmJob)\r\n}\r\n\r\ndef addConnectionProfile(ctmJob){\r\n    ctmJob.general().airflowParameters().setConnectionProfile(\"AIRFLOW_CCP\");\r\n}"
+    },
+    "jobTypeName" : "Airflow",
+    "name" : "Airflow Connection Profile",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Airflow Dag Id Rule ----\n\nString argument = \"\";\nctmWorkspace.getAirflowJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString dagIdValue = jobElement.getValueOfFirstChildElementByName('dag_id')\n\tctmJob.general().airflowParameters().setDagId(dagIdValue);\n}"
+    },
+    "jobTypeName" : "Airflow",
+    "name" : "Airflow Dag Id",
+    "category" : 3,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "script" : "ctmWorkspace.getAllJobs().each{ ctmJob ->\r\n    CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n    def scheduleInterval = jobElement.getFirstChildElementByName(\"schedule_interval\")?.getFirstChildElementByName(\"value\")\r\n    def schedulingExoression = scheduleInterval?.getText()\r\n    \r\n    if (schedulingExoression)\r\n         handleCronScheduling(schedulingExoression,ctmJob);\r\n}\r\n\r\ndef handleCronScheduling(String cronScheduling,CtmJob ctmJob){\r\n    String[] crondefs = cronScheduling.split(\" \")\r\n    if(cronScheduling.startsWith('@'))\r\n        handleSchedulingStatement(cronScheduling, ctmJob)\r\n    else{\r\n        def (minutes, hours, dayOfMonth, monthOfYear, dayOfWeek) = crondefs\r\n        handleTimes(minutes,hours,ctmJob)\r\n        handleDaysScheduling(dayOfMonth,monthOfYear,dayOfWeek,ctmJob)\r\n    }\r\n}\r\n\r\ndef handleSchedulingStatement(cronScheduling, ctmJob){\r\n    switch(cronScheduling){\r\n        case '@daily':\r\n            ctmJob.scheduling().setSchedulingTypeEveryDay()\r\n        case '@hourly':\r\n        ctmJob.scheduling().setRerunInterval(1, TimeUnit.Hour)\r\n    }\r\n}\r\n\r\ndef handleDaysScheduling(String dayOfMonth,String monthOfYear,String dayOfWeek,CtmJob ctmJob){\r\n    switch (dayOfMonth) {\r\n     case ~/.*\\/.*/:\r\n        String[] cycDays = dayOfMonth.split(\"/\");\r\n        int startDay = cycDays[0] as Integer;\r\n        int dayInterval = cycDays[1] as Integer;\r\n        String days = getDays(startDay,dayInterval);\r\n        ctmJob.scheduling().setDays(days);\r\n        break;\r\n    case ~/.*,.*/:\r\n        ctmJob.scheduling().setDays(dayOfMonth);\r\n        break;\r\n    case ~/.*\\?|\\*.*/:\r\n        ctmJob.scheduling().setDays(\"ALL\");\r\n        break;\r\n    case ~/L/:\r\n        ctmJob.scheduling().setDays(\"L1\");\r\n        break;\r\n    default:\r\n        ctmJob.scheduling().setDays(dayOfMonth);\r\n    }\r\n    \r\n    switch (monthOfYear) {\r\n     case ~/.*\\/.*/:\r\n        String[] cycMonths = monthOfYear.split(\"/\");\r\n        int startMonth = cycMonths[0] as Integer;\r\n        int monthInterval = cycMonths[1] as Integer;\r\n        String months = getMonths(startMonth,monthInterval);\r\n        if (months.equals(\"ALL\"))\r\n            ctmJob.scheduling().setOrderOnMonthsAll();\r\n        else\r\n            ctmJob.scheduling().setAllMonthsTo(months)\r\n        break;\r\n    case ~/.*,.*/:\r\n        ctmJob.scheduling().setAllMonthsTo(monthOfYear);\r\n        break;\r\n    case ~/.*\\?|\\*.*/:\r\n        ctmJob.scheduling().setOrderOnMonthsAll();\r\n        break;\r\n    case ~/\\d*/:\r\n        ctmJob.scheduling().setOrderOnMonthsNone();\r\n        int monthIndex = monthOfYear as Integer;\r\n        ctmJob.scheduling().enableOrderOnMonth(monthIndex-1)\r\n        break;\r\n    default:\r\n        ctmJob.scheduling().setAllMonthsTo(monthOfYear);\r\n    }\r\n    \r\n     switch (dayOfWeek) {\r\n     case ~/.*,.*/:\r\n        def daysOfWeek = dayOfWeek.split(\",\");\r\n        String weekdays = \"\"\r\n        daysOfWeek.each{day ->\r\n            weekdays+= ((day as Integer) - 1)+\",\";\r\n        }\r\n        ctmJob.addAttribute(\"DAYS_AND_OR\",\"A\");\r\n        ctmJob.scheduling().setWeekDays(weekdays.substring(0,weekdays.length()-1));\r\n        break;\r\n    case ~/.*#.*/:\r\n        def daysOfWeek = dayOfWeek.split(\"#\");\r\n        String wday = daysOfWeek[0];\r\n        String wdaynumber = daysOfWeek[1];\r\n        String weekdays = \"D\" + wday + \"W\" + wdaynumber;\r\n        ctmJob.addAttribute(\"DAYS_AND_OR\",\"A\");\r\n        ctmJob.scheduling().setWeekDays(weekdays);\r\n        break;\r\n    case ~/.*\\?|\\*.*/:\r\n        break;\r\n    default:\r\n        String day =  (dayOfWeek as Integer) - 1;\r\n        ctmJob.addAttribute(\"DAYS_AND_OR\",\"A\");\r\n        ctmJob.scheduling().setWeekDays(day);\r\n    }\r\n    \r\n    \r\n}\r\n\r\ndef getDays(int startDay,int dayInterval){\r\n    if (startDay==1 && dayInterval ==1 )\r\n        return \"ALL\";\r\n    String ret=\"\";\r\n    for (int i=startDay;i<31;i+=dayInterval){\r\n        ret+=i +\",\";\r\n    }\r\n    return ret.substring(0,ret.length()-1);\r\n}\r\n\r\ndef getMonths(int startMonth,int monthInterval){\r\n    if (startMonth==1 && monthInterval ==1 )\r\n        return \"ALL\";\r\n    String ret=\"\";\r\n    for (int i=startMonth;i<13;i+=monthInterval){\r\n        ret+=i +\",\";\r\n    }\r\n    return ret.substring(0,ret.length()-1);\r\n}\r\n\r\n\r\ndef handleTimes(String minutes,String hours,CtmJob ctmJob){\r\n    \r\n    int startMin;\r\n    int minInterval;\r\n    def minutesList = [] ;\r\n    int startHour;\r\n    int hourInterval;\r\n    def hoursList = [];\r\n    String[] cycHours;\r\n    String[] cycMinutes\r\n\r\n    switch (minutes) {\r\n     case ~/.*\\/.*/:\r\n        cycMinutes = minutes.split(\"/\");\r\n        minInterval = cycMinutes[1] as Integer;\r\n        break;\r\n    case ~/.*,.*/:\r\n        minutesList = minutes.split(\",\");\r\n        break;\r\n    default:\r\n        minutesList[0] = minutes;\r\n    }\r\n    switch (hours) {\r\n      case ~/.*\\/.*/:\r\n            cycHours = hours.split(\"/\");\r\n            startHour = cycHours[0] as Integer;\r\n            hourInterval = cycHours[1] as Integer;\r\n            break;\r\n      case ~/.*,.*/:\r\n            hoursList = hours.split(\",\");\r\n            break;\r\n      default:\r\n            hoursList[0] = hours;\r\n    }\r\n\r\n    if (minInterval){\r\n        ctmJob.scheduling().enableCyclic();\r\n        ctmJob.scheduling().rerunInterval().setRerunByMinutes(minInterval);\r\n        \r\n    }\r\n    if (cycHours){\r\n        for(int i=startHour;i<24;i+=hourInterval){\r\n          hoursList.add(i);\r\n        }\r\n    }\r\n    if (minutesList && hoursList){\r\n        if (minutesList.size() ==1 && hoursList.size()==1){\r\n            ctmJob.scheduling().setTimeSettings(String.format(\"%02d%02d\",hoursList[0] as Integer,minutesList[0] as Integer), \"\");\r\n        }\r\n        else{\r\n            ctmJob.scheduling().enableCyclic();\r\n            String times = \"\";\r\n            hoursList.each{hour -> minutesList.each{minute -> times+=String.format(\"%02d%02d\",hour as Integer,minute as Integer)+\",\";}}\r\n            times= times.substring(0,times.length()-1); // remove last comma character\r\n            ctmJob.scheduling().enableCyclic();\r\n            ctmJob.addAttribute(\"CYCLIC_TYPE\", \"SpecificTimes\");\r\n\t\t    ctmJob.addAttribute(\"CYCLIC_TIMES_SEQUENCE\", times);\r\n        }\r\n    }\r\n}\r\n"
+    },
+    "name" : "Free Script",
+    "category" : 5,
+    "type" : "script"
+  } ],
+  "projectRuleSetDescription" : "Airflow conversion rules to convert To Control-M Airflow Job Type sample code, you can update the code according to your specific project needs",
+  "folderRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Folder Rule ----\n\nCtmFolder ctmFolder = ctmWorkspace.createFolder();\nctmFolder.setName('AirflowDags');"
+    },
+    "name" : "Create Folder",
+    "category" : 0,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Folder Name Rule ----\n\n// For each Control-M Folder created we getting the data from\n// the equivalent XML element data and set the value to be the Folder name\nString argument = \"\";\nctmWorkspace.getAllFolders().each{ ctmFolder ->\n  CtmXmlElement folderElement = ctmFolder.getFolderInputXmlData();\n  String folderName = \"\";\n  ctmFolder.setName(folderName);\n}\n"
+    },
+    "name" : "Folder Name",
+    "category" : 0,
+    "type" : "regular"
+  } ],
+  "jobTypesRules" : {
+    "Airflow" : [ {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Airflow Job Rule ----\n\nctmWorkspace.getAllJobs().each{ ctmJob ->\n\tctmJob.setAirflowType();\n}"
+      },
+      "jobTypeName" : "Airflow",
+      "name" : "Job",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Airflow Connection Profile Rule ----\r\n\r\nctmWorkspace.getAirflowJobs().each{ ctmJob ->\r\n    addConnectionProfile(ctmJob)\r\n}\r\n\r\ndef addConnectionProfile(ctmJob){\r\n    ctmJob.general().airflowParameters().setConnectionProfile(\"AIRFLOW_CCP\");\r\n}"
+      },
+      "jobTypeName" : "Airflow",
+      "name" : "Connection Profile",
+      "category" : 3,
+      "type" : "script"
+    }, {
+      "rulesData" : {
+        "triplets" : [ {
+          "entityType" : "",
+          "value" : "",
+          "operator" : "Equal"
+        } ],
+        "script" : "//  ---- Create Airflow Dag Id Rule ----\n\nString argument = \"\";\nctmWorkspace.getAirflowJobs().each{ ctmJob ->\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString dagIdValue = jobElement.getValueOfFirstChildElementByName('dag_id')\n\tctmJob.general().airflowParameters().setDagId(dagIdValue);\n}"
+      },
+      "jobTypeName" : "Airflow",
+      "name" : "Dag Id",
+      "category" : 3,
+      "type" : "script"
+    } ]
+  },
+  "projectRuleSetName" : "AirFlowJobType_ConversionRules",
+  "projectRuleSetControlMVersion" : "9.0.20",
+  "projectRuleSetDateCreated" : "Tue Oct 26 2021",
+  "freeScriptRule" : [ {
+    "rulesData" : {
+      "script" : "ctmWorkspace.getAllJobs().each{ ctmJob ->\r\n    CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\r\n    def scheduleInterval = jobElement.getFirstChildElementByName(\"schedule_interval\")?.getFirstChildElementByName(\"value\")\r\n    def schedulingExoression = scheduleInterval?.getText()\r\n    \r\n    if (schedulingExoression)\r\n         handleCronScheduling(schedulingExoression,ctmJob);\r\n}\r\n\r\ndef handleCronScheduling(String cronScheduling,CtmJob ctmJob){\r\n    String[] crondefs = cronScheduling.split(\" \")\r\n    if(cronScheduling.startsWith('@'))\r\n        handleSchedulingStatement(cronScheduling, ctmJob)\r\n    else{\r\n        def (minutes, hours, dayOfMonth, monthOfYear, dayOfWeek) = crondefs\r\n        handleTimes(minutes,hours,ctmJob)\r\n        handleDaysScheduling(dayOfMonth,monthOfYear,dayOfWeek,ctmJob)\r\n    }\r\n}\r\n\r\ndef handleSchedulingStatement(cronScheduling, ctmJob){\r\n    switch(cronScheduling){\r\n        case '@daily':\r\n            ctmJob.scheduling().setSchedulingTypeEveryDay()\r\n        case '@hourly':\r\n        ctmJob.scheduling().setRerunInterval(1, TimeUnit.Hour)\r\n    }\r\n}\r\n\r\ndef handleDaysScheduling(String dayOfMonth,String monthOfYear,String dayOfWeek,CtmJob ctmJob){\r\n    switch (dayOfMonth) {\r\n     case ~/.*\\/.*/:\r\n        String[] cycDays = dayOfMonth.split(\"/\");\r\n        int startDay = cycDays[0] as Integer;\r\n        int dayInterval = cycDays[1] as Integer;\r\n        String days = getDays(startDay,dayInterval);\r\n        ctmJob.scheduling().setDays(days);\r\n        break;\r\n    case ~/.*,.*/:\r\n        ctmJob.scheduling().setDays(dayOfMonth);\r\n        break;\r\n    case ~/.*\\?|\\*.*/:\r\n        ctmJob.scheduling().setDays(\"ALL\");\r\n        break;\r\n    case ~/L/:\r\n        ctmJob.scheduling().setDays(\"L1\");\r\n        break;\r\n    default:\r\n        ctmJob.scheduling().setDays(dayOfMonth);\r\n    }\r\n    \r\n    switch (monthOfYear) {\r\n     case ~/.*\\/.*/:\r\n        String[] cycMonths = monthOfYear.split(\"/\");\r\n        int startMonth = cycMonths[0] as Integer;\r\n        int monthInterval = cycMonths[1] as Integer;\r\n        String months = getMonths(startMonth,monthInterval);\r\n        if (months.equals(\"ALL\"))\r\n            ctmJob.scheduling().setOrderOnMonthsAll();\r\n        else\r\n            ctmJob.scheduling().setAllMonthsTo(months)\r\n        break;\r\n    case ~/.*,.*/:\r\n        ctmJob.scheduling().setAllMonthsTo(monthOfYear);\r\n        break;\r\n    case ~/.*\\?|\\*.*/:\r\n        ctmJob.scheduling().setOrderOnMonthsAll();\r\n        break;\r\n    case ~/\\d*/:\r\n        ctmJob.scheduling().setOrderOnMonthsNone();\r\n        int monthIndex = monthOfYear as Integer;\r\n        ctmJob.scheduling().enableOrderOnMonth(monthIndex-1)\r\n        break;\r\n    default:\r\n        ctmJob.scheduling().setAllMonthsTo(monthOfYear);\r\n    }\r\n    \r\n     switch (dayOfWeek) {\r\n     case ~/.*,.*/:\r\n        def daysOfWeek = dayOfWeek.split(\",\");\r\n        String weekdays = \"\"\r\n        daysOfWeek.each{day ->\r\n            weekdays+= ((day as Integer) - 1)+\",\";\r\n        }\r\n        ctmJob.addAttribute(\"DAYS_AND_OR\",\"A\");\r\n        ctmJob.scheduling().setWeekDays(weekdays.substring(0,weekdays.length()-1));\r\n        break;\r\n    case ~/.*#.*/:\r\n        def daysOfWeek = dayOfWeek.split(\"#\");\r\n        String wday = daysOfWeek[0];\r\n        String wdaynumber = daysOfWeek[1];\r\n        String weekdays = \"D\" + wday + \"W\" + wdaynumber;\r\n        ctmJob.addAttribute(\"DAYS_AND_OR\",\"A\");\r\n        ctmJob.scheduling().setWeekDays(weekdays);\r\n        break;\r\n    case ~/.*\\?|\\*.*/:\r\n        break;\r\n    default:\r\n        String day =  (dayOfWeek as Integer) - 1;\r\n        ctmJob.addAttribute(\"DAYS_AND_OR\",\"A\");\r\n        ctmJob.scheduling().setWeekDays(day);\r\n    }\r\n    \r\n    \r\n}\r\n\r\ndef getDays(int startDay,int dayInterval){\r\n    if (startDay==1 && dayInterval ==1 )\r\n        return \"ALL\";\r\n    String ret=\"\";\r\n    for (int i=startDay;i<31;i+=dayInterval){\r\n        ret+=i +\",\";\r\n    }\r\n    return ret.substring(0,ret.length()-1);\r\n}\r\n\r\ndef getMonths(int startMonth,int monthInterval){\r\n    if (startMonth==1 && monthInterval ==1 )\r\n        return \"ALL\";\r\n    String ret=\"\";\r\n    for (int i=startMonth;i<13;i+=monthInterval){\r\n        ret+=i +\",\";\r\n    }\r\n    return ret.substring(0,ret.length()-1);\r\n}\r\n\r\n\r\ndef handleTimes(String minutes,String hours,CtmJob ctmJob){\r\n    \r\n    int startMin;\r\n    int minInterval;\r\n    def minutesList = [] ;\r\n    int startHour;\r\n    int hourInterval;\r\n    def hoursList = [];\r\n    String[] cycHours;\r\n    String[] cycMinutes\r\n\r\n    switch (minutes) {\r\n     case ~/.*\\/.*/:\r\n        cycMinutes = minutes.split(\"/\");\r\n        minInterval = cycMinutes[1] as Integer;\r\n        break;\r\n    case ~/.*,.*/:\r\n        minutesList = minutes.split(\",\");\r\n        break;\r\n    default:\r\n        minutesList[0] = minutes;\r\n    }\r\n    switch (hours) {\r\n      case ~/.*\\/.*/:\r\n            cycHours = hours.split(\"/\");\r\n            startHour = cycHours[0] as Integer;\r\n            hourInterval = cycHours[1] as Integer;\r\n            break;\r\n      case ~/.*,.*/:\r\n            hoursList = hours.split(\",\");\r\n            break;\r\n      default:\r\n            hoursList[0] = hours;\r\n    }\r\n\r\n    if (minInterval){\r\n        ctmJob.scheduling().enableCyclic();\r\n        ctmJob.scheduling().rerunInterval().setRerunByMinutes(minInterval);\r\n        \r\n    }\r\n    if (cycHours){\r\n        for(int i=startHour;i<24;i+=hourInterval){\r\n          hoursList.add(i);\r\n        }\r\n    }\r\n    if (minutesList && hoursList){\r\n        if (minutesList.size() ==1 && hoursList.size()==1){\r\n            ctmJob.scheduling().setTimeSettings(String.format(\"%02d%02d\",hoursList[0] as Integer,minutesList[0] as Integer), \"\");\r\n        }\r\n        else{\r\n            ctmJob.scheduling().enableCyclic();\r\n            String times = \"\";\r\n            hoursList.each{hour -> minutesList.each{minute -> times+=String.format(\"%02d%02d\",hour as Integer,minute as Integer)+\",\";}}\r\n            times= times.substring(0,times.length()-1); // remove last comma character\r\n            ctmJob.scheduling().enableCyclic();\r\n            ctmJob.addAttribute(\"CYCLIC_TYPE\", \"SpecificTimes\");\r\n\t\t    ctmJob.addAttribute(\"CYCLIC_TIMES_SEQUENCE\", times);\r\n        }\r\n    }\r\n}\r\n"
+    },
+    "name" : "Free Script",
+    "category" : 5,
+    "type" : "script"
+  } ],
+  "folderAttributesRules" : [ ],
+  "scriptModeString" : "",
+  "projectRuleSetConversionType" : "Tabs View",
+  "dependencyRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Wait For Event Rule ----\n\n//\tfilter how to find dependencies\nString argument = \"\";\ndef jobsList = ctmWorkspace.getAllJobs();\njobsList.each  { ctmJob ->\n\tString jobName=ctmJob.general().getName();\n//\tfind  the job that this job depends on according to argument specified\n\tCtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n\tString dependencyJobName = jobElement.undefined;\n//\tFind all jobs that depende on job being processed \n\tdef targetJobsList = ctmWorkspace.getAllJobs();\n\ttargetJobsList.each {dependencyJob -> \n\t\tString depJobName=dependencyJob.general().getName();\n\t\tif(depJobName != null && !depJobName.equals(\"\") && depJobName.equals(dependencyJobName)){\n//\t\t\tuse the addIncondition API for jobs and folders to add the incondition \n\t\t\tString condName = depJobName+\"-TO-\"+jobName;\n\t\t\tctmJob.prerequisites().addInCondition(condName);\n\t\t}\n\t}\n}"
+    },
+    "name" : "In Condition",
+    "category" : 4,
+    "type" : "regular"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "",
+        "value" : "",
+        "operator" : "Equal"
+      } ],
+      "script" : ""
+    },
+    "name" : "Out Condition",
+    "category" : 4,
+    "type" : "regular"
+  } ],
+  "jobRules" : [ {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "item",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Create Job Rule ----\n\nString xpathQuery = \"//all/item\";    // XPath query of the XML element we look for in XML Input Data\n\n// Retrieve all elements with tag name equals to \"item\" XML elements into jobElements list\nList<CtmXmlElement> jobElements = ctmXmlQuery.findXmlElementsByXPath(xpathQuery);\n\n// Run in a loop on all elements with tag name equals to \"item\" XML elements found, and create a Control-M Job for each one of them\n// For each Control-M Job created we keep the equivalent XML element data\nfor(CtmXmlElement jobElement : jobElements) {\n CtmJob ctmJob = ctmWorkspace.createJob(jobElement);\n}"
+    },
+    "name" : "Create Job",
+    "category" : 1,
+    "type" : "script"
+  }, {
+    "rulesData" : {
+      "triplets" : [ {
+        "entityType" : "Element Name",
+        "value" : "dag_id",
+        "operator" : "Equal"
+      } ],
+      "script" : "//  ---- Job Name Rule ----\n\n// For each Control-M Job created we getting the text of child element tag name \"dag_id\" from\n// the equivalent XML element data and set the value to be the Job name\nString argument = \"dag_id\";\nctmWorkspace.getAllJobs().each{ ctmJob ->\n  CtmXmlElement jobElement = ctmJob.getJobInputXmlData();\n  String jobName = jobElement.getValueOfFirstChildElementByName(argument);\n  ctmJob.setName(jobName);\n}\n"
+    },
+    "name" : "Job Name",
+    "category" : 1,
+    "type" : "regular"
+  } ],
+  "jobAttributesRules" : [ ]
+}
